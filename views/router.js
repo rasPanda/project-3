@@ -1,18 +1,22 @@
 import express from 'express'
-//! Import all our controllers here
-//! For example
-// import userControllers from '../controllers/userControllers.js'
-// import locationControllers from '../controllers/locationControllers.js'
+import singleUserController from '../controllers/singleUserController.js'
+import login from '../controllers/login.js'
+import register from '../controllers/register.js'
 import secureRoute from '../middleware/secureRoute.js'
 
 
 const router = express.Router()
 
-//* Routes go here
-//! For example
-// router.route('/register')
-//   .post(userController.register)
 
+router.route('/register')
+  .post(register.register)
 
+router.route('/login')
+  .post(login.login)
+
+router.route('/user/:id')
+  .get(singleUserController.getSingleUser)
+  .put(secureRoute, singleUserController.updateSingleUser)
+  .delete(secureRoute, singleUserController.deleteSingleUser)
 
 export default router

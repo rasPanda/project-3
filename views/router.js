@@ -4,7 +4,8 @@ import express from 'express'
 // import userControllers from '../controllers/userControllers.js'
 // import locationControllers from '../controllers/locationControllers.js'
 import secureRoute from '../middleware/secureRoute.js'
-
+import userControllers from '../controllers/userControllers.js'
+import singleEventControllers from '../controllers/singleEventControllers.js'
 
 const router = express.Router()
 
@@ -12,6 +13,18 @@ const router = express.Router()
 //! For example
 // router.route('/register')
 //   .post(userController.register)
+
+
+router.route('/users')
+  .get(userControllers.getUsers)
+
+router.route('/users/search/:name')
+  .get(userControllers.searchUsers)
+
+router.route('/events/:id')
+  .get(singleEventControllers.getSingleEvent)
+  .put(secureRoute, singleEventControllers.updateSingleEvent)
+  .delete(secureRoute, singleEventControllers.deleteSingleEvent)
 
 
 

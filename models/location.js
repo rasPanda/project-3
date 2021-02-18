@@ -2,6 +2,11 @@ import mongoose from 'mongoose'
 import commentSchema from './comment.js'
 
 const locationSchema = new mongoose.Schema({
+  name: {
+    type: String, 
+    required: true, 
+    validate: (name) => typeof name === 'string' && name.length > 0
+  },
   image: { 
     type: String, 
     required: true,

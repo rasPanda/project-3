@@ -2,43 +2,48 @@ import mongoose from 'mongoose'
 import commentSchema from './comment.js'
 
 const eventSchema = new mongoose.Schema({
-  name: { 
-    type: String, 
-    required: true, 
-    validate: (name) => typeof name === 'string' && name.length > 0 
+  name: {
+    type: String,
+    required: true,
+    validate: (name) => typeof name === 'string' && name.length > 0
   },
-  user: { 
-    type: mongoose.Schema.ObjectId, 
-    ref: 'User', 
-    required: true 
+  location: {
+    type: String,
+    required: true,
+    validate: (name) => typeof name === 'string' && name.length > 0
   },
-  image: { 
-    type: String, 
-    required: true, 
-    validate: (image) => typeof image === 'string' && image.length > 0 && image.includes('https:' || 'http:') 
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+    required: true
   },
-  time: { 
-    type: String, 
-    required: true, 
-    validate: (name) => typeof name === 'string' && name.length > 0 
+  image: {
+    type: String,
+    required: true,
+    validate: (image) => typeof image === 'string' && image.length > 0 && image.includes('https:' || 'http:')
   },
-  details: { 
-    type: String, 
-    required: false, 
-    validate: (name) => typeof name === 'string' && name.length > 0 
+  time: {
+    type: String,
+    required: true,
+    validate: (name) => typeof name === 'string' && name.length > 0
   },
-  attendees: { 
-    type: [Object], 
-    required: false, 
-    validate: (types) => Array.isArray(types) && types.length > 0 && types.every(e => typeof e === 'object') 
+  details: {
+    type: String,
+    required: false,
+    validate: (name) => typeof name === 'string' && name.length > 0
   },
-  results: { 
-    type: [Object], 
-    required: false, 
-    validate: (types) => Array.isArray(types) && types.length > 0 && types.every(e => typeof e === 'object') 
+  attendees: {
+    type: [Object],
+    required: false,
+    validate: (types) => Array.isArray(types) && types.length > 0 && types.every(e => typeof e === 'object')
+  },
+  results: {
+    type: [Object],
+    required: false,
+    validate: (types) => Array.isArray(types) && types.length > 0 && types.every(e => typeof e === 'object')
   },
   timestamps: true,
-  comments: [ commentSchema ]
+  comments: [commentSchema]
 })
 
 export default mongoose.model('Event', eventSchema)

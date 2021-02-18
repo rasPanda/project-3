@@ -1,4 +1,5 @@
 import express from 'express'
+import location from '../controllers/locationController.js'
 //! Import all our controllers here
 //! For example
 // import userControllers from '../controllers/userControllers.js'
@@ -12,10 +13,26 @@ import singleUserController from '../controllers/singleUserController.js'
 import login from '../controllers/login.js'
 import register from '../controllers/register.js'
 import secureRoute from '../middleware/secureRoute.js'
-
+import userControllers from '../controllers/userControllers.js'
+import singleEventControllers from '../controllers/singleEventControllers.js'
 
 const router = express.Router()
 
+//* Routes go here
+//! For example
+// router.route('/register')
+//   .post(userController.register)
+router.route('/location')
+  .get(location.getAllLocation)
+  .post(location.makeLocation)
+
+router.route('/location/:id')
+  .get(location.getSingleLocation)
+  .put(secureRoute, location.updateLocation)
+  .delete(secureRoute, location.deleteLocation)
+
+router.route('/location/:name')
+  .get(location.getLocationByName)
 
 router.route('/events')
   .get(events.getEvents)
@@ -46,6 +63,18 @@ router.route('/register')
 
 router.route('/login')
   .post(login.login)
+
+router.route('/users')
+  .get(userControllers.getUsers)
+
+router.route('/users/search/:name')
+  .get(userControllers.searchUsers)
+
+router.route('/events/:id')
+  .get(singleEventControllers.getSingleEvent)
+  .put(secureRoute, singleEventControllers.updateSingleEvent)
+  .delete(secureRoute, singleEventControllers.deleteSingleEvent)
+
 
 router.route('/user/:id')
   .get(singleUserController.getSingleUser)

@@ -5,7 +5,7 @@ import Location from '../models/location.js'
 //list of all Locations
 async function getAllLocation(_req, res, next) {
   try {
-    const locationList = await Location.find().populate('comment').populate('user')
+    const locationList = await Location.find().populate('comments.user').populate('user')
     res.send(locationList)
   } catch (err) {
     next(err)
@@ -19,7 +19,6 @@ async function makeLocation(req, res, next) {
   try {
     const newLocation = await Location.create(body)
     res.status(201).send(newLocation)
-
   } catch (err) {
     next(err)
   }
@@ -29,7 +28,7 @@ async function makeLocation(req, res, next) {
 async function getSingleLocation(req, res, next) {
   const locationId = req.params.id
   try {
-    const location = await Location.findById(locationId).populate('comment').populate('user')
+    const location = await Location.findById(locationId).populate('comments.user').populate('user')
     res.send(location)
   } catch (err) {
     next(err)
@@ -37,11 +36,9 @@ async function getSingleLocation(req, res, next) {
 }
 // finding location by name
 async function getLocationByName(req, res, next) {
-  const locationName = req.body.name
   try {
-    const location = await Location.findById(locationName).populate('comment').populate('user')
+    const location = await Location.find( { name: { $regex: req.params.name, $options: 'i' } } ).populate('comments.user').populate('user')
     res.send(location)
-
   } catch (err) {
     next(err)
   }
@@ -54,10 +51,8 @@ async function updateLocation(req, res, next) {
   const currentUser = req.currentUser
   try {
     const locationToUpdate = await Location.findById(locationId)
-
     if (!locationToUpdate.user.equals(currentUser._id)) {
-      return res.status(401)
-        .send({ message: 'Unauthorized' })
+      return res.status(401).send({ message: 'Unauthorized' })
     }
     locationToUpdate.set(body)
     locationToUpdate.save()
@@ -80,7 +75,6 @@ async function deleteLocation(req, res, next) {
   } catch (err) {
     next(err)
   }
-
 }
 
 

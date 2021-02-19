@@ -41,7 +41,7 @@ const locationSchema = new mongoose.Schema({
       validate: (name) => typeof name === 'string' && name.length > 0 
     }
   },
-  createdBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
+  user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
   comments: [ commentSchema ],
   events: { type: [Object], required: false }
 })

@@ -1,8 +1,10 @@
-import { expect } from chai
+/* eslint-disable no-undef */
+import { expect } from 'chai'
 import setup from './lib/setup.js'
 import tearDown from './lib/tearDown.js'
 
-dscribe('Testing REGISTER', () => {
+describe('Testing USER', () => {
+  
   beforeEach(done => {
     setup(done)
   })
@@ -10,13 +12,16 @@ dscribe('Testing REGISTER', () => {
     tearDown(done)
   })
 
-  // ------------------------ REGISTER -------------------------- //
   it('Should be able to register a new user', done => {
-    applicationCache.post('/api/register')
+    api.post('/api/register')
       .send({
         username: 'peter',
         email: 'peter@peter.com',
-        password: 'peter'
+        password: 'peter',
+        passwordConfirmation: 'peter',
+        image: 'petersFace.com',
+        bio: 'Lorem ipsum, caecalius est in horto',
+        location: 'A city somewhere nowhere'
       })
       .end((err, res) => {
         expect(res.status).to.eq(201)
@@ -25,16 +30,20 @@ dscribe('Testing REGISTER', () => {
       })
   })
 
-  it('Should be able to register user, then login a new user', done => {
-    applicationCache.post('/api/register')
-    .send({
-      username: 'simon',
-      email: 'simon@simon.com',
-      password: 'simon'
-    })
-    .end((err, res) => {
-      expect(res.status).to.eq(201)
-      expect(res.body.username).to.eq('simon')
+  it('Should be able to register user, then login a new user and delete that user', done => {
+    api.post('/api/register')
+      .send({
+        username: 'simon',
+        email: 'simon@simon.com',
+        password: 'simon',
+        passwordConfirmation: 'simon',
+        image: 'simonsFace.com',
+        bio: 'Lorem ipsum, caecalius est in horto',
+        location: 'A city somewhere nowhere'
+      })
+      .end((err, res) => {
+        expect(res.status).to.eq(201)
+        expect(res.body.username).to.eq('simon')
 
         api.post('/api/login')
           .send({
@@ -44,13 +53,54 @@ dscribe('Testing REGISTER', () => {
           .end((err, res) => {
             expect(res.status).to.eq(202)
             expect(res.body.token).to.be.a('string')
-            done()
+
+            api.delete(`/api/user/${res.body._id}`)
+              .set('Authorization', `Bearer ${res.body.token}`)
+              .end((err, res) => {
+                expect(res.body).to.be.a('Object')
+                done()
+              })
           })
-    })
+      })
   })
 
-  // it('Should be able to delete a user', done => {
-  //   api.delete('/api/delete')
-  // })
+  it('Should be able to register user, then login a new user and UPDATE that user', done => {
+    api.post('/api/register')
+      .send({
+        username: 'simon',
+        email: 'simon@simon.com',
+        password: 'simon',
+        passwordConfirmation: 'simon',
+        image: 'simonsFace.com',
+        bio: 'Lorem ipsum, caecalius est in horto',
+        location: 'A city somewhere nowhere'
+      })
+      .end((err, res) => {
+        expect(res.status).to.eq(201)
+        expect(res.body.username).to.eq('simon')
 
+        api.post('/api/login')
+          .send({
+            email: 'simon@simon.com',
+            password: 'simon'
+          })
+          .end((err, res) => {
+            expect(res.status).to.eq(202)
+            expect(res.body.token).to.be.a('string')
+
+            api.put(`/api/user/${res.body._id}`)
+              .set('Authorization', `Bearer ${res.body.token}`)
+              .send({
+                username: 'james'
+              })
+              .end((err, res) => {
+                expect(res.body).to.be.a('Object')
+                // expect(res.status).to.eq(201)
+                // console.log(res.body.username)
+                // expect(res.body.username).to.eq('james')
+                done()
+              })
+          })
+      })
+  })
 })

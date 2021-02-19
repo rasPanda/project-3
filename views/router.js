@@ -14,9 +14,21 @@ import singleEventControllers from '../controllers/singleEventControllers.js'
 
 const router = express.Router()
 
+router.route('/location/:id/comment/:commentId')
+  .put(secureRoute, locationComment.updateLocationComment)
+  .delete(secureRoute, locationComment.deleteLocationComment)
+
+router.route('/user/:id/comment/:commentId')
+  .put(secureRoute, userComment.updateUserComment)
+  .delete(secureRoute, userComment.deleteUserComment)
+
+router.route('/event/:id/comment/:commentId')
+  .put(secureRoute, eventComment.updateEventComment)
+  .delete(secureRoute, eventComment.deleteEventComment)
+  
 router.route('/location')
   .get(location.getAllLocation)
-  .post(location.makeLocation)
+  .post(secureRoute, location.makeLocation)
 
 router.route('/location/:id')
   .get(location.getSingleLocation)
@@ -24,46 +36,37 @@ router.route('/location/:id')
   .delete(secureRoute, location.deleteLocation)
   .post(secureRoute, locationComment.createLocationComment)
 
-router.route('/location/name/:name')
+router.route('/location/search/:name')
   .get(location.getLocationByName)
 
-router.route('/events')
+router.route('/event')
   .get(events.getEvents)
   .post(secureRoute, events.postEvent)
 
-router.route('/location/:locationId/comment/:commentId')
-  .put(secureRoute, locationComment.updateLocationComment)
-  .delete(secureRoute, locationComment.deleteLocationComment)
-
-router.route('/user/:userId/comment/:commentId')
-  .put(secureRoute, userComment.updateUserComment)
-  .delete(secureRoute, userComment.deleteUserComment)
-
-router.route('/event/:eventId/comment/:commentId')
-  .put(secureRoute, eventComment.updateEventComment)
-  .delete(secureRoute, eventComment.deleteEventComment)
 router.route('/register')
   .post(register.register)
 
 router.route('/login')
   .post(login.login)
 
-router.route('/users')
+router.route('/user')
   .get(userControllers.getUsers)
-
-router.route('/users/search/:name')
-  .get(userControllers.searchUsers)
-
-router.route('/events/:id')
-  .get(singleEventControllers.getSingleEvent)
-  .put(secureRoute, singleEventControllers.updateSingleEvent)
-  .delete(secureRoute, singleEventControllers.deleteSingleEvent)
-  .post(secureRoute, eventComment.createEventComment)
 
 router.route('/user/:id')
   .get(singleUserController.getSingleUser)
   .put(secureRoute, singleUserController.updateSingleUser)
   .delete(secureRoute, singleUserController.deleteSingleUser)
   .post(secureRoute, userComment.createUserComment)
+
+router.route('/user/search/:name')
+  .get(userControllers.searchUsers)
+
+router.route('/event/:id')
+  .get(singleEventControllers.getSingleEvent)
+  .put(secureRoute, singleEventControllers.updateSingleEvent)
+  .delete(secureRoute, singleEventControllers.deleteSingleEvent)
+  .post(secureRoute, eventComment.createEventComment)
+
+
 
 export default router

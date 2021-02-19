@@ -2,7 +2,7 @@ import Event from '../models/event.js'
 
 async function getEvents(_req, res, next) {
   try {
-    const eventsList = await Event.find().populate('user').populate('comments.user')
+    const eventsList = await Event.find().populate('user').populate('comments.user').populate('location').populate('attendees.user.username')
     res.status(200).send(eventsList)
   } catch (err) {
     next(err)

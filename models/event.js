@@ -15,7 +15,7 @@ const eventSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.ObjectId,
     ref: 'User',
-    required: true
+    required: false
   },
   image: {
     type: String,
@@ -33,9 +33,9 @@ const eventSchema = new mongoose.Schema({
     validate: (name) => typeof name === 'string' && name.length > 0
   },
   attendees: {
-    type: [Object],
-    required: false,
-    validate: (types) => Array.isArray(types) && types.length > 0 && types.every(e => typeof e === 'object')
+    type: [ mongoose.Schema.ObjectId ],
+    ref: 'User',
+    required: false
   },
   results: {
     type: [Object],

@@ -24,7 +24,7 @@ router.route('/location/:id')
   .delete(secureRoute, location.deleteLocation)
   .post(secureRoute, locationComment.createLocationComment)
 
-router.route('/location/:name')
+router.route('/location/name/:name')
   .get(location.getLocationByName)
 
 router.route('/events')

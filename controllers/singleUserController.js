@@ -4,7 +4,7 @@ async function getSingleUser(req, res, next) {
   const id = req.params.id
   // will id be 'id' or '_id' ?
   try {
-    const singleUser = await User.findById(id).populate('comments')
+    const singleUser = await User.findById(id).populate('comments.user')
     res.send(singleUser)
   } catch (err) {
     next(err)

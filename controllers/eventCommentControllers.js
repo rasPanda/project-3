@@ -11,9 +11,9 @@ function notFound(res) {
 async function postEventComment(req, res, next) {
   const commentData = req.body
   commentData.user = req.currentUser
-  const eventId = req.params.eventId
+  const id = req.params.id
   try {
-    const event = await Event.findById(eventId)
+    const event = await Event.findById(id)
     if (!event) {
       notFound(res)
     }
@@ -28,9 +28,9 @@ async function postEventComment(req, res, next) {
 async function updateEventComment(req, res, next) {
   const commentData = req.body
   const currentUser = req.currentUser
-  const { commentId, eventId } = req.params
+  const { commentId, id } = req.params
   try {
-    const event = await Event.findById(eventId).populate('user').populate('comments.user')
+    const event = await Event.findById(id).populate('user').populate('comments.user')
     if (!event) {
       notFound(res)
     }
@@ -48,9 +48,9 @@ async function updateEventComment(req, res, next) {
 
 async function deleteEventComment(req, res, next) {
   const currentUser = req.currentUser
-  const { commentId, eventId } = req.params
+  const { commentId, id } = req.params
   try {
-    const event = await Event.findById(eventId).populate('user').populate('comments.user')
+    const event = await Event.findById(id).populate('user').populate('comments.user')
     if (!event) {
       notFound(res)
     }

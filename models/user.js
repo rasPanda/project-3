@@ -42,6 +42,4 @@ userSchema
 userSchema.plugin(uniqueValidator)
 userSchema.plugin(mongooseHidden({ defaultHidden: { password: true, email: true } }))
 
-const User = mongoose.model('User', userSchema)
-
-export default User
+export default mongoose.model('User', userSchema)

@@ -42,8 +42,9 @@ const eventSchema = new mongoose.Schema({
     required: false,
     validate: (types) => Array.isArray(types) && types.length > 0 && types.every(e => typeof e === 'object')
   },
-  timestamps: true,
   comments: [commentSchema]
+}, {
+  timestamps: true
 })
 
 export default mongoose.model('Event', eventSchema)

@@ -5,8 +5,8 @@ import location from '../controllers/locationController.js'
 // import userControllers from '../controllers/userControllers.js'
 // import locationControllers from '../controllers/locationControllers.js'
 import locationComment from '../controllers/locationCommentControllers.js'
-import userComment from '../controllers/locationCommentControllers.js'
-import eventComment from '../controllers/locationCommentControllers.js'
+import userComment from '../controllers/userCommentControllers.js'
+import eventComment from '../controllers/eventCommentControllers.js'
 import events from '../controllers/eventControllers.js'
 
 import singleUserController from '../controllers/singleUserController.js'
@@ -18,10 +18,6 @@ import singleEventControllers from '../controllers/singleEventControllers.js'
 
 const router = express.Router()
 
-//* Routes go here
-//! For example
-// router.route('/register')
-//   .post(userController.register)
 router.route('/location')
   .get(location.getAllLocation)
   .post(location.makeLocation)
@@ -49,7 +45,7 @@ router.route('/user/:userId/comment/:commentId')
 
 router.route('/event/:eventId/comment/:commentId')
   .put(secureRoute, eventComment.updateEventComment)
-  .delete(secureRoute, userComment.deleteUserComment)
+  .delete(secureRoute, eventComment.deleteEventComment)
 router.route('/register')
   .post(register.register)
 

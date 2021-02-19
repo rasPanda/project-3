@@ -8,7 +8,7 @@ function notFound(res) {
   return res.status(404).send({ message: 'User not found' })
 }
 
-async function postUserComment(req, res, next) {
+async function createUserComment(req, res, next) {
   const commentData = req.body
   commentData.user = req.currentUser
   const id = req.params.id
@@ -67,7 +67,7 @@ async function deleteUserComment(req, res, next) {
 }
 
 export default {
-  postUserComment,
+  createUserComment,
   updateUserComment,
   deleteUserComment
 }

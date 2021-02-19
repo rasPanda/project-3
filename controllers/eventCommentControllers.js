@@ -8,7 +8,7 @@ function notFound(res) {
   return res.status(404).send({ message: 'Event not found' })
 }
 
-async function postEventComment(req, res, next) {
+async function createEventComment(req, res, next) {
   const commentData = req.body
   commentData.user = req.currentUser
   const id = req.params.id
@@ -67,7 +67,7 @@ async function deleteEventComment(req, res, next) {
 }
 
 export default {
-  postEventComment,
+  createEventComment,
   updateEventComment,
   deleteEventComment
 }

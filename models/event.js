@@ -42,7 +42,7 @@ const eventSchema = new mongoose.Schema({
     required: false,
     validate: (types) => Array.isArray(types) && types.length > 0 && types.every(e => typeof e === 'object')
   },
-  comments: [commentSchema]
+  comments: [ commentSchema ]
 }, {
   timestamps: true
 })

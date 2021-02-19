@@ -7,8 +7,8 @@ export default function getEventData(users, location) {
       image: 'https://images.unsplash.com/photo-1557804500-7a58fbcd4d1a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80',
       time: ' Sunday 21st March at 3pm',
       details: 'meeting at the south corner of sweet park',
-      attendees: users[1],
-      results: [],
+      attendees: [users[1], users[2]],
+      results: [{}],
       comments: []
     },
     {
@@ -18,8 +18,8 @@ export default function getEventData(users, location) {
       image: 'https://images.unsplash.com/photo-1568711146297-b8674c3c11b6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
       time: 'Saturday 20th March at 3pm',
       details: 'meeting at the near pub,  then walking  to the spot ',
-      attendees: users[4],
-      results: [],
+      attendees: [users[3], users[4], users[5]],
+      results: [{}],
       comments: []
     },
     {
@@ -29,8 +29,8 @@ export default function getEventData(users, location) {
       image: 'https://images.unsplash.com/photo-1591154669695-5f2a8d20c089?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
       time: 'Tuesday 24th March 6:30pm',
       details: 'meeting at the main gate, buying drink and start palying',
-      attendees: users[0],
-      results: [],
+      attendees: [users[1], users[2], users[5]],
+      results: [{}],
       comments: []
     },
     {
@@ -40,8 +40,8 @@ export default function getEventData(users, location) {
       image: 'https://images.unsplash.com/photo-1576617497557-22895ee5930b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
       time: ' Thursday 18th March at 8pm',
       details: 'meeting at the main gate, buying drink and start palying',
-      attendees: users[2],
-      results: [],
+      attendees: [users[4], users[6], users[7]],
+      results: [{}],
       comments: []
     },
     {
@@ -51,19 +51,19 @@ export default function getEventData(users, location) {
       image: 'https://images.unsplash.com/photo-1572025442937-d55974d9815f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1231&q=80',
       time: 'Thursday 18th March at 8pm',
       details: 'meeting at the main gate, buying drink and start palying',
-      attendees: users[3],
-      results: [],
+      attendees: [users[1], users[2]],
+      results: [{}],
       comments: []
     },
     {
       name: 'Green park, London',
       location: location[4],
-      user: users[5],
+      user: users[4],
       image: 'https://images.unsplash.com/photo-1559077184-562609f0a10b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1349&q=80',
       time: 'Saturday 27th March at 3pm',
       details: 'meeting at the near pub,  then walking  to the spot',
-      attendees: users[2],
-      results: [],
+      attendees: [users[0], users[4]],
+      results: [{}],
       comments: []
     }
   ]

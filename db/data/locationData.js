@@ -9,7 +9,7 @@ export default function getLocationData(users) {
       },
       address: 'Chumleigh Gardens, SE5 0RJ',
       facilities: {
-        numOfTables: 3,
+        numberOfTables: 3,
         description: 'Three permanent tables located amoungst the play equipment in Chumleigh Playground in Burgess Park.'
       },
       createdBy: users[0],
@@ -25,7 +25,7 @@ export default function getLocationData(users) {
       },
       address: '89 Cobourg Rd, SE5 0JB',
       facilities: {
-        numOfTables: 2,
+        numberOfTables: 2,
         description: 'Two tables located outside of Burgess Park Sports Centre, next to the football pitches.'
       },
       createdBy: users[0],
@@ -41,7 +41,7 @@ export default function getLocationData(users) {
       },
       address: 'Pagnell Street, SE14 6AY',
       facilities: {
-        numOfTables: 2,
+        numberOfTables: 2,
         description: '2 Permanent Tables'
       },
       createdBy: users[1],
@@ -57,7 +57,7 @@ export default function getLocationData(users) {
       },
       address: 'Scawen Road, SE8 5AG',
       facilities: {
-        numOfTables: 1,
+        numberOfTables: 1,
         description: '1 table next to basketball court abd playground'
       },
       createdBy: users[1],
@@ -73,7 +73,7 @@ export default function getLocationData(users) {
       },
       address: 'Rolt Street, SE8 5NN',
       facilities: {
-        numOfTables: 1,
+        numberOfTables: 1,
         description: '1 Permanent Table'
       },
       createdBy: users[2],

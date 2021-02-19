@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import connectToDb from '../lib/connectToDb'
+import connectToDb from '../lib/connectToDb.js'
 import User from '../models/user.js'
 import Location from '../models/location.js'
 import Event from '../models/event.js'

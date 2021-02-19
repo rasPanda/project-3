@@ -2,8 +2,10 @@ import express from 'express'
 import router from './views/router.js'
 import logger from './middleware/logger.js'
 import connectToDb from './lib/connectToDb.js'
-
 import errorHandler from './middleware/errorHandler.js'
+import { port } from './config/environment.js'
+import dotenv from 'dotenv'
+dotenv.config()
 
 //* This is our index file. It imports the necessary files and functions 
 //* And connects our express server to our mongo database and creates the routes
@@ -17,7 +19,9 @@ async function startServer() {
   app.use(logger)
   app.use('/api', router)
   app.use(errorHandler)
-  app.listen(8000, () => console.log('Up and Running on Port 8000'))
+  app.listen(8000, () => console.log(`Up and Running on Port ${port}`))
 }
 
 startServer()
+
+export default app

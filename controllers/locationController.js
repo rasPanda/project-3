@@ -17,8 +17,10 @@ async function getAllLocation(_req, res, next) {
 async function makeLocation(req, res, next) {
   const body = req.body
   body.user = req.currentUser
-  console.log(req)
   try {
+    if (!req.currentUser) {
+      return res.status(401).send({ message: 'Unauthorised' })
+    }
     const newLocation = await Location.create(body)
     res.status(201).send(newLocation)
   } catch (err) {
@@ -39,7 +41,7 @@ async function getSingleLocation(req, res, next) {
 // finding location by name
 async function getLocationByName(req, res, next) {
   try {
-    const location = await Location.find( { name: { $regex: req.params.name, $options: 'i' } } ).populate('comments.user').populate('user')
+    const location = await Location.find({ name: { $regex: req.params.name, $options: 'i' } }).populate('comments.user').populate('user')
     res.status(200).send(location)
   } catch (err) {
     next(err)

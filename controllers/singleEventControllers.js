@@ -3,7 +3,7 @@ import Event from '../models/event.js'
 async function getSingleEvent(req, res, next) {
   const id = req.params.id
   try {
-    const event = await Event.findById(id).populate('user').populate('comments.user')
+    const event = await Event.findById(id).populate('user').populate('comments.user').populate('location').populate('attendees.user')
     res.send(event)
   } catch (err) {
     next(err)

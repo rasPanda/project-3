@@ -4,13 +4,13 @@ import locationComment from '../controllers/locationCommentControllers.js'
 import userComment from '../controllers/userCommentControllers.js'
 import eventComment from '../controllers/eventCommentControllers.js'
 import events from '../controllers/eventControllers.js'
-
 import singleUserController from '../controllers/singleUserController.js'
 import login from '../controllers/login.js'
 import register from '../controllers/register.js'
 import secureRoute from '../middleware/secureRoute.js'
 import userControllers from '../controllers/userControllers.js'
 import singleEventControllers from '../controllers/singleEventControllers.js'
+import attendee from '../controllers/attendeeController.js'
 
 const router = express.Router()
 
@@ -25,7 +25,7 @@ router.route('/user/:id/comment/:commentId')
 router.route('/event/:id/comment/:commentId')
   .put(secureRoute, eventComment.updateEventComment)
   .delete(secureRoute, eventComment.deleteEventComment)
-  
+
 router.route('/location')
   .get(location.getAllLocation)
   .post(secureRoute, location.makeLocation)
@@ -60,6 +60,10 @@ router.route('/user/:id')
 
 router.route('/user/search/:name')
   .get(userControllers.searchUsers)
+
+router.route('/event/:id/attendee')
+  .post(secureRoute, attendee.addAttendee)
+  .delete(secureRoute, attendee.deleteAttendee)
 
 router.route('/event/:id')
   .get(singleEventControllers.getSingleEvent)

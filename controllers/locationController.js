@@ -76,7 +76,7 @@ async function deleteLocation(req, res, next) {
       return res.status(401).send('Unauthorized')
     }
     await locationToDelete.deleteOne()
-    res.send(`your successfully deleted this location, ${locationToDelete}`)
+    res.send(`You successfully deleted this location, ${locationToDelete}`)
   } catch (err) {
     next(err)
   }

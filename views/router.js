@@ -1,9 +1,5 @@
 import express from 'express'
 import location from '../controllers/locationController.js'
-//! Import all our controllers here
-//! For example
-// import userControllers from '../controllers/userControllers.js'
-// import locationControllers from '../controllers/locationControllers.js'
 import locationComment from '../controllers/locationCommentControllers.js'
 import userComment from '../controllers/userCommentControllers.js'
 import eventComment from '../controllers/eventCommentControllers.js'

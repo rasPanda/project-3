@@ -11,9 +11,9 @@ function notFound(res) {
 async function createUserComment(req, res, next) {
   const commentData = req.body
   commentData.user = req.currentUser
-  const userId = req.params.userId
+  const id = req.params.id
   try {
-    const user = await User.findById(userId)
+    const user = await User.findById(id)
     if (!user) {
       notFound(res)
     }
@@ -28,9 +28,9 @@ async function createUserComment(req, res, next) {
 async function updateUserComment(req, res, next) {
   const commentData = req.body
   const currentUser = req.currentUser
-  const { commentId, userId } = req.params
+  const { commentId, id } = req.params
   try {
-    const user = await User.findById(userId).populate('user').populate('comments.user')
+    const user = await User.findById(id).populate('user').populate('comments.user')
     if (!user) {
       notFound(res)
     }
@@ -48,9 +48,9 @@ async function updateUserComment(req, res, next) {
 
 async function deleteUserComment(req, res, next) {
   const currentUser = req.currentUser
-  const { commentId, userId } = req.params
+  const { commentId, id } = req.params
   try {
-    const user = await User.findById(userId).populate('user').populate('comments.user')
+    const user = await User.findById(id).populate('user').populate('comments.user')
     if (!user) {
       notFound(res)
     }

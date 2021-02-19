@@ -10,7 +10,7 @@ import register from '../controllers/register.js'
 import secureRoute from '../middleware/secureRoute.js'
 import userControllers from '../controllers/userControllers.js'
 import singleEventControllers from '../controllers/singleEventControllers.js'
-import attendee from '../controllers/attendeeController.js'
+import attendee from '../controllers/attendeeControllers.js'
 
 const router = express.Router()
 

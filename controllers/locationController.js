@@ -3,7 +3,7 @@ import Location from '../models/location.js'
 
 
 //list of all Locations
-async function getAllLocation(req, res, next) {
+async function getAllLocation(_req, res, next) {
   try {
     const locationList = await Location.find().populate('comment').populate('user')
     res.send(locationList)
@@ -66,7 +66,7 @@ async function updateLocation(req, res, next) {
   }
 }
 
-//delet location 
+//delete location 
 async function deleteLocation(req, res, next) {
   const locationId = req.params.id
   const currentUser = req.currentUser

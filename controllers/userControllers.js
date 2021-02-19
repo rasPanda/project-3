@@ -16,7 +16,7 @@ async function getUsers (_req, res, next) {
 
 async function searchUsers (req, res, next) {
   try {
-    const userList = await User.find( { name: { $regex: req.params.name, $options: 'i' } } )
+    const userList = await User.find( { username: { $regex: req.params.name, $options: 'i' } } )
       .populate('user')
       .populate('comments.user')
     res.send(userList)

@@ -7,7 +7,7 @@ export default function getUserData() {
       passwordConfirmation: 'joe',
       isAdmin: true,
       image: 'https://joesface.com',
-      bio: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       location: 'Bristol'
     },
     {
@@ -17,7 +17,7 @@ export default function getUserData() {
       passwordConfirmation: 'yusuf',
       isAdmin: true,
       image: 'https://yusufsface.com',
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       location: 'Brick Lane'
     },
     {
@@ -27,7 +27,7 @@ export default function getUserData() {
       passwordConfirmation: 'carl',
       isAdmin: true,
       image: 'https://carlsface.com',
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       location: 'London'
     },
     {
@@ -37,7 +37,7 @@ export default function getUserData() {
       passwordConfirmation: 'james',
       isAdmin: true,
       image: 'https://jamesface.com',
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       location: 'London'
     },
     {
@@ -45,8 +45,9 @@ export default function getUserData() {
       email: 'bill@bill.com',
       password: 'bill',
       passwordConfirmation: 'bill',
+      isAdmin: false,
       image: 'https://billsface.com',
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       location: 'New York'
     },
     {
@@ -54,8 +55,9 @@ export default function getUserData() {
       email: 'sarah@sarah.com',
       password: 'sarah',
       passwordConfirmation: 'sarah',
+      isAdmin: false,
       image: 'https://sarahsface.com',
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       location: 'Edinburgh'
     },
     {
@@ -65,7 +67,7 @@ export default function getUserData() {
       passwordConfirmation: 'patrick',
       isAdmin: false,
       image: 'https://patricksface.com',
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       location: 'Dublin'
     },
     {
@@ -75,7 +77,7 @@ export default function getUserData() {
       passwordConfirmation: 'beth',
       isAdmin: false,
       image: 'https://bethsface.com',
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       location: 'Kings Lynn'
     }
   ]

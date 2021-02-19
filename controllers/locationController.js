@@ -5,8 +5,8 @@ import Location from '../models/location.js'
 //list of all Locations
 async function getAllLocation(_req, res, next) {
   try {
-    const locationList = await Location.find().populate('comments.user').populate('user')
-    res.send(locationList)
+    const locationList = await Location.find().populate('comments.user').populate('user').populate('location')
+    res.status(200).send(locationList)
   } catch (err) {
     next(err)
   }
@@ -18,6 +18,9 @@ async function makeLocation(req, res, next) {
   const body = req.body
   body.user = req.currentUser
   try {
+    if (!req.currentUser) {
+      return res.status(401).send({ message: 'Unauthorised' })
+    }
     const newLocation = await Location.create(body)
     res.status(201).send(newLocation)
   } catch (err) {
@@ -30,7 +33,7 @@ async function getSingleLocation(req, res, next) {
   const locationId = req.params.id
   try {
     const location = await Location.findById(locationId).populate('comments.user').populate('user')
-    res.send(location)
+    res.status(200).send(location)
   } catch (err) {
     next(err)
   }
@@ -38,8 +41,8 @@ async function getSingleLocation(req, res, next) {
 // finding location by name
 async function getLocationByName(req, res, next) {
   try {
-    const location = await Location.find( { name: { $regex: req.params.name, $options: 'i' } } ).populate('comments.user').populate('user')
-    res.send(location)
+    const location = await Location.find({ name: { $regex: req.params.name, $options: 'i' } }).populate('comments.user').populate('user')
+    res.status(200).send(location)
   } catch (err) {
     next(err)
   }
@@ -52,11 +55,12 @@ async function updateLocation(req, res, next) {
   const currentUser = req.currentUser
   try {
     const locationToUpdate = await Location.findById(locationId)
-    if (!locationToUpdate.user.equals(currentUser._id)) {
+    if (!currentUser.isAdmin && !locationToUpdate.user.equals(currentUser._id)) {
       return res.status(401).send({ message: 'Unauthorized' })
     }
     locationToUpdate.set(body)
     locationToUpdate.save()
+    res.status(200).send(locationToUpdate)
   } catch (err) {
     next(err)
   }
@@ -68,11 +72,11 @@ async function deleteLocation(req, res, next) {
   const currentUser = req.currentUser
   try {
     const locationToDelete = await Location.findById(locationId)
-    if (!locationToDelete.user.equals(currentUser._id)) {
+    if (!currentUser.isAdmin && !locationToDelete.user.equals(currentUser._id)) {
       return res.status(401).send({ message: 'Unauthorized' })
     }
     await locationToDelete.deleteOne()
-    res.send(locationToDelete)
+    res.status(202).send(locationToDelete)
   } catch (err) {
     next(err)
   }

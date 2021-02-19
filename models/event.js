@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import commentSchema from './comment.js'
+import attendeeSchema from './attendee.js'
 
 const eventSchema = new mongoose.Schema({
   name: {
@@ -15,7 +16,7 @@ const eventSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.ObjectId,
     ref: 'User',
-    required: true
+    required: false
   },
   image: {
     type: String,
@@ -32,17 +33,13 @@ const eventSchema = new mongoose.Schema({
     required: false,
     validate: (name) => typeof name === 'string' && name.length > 0
   },
-  attendees: {
-    type: [Object],
-    required: false,
-    validate: (types) => Array.isArray(types) && types.length > 0 && types.every(e => typeof e === 'object')
-  },
   results: {
     type: [Object],
     required: false,
     validate: (types) => Array.isArray(types) && types.length > 0 && types.every(e => typeof e === 'object')
   },
-  comments: [ commentSchema ]
+  attendees: [attendeeSchema],
+  comments: [commentSchema]
 }, {
   timestamps: true
 })

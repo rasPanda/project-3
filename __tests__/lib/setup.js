@@ -1,7 +1,6 @@
 import User from '../../models/user.js'
 import Location from '../../models/location.js'
 import Event from '../../models/event.js'
-
 export default async function setup(done) {
   const users = await User.create([
     {

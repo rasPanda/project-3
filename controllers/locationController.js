@@ -16,6 +16,7 @@ async function getAllLocation(_req, res, next) {
 // create location
 async function makeLocation(req, res, next) {
   const body = req.body
+  body.user = req.currentUser
   try {
     const newLocation = await Location.create(body)
     res.status(201).send(newLocation)

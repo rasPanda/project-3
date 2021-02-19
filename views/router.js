@@ -16,7 +16,7 @@ const router = express.Router()
 
 router.route('/location')
   .get(location.getAllLocation)
-  .post(location.makeLocation)
+  .post(secureRoute, location.makeLocation)
 
 router.route('/location/:id')
   .get(location.getSingleLocation)

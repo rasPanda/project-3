@@ -30,6 +30,7 @@ router.route('/location/:id')
   .get(location.getSingleLocation)
   .put(secureRoute, location.updateLocation)
   .delete(secureRoute, location.deleteLocation)
+  .post(secureRoute, locationComment.createLocationComment)
 
 router.route('/location/:name')
   .get(location.getLocationByName)
@@ -37,15 +38,6 @@ router.route('/location/:name')
 router.route('/events')
   .get(events.getEvents)
   .post(secureRoute, events.postEvent)
-
-router.route('/location/:locationId')
-  .post(secureRoute, locationComment.createLocationComment)
-
-router.route('/user/:userId')
-  .post(secureRoute, userComment.createUserComment)
-
-router.route('/event/:eventId')
-  .post(secureRoute, eventComment.createEventComment)
 
 router.route('/location/:locationId/comment/:commentId')
   .put(secureRoute, locationComment.updateLocationComment)
@@ -74,11 +66,12 @@ router.route('/events/:id')
   .get(singleEventControllers.getSingleEvent)
   .put(secureRoute, singleEventControllers.updateSingleEvent)
   .delete(secureRoute, singleEventControllers.deleteSingleEvent)
-
+  .post(secureRoute, eventComment.createEventComment)
 
 router.route('/user/:id')
   .get(singleUserController.getSingleUser)
   .put(secureRoute, singleUserController.updateSingleUser)
   .delete(secureRoute, singleUserController.deleteSingleUser)
+  .post(secureRoute, userComment.createUserComment)
 
 export default router

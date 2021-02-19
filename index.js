@@ -1,7 +1,7 @@
 import express from 'express'
 import router from './views/router.js'
 import logger from './middleware/logger.js'
-import connectToDb from '.lib/connectToDb.js'
+import connectToDb from './lib/connectToDb.js'
 import errorHandler from './middleware/errorHandler.js'
 
 //* This is our index file. It imports the necessary files and functions 

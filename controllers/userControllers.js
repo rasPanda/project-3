@@ -3,7 +3,7 @@ import User from '../models/user.js'
 
 //* A controller to get all users
 
-async function getUsers (req, res, next) {
+async function getUsers (_req, res, next) {
   try {
     const userList = await User.find()
       .populate('user')

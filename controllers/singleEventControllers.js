@@ -26,7 +26,7 @@ async function updateSingleEvent(req, res, next) {
     eventToUpdate.save()
     res.send(eventToUpdate)
   } catch (err) {
-    next()
+    next(err)
   }
 }
 

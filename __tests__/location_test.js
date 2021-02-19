@@ -4,7 +4,7 @@ import setup from './lib/setup.js'
 import tearDown from './lib/tearDown.js'
 
 describe('Testing GET locations', () => {
-  
+
   beforeEach(done => {
     setup(done)
   })
@@ -14,13 +14,13 @@ describe('Testing GET locations', () => {
   })
 
   it('should return a 200 response', done => {
-    applicationCache.get('/api/location')
+    api.get('/api/location')
       .end((err, res) => {
         expect(res.status).to.eq(200)
         done()
       })
   })
 
-  
+
 
 })

@@ -21,11 +21,11 @@ describe('Testing GET Event', () => {
       })
   })
 
-  it('should return an array of 5 Event', done => {
+  it('should return an array of 6 Event', done => {
     api.get('/api/events')
       .end((err, res) => {
         expect(res.body).to.be.an('array')
-        expect(res.body.length).to.eq(5)
+        expect(res.body.length).to.eq(6)
         done()
       })
   })
@@ -33,6 +33,7 @@ describe('Testing GET Event', () => {
 
   it('should return an array of 1 Event', done => {
     api.post('/api/events')
+      .set('Authorization', `Bearer ${res.body.token}`)
       .send({
         name: 'King test',
         location: location[1],
@@ -45,15 +46,17 @@ describe('Testing GET Event', () => {
         comments: []
       })
       .end((err, res) => {
-        expect(res.body).to.be.an('array')
-        expect(res.body.length).to.eq(5)
+        expect(res.body).to.be.a('object')
+        expect(res.body.length).to.eq(1)
         expect(res.status).to.eq(201)
         api.delete(`/api/events/${res.body._id}`)
+          .set('Bearer', `${res.body.token}`)
           .end((err, res) => {
-            expect(res.body).to.be.an('array')
+            expect(res.body).to.be.a('object')
             expect(res.body.length).to.eq(1)
             done()
           })
       })
   })
 })
+

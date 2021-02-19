@@ -11,9 +11,9 @@ function notFound(res) {
 async function createLocationComment(req, res, next) {
   const commentData = req.body
   commentData.user = req.currentUser
-  const locationId = req.params.locationId
+  const id = req.params.id
   try {
-    const location = await Location.findById(locationId)
+    const location = await Location.findById(id)
     if (!location) {
       notFound(res)
     }
@@ -28,9 +28,9 @@ async function createLocationComment(req, res, next) {
 async function updateLocationComment(req, res, next) {
   const commentData = req.body
   const currentUser = req.currentUser
-  const { commentId, locationId } = req.params
+  const { commentId, id } = req.params
   try {
-    const location = await Location.findById(locationId).populate('user').populate('comments.user')
+    const location = await Location.findById(id).populate('user').populate('comments.user')
     if (!location) {
       notFound(res)
     }
@@ -48,9 +48,9 @@ async function updateLocationComment(req, res, next) {
 
 async function deleteLocationComment(req, res, next) {
   const currentUser = req.currentUser
-  const { commentId, locationId } = req.params
+  const { commentId, id } = req.params
   try {
-    const location = await Location.findById(locationId).populate('user').populate('comments.user')
+    const location = await Location.findById(id).populate('user').populate('comments.user')
     if (!location) {
       notFound(res)
     }

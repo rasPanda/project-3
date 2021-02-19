@@ -4,7 +4,7 @@ dotenv.config()
 const environment = process.env.NODE_ENV || 'development'
 export const dbURI = environment === 'production'
   ? process.env.MONGODB_URI
-  : `monodb://localhost/pingpongdb-${environment}`
+  : `monogdb://localhost/pingpongdb-${environment}`
 
 // export const dbURI = 'mongodb://localhost/pingpongdb'
 export const port = 8000

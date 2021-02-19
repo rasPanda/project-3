@@ -12,7 +12,7 @@ export default function getLocationData(users) {
         numberOfTables: 3,
         description: 'Three permanent tables located amoungst the play equipment in Chumleigh Playground in Burgess Park.'
       },
-      createdBy: users[0],
+      user: users[0],
       comments: [],
       events: {}
     },
@@ -28,7 +28,7 @@ export default function getLocationData(users) {
         numberOfTables: 2,
         description: 'Two tables located outside of Burgess Park Sports Centre, next to the football pitches.'
       },
-      createdBy: users[0],
+      user: users[0],
       comments: [],
       events: {}
     },
@@ -44,7 +44,7 @@ export default function getLocationData(users) {
         numberOfTables: 2,
         description: '2 Permanent Tables'
       },
-      createdBy: users[1],
+      user: users[1],
       comments: [],
       events: {}
     },
@@ -60,12 +60,12 @@ export default function getLocationData(users) {
         numberOfTables: 1,
         description: '1 table next to basketball court abd playground'
       },
-      createdBy: users[1],
+      user: users[1],
       comments: [],
       events: {}
     },
     {
-      name: 'Folkeston Gardens',
+      name: 'Folkestone Gardens',
       image: 'https://bestoutdoorpingpongtables.com/wp-content/uploads/2017/02/Cornilleau-Park-Outdoor.jpg',
       location: {
         lat: 51.48309452004964,
@@ -76,7 +76,7 @@ export default function getLocationData(users) {
         numberOfTables: 1,
         description: '1 Permanent Table'
       },
-      createdBy: users[2],
+      user: users[2],
       comments: [],
       events: {}
     }

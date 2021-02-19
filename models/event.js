@@ -44,7 +44,7 @@ const eventSchema = new mongoose.Schema({
   },
   comments: [commentSchema]
 }, {
-  timestamps: true }
-)
+  timestamps: true
+})
 
 export default mongoose.model('Event', eventSchema)

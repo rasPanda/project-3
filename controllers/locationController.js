@@ -3,7 +3,7 @@ import Location from '../models/location.js'
 
 
 //list of all Locations
-async function getAllLocation(req, res, next) {
+async function getAllLocation(_req, res, next) {
   try {
     const locationList = await Location.find().populate('comment').populate('user')
     res.send(locationList)
@@ -18,7 +18,7 @@ async function makeLocation(req, res, next) {
   const body = req.body
   try {
     const newLocation = await Location.create(body)
-    res.status(201).send(`hi, you successfully new game location ${newLocation}`)
+    res.status(201).send(newLocation)
 
   } catch (err) {
     next(err)
@@ -30,7 +30,7 @@ async function getSingleLocation(req, res, next) {
   const locationId = req.params.id
   try {
     const location = await Location.findById(locationId).populate('comment').populate('user')
-    res.send(`your search is: ${location}`)
+    res.send(location)
   } catch (err) {
     next(err)
   }
@@ -40,7 +40,7 @@ async function getLocationByName(req, res, next) {
   const locationName = req.body.name
   try {
     const location = await Location.findById(locationName).populate('comment').populate('user')
-    res.send(`your search is: ${location}`)
+    res.send(location)
 
   } catch (err) {
     next(err)
@@ -56,8 +56,8 @@ async function updateLocation(req, res, next) {
     const locationToUpdate = await Location.findById(locationId)
 
     if (!locationToUpdate.user.equals(currentUser._id)) {
-      return res.status9401
-        .send('Unauthorized')
+      return res.status(401)
+        .send({ message: 'Unauthorized' })
     }
     locationToUpdate.set(body)
     locationToUpdate.save()
@@ -66,17 +66,17 @@ async function updateLocation(req, res, next) {
   }
 }
 
-//delet location 
+//delete location 
 async function deleteLocation(req, res, next) {
   const locationId = req.params.id
   const currentUser = req.currentUser
   try {
     const locationToDelete = await Location.findById(locationId)
     if (!locationToDelete.user.equals(currentUser._id)) {
-      return res.status(401).send('Unauthorized')
+      return res.status(401).send({ message: 'Unauthorized' })
     }
     await locationToDelete.deleteOne()
-    res.send(`You successfully deleted this location, ${locationToDelete}`)
+    res.send(locationToDelete)
   } catch (err) {
     next(err)
   }

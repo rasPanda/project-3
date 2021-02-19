@@ -8,9 +8,9 @@ const eventSchema = new mongoose.Schema({
     validate: (name) => typeof name === 'string' && name.length > 0
   },
   location: {
-    type: String,
-    required: true,
-    validate: (name) => typeof name === 'string' && name.length > 0
+    type: mongoose.Schema.ObjectId,
+    ref: 'Location',
+    required: true
   },
   user: {
     type: mongoose.Schema.ObjectId,

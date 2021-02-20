@@ -3,7 +3,7 @@ import { expect } from 'chai'
 import setup from './lib/setup.js'
 import tearDown from './lib/tearDown.js'
 
-describe('Testing USER', () => {
+xdescribe('Testing USER', () => {
   
   beforeEach(done => {
     setup(done)
@@ -95,9 +95,9 @@ describe('Testing USER', () => {
               })
               .end((err, res) => {
                 expect(res.body).to.be.a('Object')
-                // expect(res.status).to.eq(201)
-                // console.log(res.body.username)
-                // expect(res.body.username).to.eq('james')
+                expect(res.status).to.eq(201)
+                console.log(res.body.username)
+                expect(res.body.username).to.eq('james')
                 done()
               })
           })

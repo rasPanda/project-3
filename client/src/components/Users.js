@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { isCreator } from '../lib/auth'
 import { Link } from 'react-router-dom'
-import UserModal from './UserModal'
-
 
 const Users = () => {
   const [users, setUsers] = useState([])
@@ -24,19 +22,20 @@ const Users = () => {
 
   // console.log(users)
   // console.log(isModal)
-  console.log(selectedUser)
+  // console.log(selectedUser)
 
   return <div className="section is-half is-offset-one-quarter">
     <div className="columns">
+
       <div className="column">
         <div className="container">
           <div className="columns is-multiline is-mobile">
             {users.map((user, index) => {
-                return <div key={index} className="column is-one-third-desktop is-half-tablet is-half-mobile">
+                return <div key={index} className={!isModal? "column is-one-third" : "column is-half"}>
                   <div className="card" onClick={() => {showModal(user)}}>
                     <div className="card-image">
                       <figure className="image is-4by3">
-                        {/* <img src={user.image}></img> */}
+                        <img src={user.image}></img>
                         Image placeholder...
                       </figure>
                     </div>
@@ -53,11 +52,42 @@ const Users = () => {
           </div>
         </div>
       </div>
+
       {isModal && <div className="column is-narrow is-one-third">
-        <UserModal
-          user={selectedUser}
-        />
+        <div className="container" id="fixed">
+          <button className="delete" onClick={() => {setIsModal(false)}}></button>
+          <div className="column is-full">
+            <figure className="image is-1by1">
+              <img className="is-rounded" id="modalImage" src={selectedUser.image}></img>
+            </figure>
+            <h1>Name: {selectedUser.username}</h1>
+            <h3>Location: {selectedUser.location}</h3>
+            <h4>Bio:</h4>
+            <h3>{selectedUser.bio}</h3>
+            <Link to={`/user/${selectedUser._id}`}>
+              <button className="button is-primary">User's Page</button>
+            </Link>
+          </div>
+          {selectedUser.comments && <div className="container is-clipped">
+            <h4>Comments:</h4>
+            <div className="column" id="commentsScroll">
+              {selectedUser.comments.map((comment) => {
+                return <article key={comment._id} className="media">
+                  <div className="media-content">
+                    <div className="content">
+                      <p className="subtitle">
+                        {comment.user.username}
+                      </p>
+                      <p>{comment.text}</p>
+                    </div>
+                  </div>
+                </article>
+              })}
+            </div>
+          </div>}
+        </div>
       </div>}
+
     </div>
   </div>
 }

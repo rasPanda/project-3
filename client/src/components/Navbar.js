@@ -52,9 +52,9 @@ const Navbar = () => {
                 </Link>
               </div> :
               <div className="buttons" onClick={logOut}>
-                <Link to="/login" className="button is-primary">
+                <button className="button is-primary">
                   <strong>LogOut</strong>
-                </Link>
+                </button>
               </div>
             }
           </div>
@@ -64,4 +64,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar;
+export default Navbar

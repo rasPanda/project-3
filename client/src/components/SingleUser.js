@@ -6,7 +6,7 @@ function SingleUser({ match, history }) {
   const userId = match.params.id
   const token = localStorage.getItem('token')
   const [user, setUser] = useState({})
-  const [text, setText] = useState({})
+  const [text, setText] = useState('')
 
   useEffect(() => {
     async function fetchUser() {
@@ -39,13 +39,13 @@ function SingleUser({ match, history }) {
           <h3>{user.bio}</h3>
         </div>
         <div className="column">
-          <figure className="image is-4by3">
-            <img src=""></img>
+          <figure className="image is-1by1">
+            <img className="is-rounded" src={user.image}></img>
           </figure>
         </div>
       </div>
       {user.comments && <div className="container">
-        <div className="column">
+        <div className="column" id="commentsScroll">
           {user.comments.map((comment) => {
             return <article key={comment._id} className="media">
               <div className="media-content">
@@ -91,8 +91,6 @@ function SingleUser({ match, history }) {
       <div className="container is-half is-offset-one-quarter">
         {isCreator(userId) && <button className="button is-danger">Delete account</button>}
         {isCreator(userId) && <button className="button is-secondary">Update account</button>}
-        <button className="button is-danger">Delete account</button>
-        <button className="button is-secondary">Update account</button>
       </div>   
     </div> 
   </div>

@@ -30,7 +30,10 @@ export default function Login(history) {
       }
       console.log(data.token)
       console.log('SUCCESS')
-      history.goBack()
+
+      history.push('/')
+      location.reload()
+
       //! If need be, add browser history to App.js
     } catch (err) {
       console.log(err.response.data.errors)

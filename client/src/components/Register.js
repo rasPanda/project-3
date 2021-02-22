@@ -12,7 +12,7 @@ export default function Register() {
     email: '',
     password: '',
     passwordConfirmation: '',
-    image: '',
+    image: 'https://i.pinimg.com/564x/f2/b6/e4/f2b6e41cda9aed63ecbcd32de69b825a.jpg',
     bio: '',
     location: ''
   })
@@ -48,12 +48,25 @@ export default function Register() {
     }
   }
 
-  // function handleUpload() {
-  //   window.cloudinary.createUploadWdiget(
-  //     {cloudName:
-  //     }
-  //   ).open()
-  // }
+  function handleUpload(event) {
+    event.preventDefault()
+    window.cloudinary.createUploadWidget(
+      {
+        cloudName: 'dzoqli241',
+        uploadPreset: 'PingPongImages',
+        cropping: true
+      },
+      (err, result) => {
+        if (result.event !== 'success') {
+          return
+        }
+        updateRegData({
+          ...regData,
+          image: `${result.info.secure_url}`
+        })
+      }
+    ).open()
+  }
 
 
 
@@ -112,19 +125,6 @@ export default function Register() {
       </div>
     </div>
     <div className="field">
-      <label className="label">Image URL </label>
-      <div className="control">
-        <input
-          className="input"
-          type="text"
-          value={regData.image}
-          onChange={handleRegChange}
-          name={'image'}
-        />
-        {regErrors.image && <small className="has-text-danger">{regErrors.image.message}</small>}
-      </div>
-    </div>
-    <div className="field">
       <label className="label">Bio</label>
       <div className="control">
         <input
@@ -149,6 +149,10 @@ export default function Register() {
         />
         {regErrors.location && <small className="has-text-danger">{regErrors.location.message}</small>}
       </div>
+    </div>
+    <div className="field">
+      <button className="button" onClick={handleUpload}>Click to Upload Image</button>
+      {regErrors.image && <div><small className="has-text-danger">Please upload an image</small></div>}
     </div>
     <button className="button">Submit</button>
     {registrationSuccess && <div><small className="has-text-primary">Registration Successful!</small></div>}

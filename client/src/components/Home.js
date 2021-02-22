@@ -11,7 +11,7 @@ const Home = () => {
             <input className="input is-success is-rounded is-focused is-medium" id="input-width" type="text" placeholder="Search for near location" />
           </div>
         </div>
-        <div class="control">
+        <div className="control">
           <Link to='/location' className="button is-success is-link">Search</Link>
         </div>
       </div>

@@ -8,8 +8,10 @@ async function register(req, res, next) {
   try {
     const user = await User.create(body)
     res.status(201).send(user)
+    console.log('new user')
   } catch (err) {
     next(err)
+    console.log('registration error')
   }
 }
 

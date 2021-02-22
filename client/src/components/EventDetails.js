@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 
 export default function singleEventPage({ match, history }) {
   const [event, getEvent] = useState({})
-  const [user, getUser] = useState({})
   const [newComment, updateNewComment] = useState({
     text: ''
   })
@@ -16,7 +15,6 @@ export default function singleEventPage({ match, history }) {
     async function fetchData() {
       const { data } = await axios.get(`/api/event/${id}`)
       getEvent(data)
-      getUser(data.user)
     }
     fetchData()
   }, [])
@@ -27,8 +25,9 @@ export default function singleEventPage({ match, history }) {
 
   async function handleCommentSubmit(e) {
     e.preventDefault()
+    console.log(id)
     try {
-      await axios.post(`/api/event/${id}/comment/`, newComment, {
+      await axios.post(`/api/event/${id}/`, newComment, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -77,6 +76,7 @@ export default function singleEventPage({ match, history }) {
           className='button is-danger'
           onClick={handleDelete}
         >Delete & Cancel Event</button></div>}
+        <Link className='button is-warning' to={'/events'}>Back</Link>
       </div>
       <div className="container">
         <div className="columns is-centered">
@@ -87,19 +87,14 @@ export default function singleEventPage({ match, history }) {
               <div><span>Host: </span>{<Link to={`/user/${event.user._id}`}>{event.user.username}</Link>}</div>
               <div><span>Time: </span>{event.time}</div>
               <div><h3>Details:</h3><div>{event.details}</div></div>
-              {/* {event.comments.length > 0 &&
-                <div><h3>Comments:</h3>
+              {event.attendees.length > 0 &&
+                <div><h3>Attendees:</h3>
                   {event.attendees.map(attendee => {
-                    return <div key={attendee._id} className='notification is-size-7'>
-                      {isCreator(comment.user._id) && <button
-                        className='delete is-small is-pulled-right'
-                        onClick={() => handleCommentDelete(comment._id)}
-                      ></button>}
-                      {comment.text}
-                    </div>
+                    return <Link key={attendee._id} to={`/user/${event.user._id}`}>{attendee.user.username}</Link>
                   })}
-                </div>} */}
-              {/* <div><span>Attendees: </span>{event.attendees}</div> */}
+                </div>}
+            </div>
+            <div>
               {event.comments.length > 0 &&
                 <div><h3>Comments:</h3>
                   {event.comments.map(comment => {
@@ -112,20 +107,19 @@ export default function singleEventPage({ match, history }) {
                     </div>
                   })}
                 </div>}
+              <form className="box mt-3" onSubmit={handleCommentSubmit}>
+                <label className='label'>Add a comment!</label>
+                <textarea
+                  className="textarea"
+                  placeholder='Your comment here...'
+                  type="text"
+                  value={newComment.text}
+                  onChange={handleChange}
+                  name={'newComment'}
+                />
+                <button className='button is-warning mt-3'>Post</button>
+              </form>
             </div>
-            <form className="box mt-3" onSubmit={handleCommentSubmit}>
-              <label className='label'>Add a comment!</label>
-              <textarea
-                className="textarea"
-                placeholder='Your comment here...'
-                type="text"
-                value={newComment.text}
-                onChange={handleChange}
-                name={'newComment'}
-              />
-              <button className='button is-warning mt-3'>Post</button>
-            </form>
-            <Link className='button is-warning' to={'/events'}>Back</Link>
           </div>
         </div>
       </div>

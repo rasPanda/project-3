@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 export default function EventsPage() {
   const [eventData, updateEventData] = useState([])
   const [sideCard, revealSideCard] = useState(false)
   const [selectedEvent, updateSelectedEvent] = useState({
+    id: '',
     name: '',
     location: '',
     user: '',
@@ -14,16 +16,19 @@ export default function EventsPage() {
     image: ''
   })
 
-  function handleSelectedEvent({ name, location, user, attendees, time, details, image }) {
+  function handleSelectedEvent({ _id, name, location, user, attendees, time, details, image, comments }) {
     const event = {
+      id: _id,
       name: name,
       location: location.name,
       user: user.username,
       attendees: attendees.length,
       time: time,
       details: details,
-      image: image
+      image: image,
+      comments: comments
     }
+    console.log(event.id)
     updateSelectedEvent(event)
     if (!sideCard) {
       revealSideCard(true)
@@ -38,6 +43,7 @@ export default function EventsPage() {
   }, [])
 
   return <main>
+    
     <section className="container">
       <div className='columns'>
         <div className={!sideCard ? 'column' : 'column is-two-thirds'}>
@@ -60,16 +66,27 @@ export default function EventsPage() {
             })}
           </div>
         </div>
-        {sideCard && <div className="column">
-          <div className='box'>
-            <p className> </p>
+        {sideCard && <div className="column is-one-third">
+          <div className='box' id='fixed'>
+            <button className='delete is-pulled-right' onClick={() => revealSideCard(false)} />
             <p className="title is-4">{selectedEvent.name}</p>
+            <img src={selectedEvent.image} alt={selectedEvent.name} />
             <p className="subtitle is-6">{selectedEvent.location}</p>
             <p className="subtitle is-6">{'Host: ' + selectedEvent.user}</p>
             <p className="subtitle is-6">{'Attendees: ' + selectedEvent.attendees}</p>
             <p className="subtitle is-6">{selectedEvent.time}</p>
             <p className="subtitle is-6">{selectedEvent.details}</p>
-            <img src={selectedEvent.image} alt={selectedEvent.name} />
+            <Link className='button' to={`/event/${selectedEvent.id}`}>Go to Event</Link>
+            {selectedEvent.comments.length > 0 &&
+              <div>
+                <p className="subtitle is-7">Comments:</p>
+                {selectedEvent.comments.map(comment => {
+                  return <div key={comment._id} className='box'>
+                    {comment.user.username}
+                    {comment.text}
+                  </div>
+                })}
+              </div>}
           </div>
         </div>}
       </div>

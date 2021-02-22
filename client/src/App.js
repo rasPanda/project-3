@@ -18,10 +18,10 @@ const App = () => (
   <BrowserRouter>
     <Navbar />
     <Switch>
-      <Route exact path="/events" component={EventsPage}/>
-      <Route exact path="/users" component={Users}/>
-      <Route exact path="/user/:id" component={SingleUser}/>
-      <Route exact path="/login" component={LoginAndRegister}/>
+      <Route exact path="/events" component={EventsPage} />
+      <Route exact path="/users" component={Users} />
+      <Route exact path="/user/:id" component={SingleUser} />
+      <Route exact path="/login" component={LoginAndRegister} />
       <Route exact path="/" component={Home} />
     </Switch>
     <Footer />

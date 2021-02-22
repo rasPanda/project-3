@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 
-const Navbar = (history) => {
+const Navbar = () => {
   const [logIn, updateLogin] = useState(false)
   useEffect(() => {
     const handleLogin = () => {
@@ -18,7 +18,7 @@ const Navbar = (history) => {
   //loggingOut
   const logOut = () => {
     localStorage.removeItem('token')
-    history.push('/login')
+    location.reload()
   }
 
   return (
@@ -52,9 +52,9 @@ const Navbar = (history) => {
                 </Link>
               </div> :
               <div className="buttons" onClick={logOut}>
-                <Link to="/login" className="button is-primary">
+                <button className="button is-primary">
                   <strong>LogOut</strong>
-                </Link>
+                </button>
               </div>
             }
           </div>

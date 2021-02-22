@@ -4,7 +4,10 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 // import Navbar from './components/Navbar'
 // import Home from './components/Home'
 import EventsPage from './components/Events'
+import Users from './components/Users'
+import SingleUser from './components/SingleUser'
 
+import LoginAndRegister from './components/LoginAndRegister'
 
 
 import 'bulma'
@@ -16,6 +19,11 @@ const App = () => (
     <Switch>
       {/* <Route exact path="/" component={Home}/> */}
       <Route exact path="/events" component={EventsPage}/>
+      <Route exact path="/users" component={Users}/>
+      <Route exact path="/user/:id" component={SingleUser}/>
+      
+      <Route exact path="/login" component={LoginAndRegister}/>
+      {/* <Route exact path="/" component={Home} /> */}
     </Switch>
   </BrowserRouter>
 )

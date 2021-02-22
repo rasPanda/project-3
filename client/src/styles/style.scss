@@ -38,3 +38,21 @@ align-items: center;
 
 }
 // styling home and footer page ends here
+
+#fixed {
+  position: sticky;
+  top: 0;
+}
+
+#commentsScroll {
+  max-height: 400px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+#modalImage {
+  width: 300px;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}

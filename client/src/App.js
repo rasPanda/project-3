@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 //! Import Components here
 import Navbar from './components/Navbar'
 import Home from './components/Home'
+import Footer from './components/Footer'
 
 
 
@@ -15,6 +16,7 @@ const App = () => (
     <Switch>
       <Route exact path="/" component={Home} />
     </Switch>
+    <Footer />
   </BrowserRouter>
 )
 

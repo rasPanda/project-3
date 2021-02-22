@@ -1,8 +1,26 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const Navbar = () => {
+  const [logIn, updateLogin] = useState(false)
+  useEffect(() => {
+    const handleLogin = () => {
+      const token = localStorage.getItem('token')
+      if (token) {
+        //change the button to logout
+        updateLogin(true)
+      }
+    }
+    handleLogin()
+  }, [])
+
+  //loggingOut
+  const logOut = () => {
+    localStorage.removeItem('token')
+    location.reload()
+  }
+
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
@@ -19,39 +37,26 @@ const Navbar = () => {
 
       <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
-          <a className="navbar-item">
-            Home </a>
-
-          <a className="navbar-item">
-            Documentation </a>
-
-          <div className="navbar-item has-dropdown is-hoverable">
-            <a className="navbar-link">
-              More</a>
-
-            <div className="navbar-dropdown">
-              <a className="navbar-item">
-                About</a>
-              <a className="navbar-item">
-                Jobs </a>
-              <a className="navbar-item">
-                Contact</a>
-              <hr className="navbar-divider" />
-              <a className="navbar-item">
-                Report an issue</a>
-            </div>
-          </div>
+          <Link to="/" className="navbar-item">Home </Link>
+          <Link to="/location" className="navbar-item"> Locations </Link>
+          <Link to="/event" className="navbar-item">Events </Link>
+          <Link to="/users" className="navbar-item"> Users </Link>
         </div>
 
         <div className="navbar-end">
           <div className="navbar-item">
-            <div className="buttons">
-              <a className="button is-primary">
-                <strong>Login/Regi</strong>
-              </a>
-              <a className="button is-light">
-                Log in</a>
-            </div>
+            {!logIn ?
+              <div className="buttons">
+                <Link to="/login" className="button is-primary">
+                  <strong>Login/Register</strong>
+                </Link>
+              </div> :
+              <div className="buttons" onClick={logOut}>
+                <Link to="/login" className="button is-primary">
+                  <strong>LogOut</strong>
+                </Link>
+              </div>
+            }
           </div>
         </div>
       </div>

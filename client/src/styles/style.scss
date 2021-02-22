@@ -2,3 +2,43 @@
   position: sticky; 
   top: 0;
 }
+// styling home page starts here
+.home-container{
+  width: 100vw;
+  height: 100vh;
+  background-image: url("https://images.unsplash.com/photo-1609710228159-0fa9bd7c0827?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80");
+  background-position:  center;
+  background-size:cover
+}
+.home-search-container{
+height:100vh;
+display: flex;
+flex-direction:column;
+justify-content: center;
+align-items: center;
+}
+
+.footer-container{
+  position:fixed;
+  display:flex;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:6%;
+  text-align: center;
+  justify-content:center;
+  align-items:center;
+  color: white;
+  background:#0081CF
+}
+#input-width{
+  width: 30vw
+}
+
+@media only screen and (max-width: 600px){
+  .footer-container{
+    font-size:12px;
+  }
+
+}
+// styling home and footer page ends here

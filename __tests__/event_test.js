@@ -40,49 +40,41 @@ xdescribe('Testing GET Event', () => {
 
       .end((err, res) => {
         expect(res.status).to.eq(202)
-        expect(res.body.token).to.be.a('string')
-        const token = res.body.token
+
 
         api.post('/api/event')
-          .set('Authorization', `Bearer ${token}`)
-          .send({
-            name: 'King test',
-            location: {
-              name: 'New location',
-              image: 'https://image.com',
+          .set('Authorization', `Bearer ${res.body.token}`)
+          .send(
+            {
+              name: 'King Pong',
               location: {
                 lat: 51.483857,
                 long: -0.084035
               },
-              address: '1 roadymcroadface',
-              facilities: {
-                numberOfTables: 3,
-                description: 'Three tables, beautifully new'
-              },
-              comments: [],
-              events: {}
-            },
-            user: {
-              username: 'simon',
-              email: 'simon@simon.com',
-              password: 'simon',
-              passwordConfirmation: 'simon',
-              image: 'simonsFace.com',
-              bio: 'Lorem ipsum, caecalius est in horto',
-              location: 'A city somewhere nowhere'
-            },
-            image: 'https://images.unsplash.com/photo-1568711146297-b8674c3c11b6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-            time: 'Saturday 20th March at 3pm',
-            details: 'meeting at the near pub,  then walking  to the spot ',
-            attendees: [],
-            results: [{}],
-            comments: []
-          })
+              user: {
+                username: 'peter',
+                email: 'peter@peter.com',
+                password: 'peter',
+                passwordConfirmation: 'peter',
+                image: 'petersFace.com',
+                bio: 'Lorem ipsum, caecalius est in horto',
+                location: 'A city somewhere nowhere'
+              }
+              ,
+              image: 'https://images.unsplash.com/photo-1568711146297-b8674c3c11b6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+              time: 'Saturday 20th March at 3pm',
+              details: 'meeting at the near pub,  then walking  to the spot ',
+              attendees: [],
+              results: [{}],
+              comments: []
+            }
+          )
           .end((err, res) => {
             expect(res.body).to.be.a('object')
-            expect(res.status).to.eq(201)
+            // done()
+
             api.delete(`/api/event/${res.body._id}`)
-              .set('Bearer', `${token}`)
+              .set('Bearer', `${res.body.token}`)
               .end((err, res) => {
                 expect(res.body).to.be.a('object')
                 done()

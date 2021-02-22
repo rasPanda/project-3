@@ -14,7 +14,7 @@ describe('Testing GET Event', () => {
   })
 
   it('should return a 200 response', done => {
-    api.get('/api/events')
+    api.get('/api/event')
       .end((err, res) => {
         expect(res.status).to.eq(200)
         done()
@@ -22,7 +22,7 @@ describe('Testing GET Event', () => {
   })
 
   it('should return an array of 6 Event', done => {
-    api.get('/api/events')
+    api.get('/api/event')
       .end((err, res) => {
         expect(res.body).to.be.an('array')
         expect(res.body.length).to.eq(6)
@@ -32,7 +32,7 @@ describe('Testing GET Event', () => {
 
 
   it('should return an array of 1 Event', done => {
-    api.post('/api/events')
+    api.post('/api/event')
       .set('Authorization', `Bearer ${res.body.token}`)
       .send({
         name: 'King test',
@@ -49,7 +49,7 @@ describe('Testing GET Event', () => {
         expect(res.body).to.be.a('object')
         expect(res.body.length).to.eq(1)
         expect(res.status).to.eq(201)
-        api.delete(`/api/events/${res.body._id}`)
+        api.delete(`/api/event/${res.body._id}`)
           .set('Bearer', `${res.body.token}`)
           .end((err, res) => {
             expect(res.body).to.be.a('object')

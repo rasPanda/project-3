@@ -5,7 +5,7 @@ import tearDown from './lib/tearDown.js'
 
 // * Mocha ☕️
 
-xdescribe('Testing GET Event', () => {
+describe('Testing GET Event', () => {
   beforeEach(done => {
     setup(done)
   })

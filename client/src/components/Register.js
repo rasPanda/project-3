@@ -28,6 +28,7 @@ export default function Register() {
   })
 
   const [registrationSuccess, updateRegistrationSuccess] = useState(false)
+  const [uploadSuccess, updateUploadSuccess] = useState(false)
 
   function handleRegChange(event) {
     const { name, value } = event.target
@@ -64,6 +65,7 @@ export default function Register() {
           ...regData,
           image: `${result.info.secure_url}`
         })
+        updateUploadSuccess(true)
       }
     ).open()
   }
@@ -152,7 +154,7 @@ export default function Register() {
     </div>
     <div className="field">
       <button className="button" onClick={handleUpload}>Click to Upload Image</button>
-      {regErrors.image && <div><small className="has-text-danger">Please upload an image</small></div>}
+      {uploadSuccess && <div><small className="has-text-primary">Upload Complete</small></div>}
     </div>
     <button className="button">Submit</button>
     {registrationSuccess && <div><small className="has-text-primary">Registration Successful!</small></div>}

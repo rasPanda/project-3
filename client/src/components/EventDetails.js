@@ -4,6 +4,7 @@ import { isCreator } from '../lib/auth'
 import { Link } from 'react-router-dom'
 
 import EventUpdateForm from './EventUpdate'
+import ShareButton from './ShareButton'
 
 export default function singleEventPage({ match, history }) {
   const [event, getEvent] = useState({})
@@ -115,6 +116,9 @@ export default function singleEventPage({ match, history }) {
         </div>
 
         <Link className='button is-warning' to={'/events'}>Back</Link>
+        <ShareButton
+          eventId={id}
+        />
       </div>
       <div className="container">
         <div className="columns is-centered">

@@ -12,6 +12,7 @@ import CreateLocation from './components/CreateLocation'
 import Users from './components/Users'
 import SingleUser from './components/SingleUser'
 import LoginAndRegister from './components/LoginAndRegister'
+import Location from './components/Location'
 
 
 // import 'bulma'
@@ -26,9 +27,9 @@ const App = () => (
       <Route exact path="/event/create" component={CreateEvent}/>
       <Route exact path="/event/:id" component={SingleEventPage}/>
       <Route exact path="/location/create" component={CreateLocation}/>
+      <Route exact path="/location" component={Location} />
       <Route exact path="/users" component={Users}/>
       <Route exact path="/user/:id" component={SingleUser}/>
-      
       <Route exact path="/login" component={LoginAndRegister}/>
     </Switch>
     <Footer />

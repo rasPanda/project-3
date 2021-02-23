@@ -29,11 +29,16 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bulma": "^0.9.2",
+    "mapbox-gl": "^2.1.1",
     "moment": "^2.29.1",
+    "monent": "0.0.2-security",
     "react": "^16.13.1",
+    "react-custom-share": "^0.4.8",
     "react-dom": "^16.13.1",
+    "react-icons": "^4.2.0",
     "react-map-gl": "^6.1.9",
     "react-router-dom": "^5.2.0",
-    "react-select": "^4.1.0"
+    "react-select": "^4.1.0",
+    "react-share": "^4.3.1"
   }
 }

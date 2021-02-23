@@ -1,4 +1,4 @@
-export default function getLocationData(users) {
+export default function getLocationData(users, event) {
   return [
     {
       name: 'Burgess Park Chumleigh Gardens Playground',
@@ -14,7 +14,7 @@ export default function getLocationData(users) {
       },
       user: users[0],
       comments: [],
-      events: {}
+      events: []
     },
     {
       name: 'Burgess Park Football Pitch',
@@ -30,7 +30,7 @@ export default function getLocationData(users) {
       },
       user: users[0],
       comments: [],
-      events: {}
+      events: []
     },
     {
       name: 'Fordham Park',
@@ -46,7 +46,7 @@ export default function getLocationData(users) {
       },
       user: users[1],
       comments: [],
-      events: {}
+      events: []
     },
     {
       name: 'Deptford Park',
@@ -62,7 +62,7 @@ export default function getLocationData(users) {
       },
       user: users[1],
       comments: [],
-      events: {}
+      events: []
     },
     {
       name: 'Folkestone Gardens',
@@ -78,7 +78,7 @@ export default function getLocationData(users) {
       },
       user: users[2],
       comments: [],
-      events: {}
+      events: []
     }
   ]
 }

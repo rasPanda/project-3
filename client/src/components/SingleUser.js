@@ -60,7 +60,7 @@ function SingleUser({ match, history }) {
     updateFormData({ ...formData, [name]: value })
   }
 
-  async function handleSave(event) {
+  async function handleSave() {
     const newFormData = { ...formData }
     try {
       const { data } = await axios.put(`/api/user/${userId}`, newFormData, {
@@ -89,7 +89,7 @@ function SingleUser({ match, history }) {
     }
   }
 
-  function handleUpload(event) {
+  function handleUpload() {
     //event.preventDefault()
     window.cloudinary.createUploadWidget(
       {

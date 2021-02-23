@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function EventUpdateForm({ formData, handleSave, handleFormChange }) {
-  const inputFields = ['name', 'location', 'time', 'details']
+export default function LocationUpdateForm({ formData, handleSave, handleFormChange }) {
+  const inputFields = ['name', 'location', 'address', 'facilities']
 
   return <form>
     {inputFields.map(field => {

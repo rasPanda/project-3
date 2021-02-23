@@ -24,7 +24,7 @@ function SingleUser({ match, history }) {
         const { data } = await axios.get(`/api/user/${userId}`)
         setUser(data)
         const mappedData = {
-          ...data,
+          ...data
         }
         updateFormData(mappedData)
       } catch (err) {
@@ -36,7 +36,7 @@ function SingleUser({ match, history }) {
 
   function handleComment() {
     axios.post(`/api/user/${userId}`, { text }, {
-      headers: {Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` }
     })
       .then(resp => {
         setText('')
@@ -89,7 +89,7 @@ function SingleUser({ match, history }) {
 
   return <div className="section">
     <div className="column is-half is-offset-one-quarter">
-    <Link className='button is-warning' to={'/users'}>Back</Link>
+      <Link className='button is-info' to={'/users'}>Back</Link>
       <div className="columns">
         {editState === false 
           ? <div className="column">
@@ -114,7 +114,7 @@ function SingleUser({ match, history }) {
       </div>
       <div className="section">
         {user.comments && <div className="container">
-          Comments:
+          Message board:
           <div className="column" id="commentsScroll">
             {user.comments.map((comment, index) => {
               return <div key={index} className="columns">
@@ -131,8 +131,8 @@ function SingleUser({ match, history }) {
                   </article>
                 </div>
                 {isCreator(comment.user._id) && <div className="column is-mulitline is-1">
-                    <button className="button is-danger" onClick={() => handleCommentDelete(comment._id)}>Delete</button>
-                    <button className="button is-secondary">Edit</button>
+                  <button className="button is-danger is-hovered" onClick={() => handleCommentDelete(comment._id)}>Delete</button>
+                  <button className="button is-secondary is-hovered">Edit</button>
                 </div>}
               </div>
             })}
@@ -156,7 +156,7 @@ function SingleUser({ match, history }) {
             <div className="field">
               <p className="control">
                 <button
-                  className="button is-info"
+                  className="button is-info is-hovered"
                   onClick={handleComment}
                 >
                   Submit
@@ -166,12 +166,12 @@ function SingleUser({ match, history }) {
           </div>
         </article>
       </div>
-      
+
       <div className="container is-half is-offset-one-quarter">
-        {isCreator(userId) && <button className="button is-danger" onClick={handleUserDelete}>Delete account</button>}
-        {isCreator(userId) && <button className="button is-secondary" onClick={() => changeEditState(true)}>Update account</button>}
-      </div>   
-    </div> 
+        {isCreator(userId) && <button className="button is-danger is-hovered" onClick={handleUserDelete}>Delete account</button>}
+        {isCreator(userId) && <button className="button is-warning is-hovered" onClick={() => changeEditState(true)}>Update account</button>}
+      </div>
+    </div>
   </div>
 }
 

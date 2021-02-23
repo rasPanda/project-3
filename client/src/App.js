@@ -12,7 +12,7 @@ import SingleUser from './components/SingleUser'
 import LoginAndRegister from './components/LoginAndRegister'
 
 
-import 'bulma'
+// import 'bulma'
 import './styles/style.scss'
 
 const App = () => (

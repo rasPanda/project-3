@@ -25,65 +25,65 @@ const Users = () => {
   // console.log(selectedUser)
 
   return <div className="section">
-    <div className="columns is-half is-offset-one-quarter">
+    <div className="container">
+      <div className="columns">
+        <div className={!isModal ? 'column' : 'column is-two-thirds'}>
 
-      {/* <div className="column"> */}
-        <div className="container">
           <div className="columns is-multiline">
             {users.map((user, index) => {
-                return <div key={index} className={!isModal? "column is-one-third" : "column is-half"}>
-                  <div className="card" onClick={() => {showModal(user)}}>
-                    <div className="card-image">
-                      <figure className="image is-4by3">
-                        <img src={user.image}></img>
-                        Image placeholder...
-                      </figure>
-                    </div>
-                    <div className="content">
-                      <h3>{user.username}</h3>
-                      <h4>{user.location}</h4>
-                    </div>
+              return <div key={index} className={!isModal ? 'column is-one-third' : 'column is-half'}>
+                <div className="card is-hovered" id="cardHover" onClick={() => { showModal(user) }}>
+                  <div className="card-image">
+                    <figure className="image is-1by1">
+                      <img src={user.image}></img>
+                    </figure>
+                  </div>
+                  <div className="content">
+                    <h3 className="title">{user.username}</h3>
+                    <h4 className="subtitle">{user.location}</h4>
                   </div>
                 </div>
-              })}
-          </div>
-        </div>
-      {/* </div> */}
-      {isModal && <div className="column is-narrow is-one-third">
-        <div className="container" id="fixed">
-          <button className="delete" onClick={() => {setIsModal(false)}}></button>
-          <div className="column is-full">
-            <figure className="image is-1by1">
-              <img className="is-rounded" id="modalImage" src={selectedUser.image}></img>
-            </figure>
-            <h1>Name: {selectedUser.username}</h1>
-            <h3>Location: {selectedUser.location}</h3>
-            <h4>Bio:</h4>
-            <h3>{selectedUser.bio}</h3>
-            <Link to={`/user/${selectedUser._id}`}>
-              <button className="button is-primary">User's Page</button>
-            </Link>
-            {selectedUser.comments && <div className="container is-clipped">
-              <h4>Comments:</h4>
-              <div className="column" id="commentsScroll">
-                {selectedUser.comments.map((comment) => {
-                  return <article key={comment._id} className="media">
-                    <div className="media-content">
-                      <div className="content">
-                        <p className="subtitle">
-                          {comment.user.username}
-                        </p>
-                        <p>{comment.text}</p>
-                      </div>
-                    </div>
-                  </article>
-                })}
               </div>
-            </div>}
+            })}
           </div>
         </div>
-      </div>}
+        {isModal && <div className="column is-narrow is-one-third">
+          <div className="container" id="fixed">
+            <button className="delete" onClick={() => { setIsModal(false) }}></button>
+            <div className="column is-full">
+              <figure className="image is-1by1">
+                <img className="is-rounded" id="modalImage" src={selectedUser.image}></img>
+              </figure>
+              <br></br>
+              <h1 className="title">Name: {selectedUser.username}</h1>
+              <h3 className="subtitle">Location: {selectedUser.location}</h3>
+              <h4 className="subtitle">Bio:</h4>
+              <h3>{selectedUser.bio}</h3>
+              <Link to={`/user/${selectedUser._id}`}>
+                <button className="button is-hovered is-info">User's Page</button>
+              </Link>
+              {selectedUser.comments && <div className="container is-clipped">
+                <h4 className="subtitle">Message board:</h4>
+                <div className="column" id="commentsScroll">
+                  {selectedUser.comments.map((comment) => {
+                    return <article key={comment._id} className="media">
+                      <div className="media-content">
+                        <div className="content">
+                          <p className="subtitle">
+                            {comment.user.username}
+                          </p>
+                          <p>{comment.text}</p>
+                        </div>
+                      </div>
+                    </article>
+                  })}
+                </div>
+              </div>}
+            </div>
+          </div>
+        </div>}
 
+      </div>
     </div>
   </div>
 }

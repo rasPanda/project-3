@@ -167,7 +167,7 @@ export default function singleEventPage({ match, history }) {
                   onChange={handleChange}
                   name={'newComment'}
                 />
-                <button className='button is-warning mt-3'>Post</button>
+                <button className='button is-info is-hovered mt-3'>Post</button>
               </form>
             </div>
           </div>

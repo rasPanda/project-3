@@ -73,7 +73,7 @@ export default function Register() {
 
 
   return <form onSubmit={handleRegSubmit}>
-    <h2>Register</h2>
+    <h2 className="title">Register</h2>
     <div className="field">
       <label className="label">Username</label>
       <div className="control">
@@ -153,10 +153,10 @@ export default function Register() {
       </div>
     </div>
     <div className="field">
-      <button className="button" onClick={handleUpload}>Click to Upload Image</button>
+      <button className="button is-hovered is-info" onClick={handleUpload}>Click to Upload Image</button>
       {uploadSuccess && <div><small className="has-text-primary">Upload Complete</small></div>}
     </div>
-    <button className="button">Submit</button>
+    <button className="button is-hovered is-info">Submit</button>
     {registrationSuccess && <div><small className="has-text-primary">Registration Successful!</small></div>}
   </form>
 

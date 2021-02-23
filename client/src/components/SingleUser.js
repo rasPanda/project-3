@@ -30,6 +30,15 @@ function SingleUser({ match, history }) {
       })
   }
 
+  function handleCommentDelete(commentId) {
+    axios.delete(`/api/user/${userId}/comment/${commentId}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(resp => {
+        setUser(resp.data)
+      })
+  }
+
   return <div className="section">
     <div className="column is-half is-offset-one-quarter">
       <div className="columns">
@@ -45,18 +54,27 @@ function SingleUser({ match, history }) {
         </div>
       </div>
       {user.comments && <div className="container">
+        Comments:
         <div className="column" id="commentsScroll">
-          {user.comments.map((comment) => {
-            return <article key={comment._id} className="media">
-              <div className="media-content">
-                <div className="content">
-                  <p className="subtitle">
-                    {comment.user.username}
-                  </p>
-                  <p>{comment.text}</p>
-                </div>
+          {user.comments.map((comment, index) => {
+            return <div key={index} className="columns">
+              <div className="column is-10">
+                <article key={comment._id} className="media">
+                  <div className="media-content">
+                    <div className="content">
+                      <p className="subtitle">
+                        {comment.user.username}
+                      </p>
+                      <p>{comment.text}</p>
+                    </div>
+                  </div>
+                </article>
               </div>
-            </article>
+              {isCreator(comment.user._id) && <div className="column is-mulitline is-1">
+                  <button className="button is-danger" onClick={() => handleCommentDelete(comment._id)}>Delete</button>
+                  <button className="button is-secondary">Edit</button>
+              </div>}
+            </div>
           })}
         </div>
       </div>

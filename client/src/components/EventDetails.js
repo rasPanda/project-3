@@ -3,6 +3,8 @@ import axios from 'axios'
 import { isCreator } from '../lib/auth'
 import { Link } from 'react-router-dom'
 
+import EventUpdateForm from './EventUpdate'
+
 export default function singleEventPage({ match, history }) {
   const [event, getEvent] = useState({})
   const [newComment, updateNewComment] = useState({
@@ -10,15 +12,28 @@ export default function singleEventPage({ match, history }) {
   })
   const id = match.params.id
   const token = localStorage.getItem('token')
+  const [editState, changeEditState] = useState(false)
+  const [formData, updateFormData] = useState({
+    name: '',
+    location: '',
+    time: '',
+    details: ''
+  })
 
   useEffect(() => {
     async function fetchData() {
       const { data } = await axios.get(`/api/event/${id}`)
       getEvent(data)
+      const mappedData = {
+        ...data,
+        // location: data.location.name
+      }
+      updateFormData(mappedData)
     }
     fetchData()
   }, [])
 
+  console.log(formData)
   function handleChange(e) {
     updateNewComment({ ...newComment, text: e.target.value })
   }
@@ -64,6 +79,25 @@ export default function singleEventPage({ match, history }) {
     }
   }
 
+  function handleFormChange(event) {
+    const { name, value } = event.target
+    updateFormData({ ...formData, [name]: value })
+  }
+
+  async function handleSave(event) {
+    const newFormData = { ...formData }
+    try {
+      const { data } = await axios.put(`/api/event/${id}`, newFormData, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      console.log(data)
+      changeEditState(false)
+      // history.push(`/user/${data._id}`)
+    } catch (err) {
+      console.log(err.response.data)
+    }
+  }
+
   if (!event.user) {
     return null
   }
@@ -72,21 +106,37 @@ export default function singleEventPage({ match, history }) {
     <div className="columns is-centered">
       <div className="column">
         <img src={event.image} />
-        {isCreator(event.user._id) && <div className='field'><button
-          className='button is-danger'
-          onClick={handleDelete}
-        >Delete & Cancel Event</button></div>}
+        <div className='columns'>
+          {isCreator(event.user._id) && <div className='column is-three-quarters'><button
+            className='button is-danger'
+            onClick={handleDelete}
+          >Delete & Cancel Event</button></div>}
+          {isCreator(event.user._id) && <div className='column is-one-quarters'><button
+            className='button is-info'
+            onClick={() => changeEditState(true)}
+          >Edit Event</button></div>}
+        </div>
+
         <Link className='button is-warning' to={'/events'}>Back</Link>
       </div>
       <div className="container">
         <div className="columns is-centered">
           <div className="column is-two-thirds">
             <div className="box mt-3">
-              <div>{event.name}</div>
-              <div><span>Location: </span>{<Link to={`/location/${event.location._id}`}>{event.location.name}</Link>}</div>
-              <div><span>Host: </span>{<Link to={`/user/${event.user._id}`}>{event.user.username}</Link>}</div>
-              <div><span>Time: </span>{event.time}</div>
-              <div><h3>Details:</h3><div>{event.details}</div></div>
+              {editState === false
+                ? <div>
+                  <div>{event.name}</div>
+                  <div><span>Location: </span>{<Link to={`/location/${event.location._id}`}>{event.location.name}</Link>}</div>
+                  <div><span>Host: </span>{<Link to={`/user/${event.user._id}`}>{event.user.username}</Link>}</div>
+                  <div><span>Time: </span>{event.time}</div>
+                  <div><h3>Details:</h3><div>{event.details}</div></div>
+                </div>
+                : <EventUpdateForm
+                  handleSave={handleSave}
+                  handleFormChange={handleFormChange}
+                  formData={formData}
+                />
+              }
               {event.attendees.length > 0 &&
                 <div><h3>Attendees:</h3>
                   {event.attendees.map(attendee => {

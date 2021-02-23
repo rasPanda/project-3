@@ -23,12 +23,10 @@ function SingleUser({ match, history }) {
       try {
         const { data } = await axios.get(`/api/user/${userId}`)
         setUser(data)
-
         const mappedData = {
           ...data,
         }
         updateFormData(mappedData)
-
       } catch (err) {
         console.log(err)
       }
@@ -53,10 +51,6 @@ function SingleUser({ match, history }) {
       .then(resp => {
         setUser(resp.data)
       })
-  }
-
-  function editPage() {
-    changeEditState(true)
   }
 
   function handleChange(event) {
@@ -98,19 +92,20 @@ function SingleUser({ match, history }) {
     <Link className='button is-warning' to={'/users'}>Back</Link>
       <div className="columns">
         {editState === false 
-        ? <div className="column">
-          <label className="label">Username:</label>
-          <h1>{user.username}</h1>
-          <label className="label">Location:</label>
-          <h3>{user.location}</h3>
-          <label className="label">Bio:</label>
-          <h3>{user.bio}</h3>
-        </div>
-        : <UserUpdateForm
-          handleSave={handleSave}
-          handleChange={handleChange}
-          formData={formData}
-        />}
+          ? <div className="column">
+            <label className="label">Username:</label>
+            <h1>{user.username}</h1>
+            <label className="label">Location:</label>
+            <h3>{user.location}</h3>
+            <label className="label">Bio:</label>
+            <h3>{user.bio}</h3>
+          </div>
+          : <UserUpdateForm
+            handleSave={handleSave}
+            handleChange={handleChange}
+            formData={formData}
+          />
+        }
         <div className="column">
           <figure className="image is-1by1">
             <img className="is-rounded" src={user.image}></img>
@@ -174,7 +169,7 @@ function SingleUser({ match, history }) {
       
       <div className="container is-half is-offset-one-quarter">
         {isCreator(userId) && <button className="button is-danger" onClick={handleUserDelete}>Delete account</button>}
-        {isCreator(userId) && <button className="button is-secondary" onClick={editPage}>Update account</button>}
+        {isCreator(userId) && <button className="button is-secondary" onClick={() => changeEditState(true)}>Update account</button>}
       </div>   
     </div> 
   </div>

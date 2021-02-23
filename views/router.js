@@ -71,6 +71,4 @@ router.route('/event/:id')
   .delete(secureRoute, singleEventControllers.deleteSingleEvent)
   .post(secureRoute, eventComment.createEventComment)
 
-
-
 export default router

@@ -7,25 +7,63 @@ const Users = () => {
   const [users, setUsers] = useState([])
   const [isModal, setIsModal] = useState(false)
   const [selectedUser, setSelectedUser] = useState({})
+  const [filterTerm, setFilterTerm] = useState('')
 
   useEffect(() => {
-    axios.get('/api/user')
+    if (!filterTerm) {
+      axios.get('/api/user')
       .then(axiosResp => {
         setUsers(axiosResp.data)
       })
+    }
   }, [])
+
+  async function filterByName(event) {
+    event.preventDefault()
+    console.log('filtering users')
+  }
+
+  async function handleChange(event) {
+    event.preventDefault()
+    const value = event.target.value
+    setFilterTerm(value)
+    try {
+      if (!value) {
+        axios.get('/api/user')
+        .then(axiosResp => {
+          setUsers(axiosResp.data)
+        })
+      } else {
+        const { data } = await axios.get(`/api/user/search/${filterTerm}`) 
+        setUsers(data)
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   function showModal(user) {
     setIsModal(true)
     setSelectedUser(user)
   }
 
-  // console.log(users)
-  // console.log(isModal)
-  // console.log(selectedUser)
 
   return <div className="section">
     <div className="container">
+
+      <div className="column">
+        <form onSubmit={filterByName} className="columns">
+          <input 
+            type="text"
+            placeholder="Search by name..."
+            className="input is-info is-rounded is-9"
+            onChange={(event) => handleChange(event)}
+            value={filterTerm}
+          />
+          <button className="button is-info is-rounded is-1">Search</button>
+        </form>
+      </div>
+
       <div className="columns">
         <div className={!isModal ? 'column' : 'column is-two-thirds'}>
 

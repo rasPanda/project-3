@@ -12,10 +12,12 @@ function SingleUser({ match, history }) {
   const [user, setUser] = useState({})
   const [text, setText] = useState('')
   const [editState, changeEditState] = useState(false)
+  const [uploadSuccess, updateUploadSuccess] = useState(false)
   const [formData, updateFormData] = useState({
     username: '',
     location: '',
-    bio: ''
+    bio: '',
+    image: ''
   })
 
   useEffect(() => {
@@ -87,6 +89,27 @@ function SingleUser({ match, history }) {
     }
   }
 
+  function handleUpload(event) {
+    //event.preventDefault()
+    window.cloudinary.createUploadWidget(
+      {
+        cloudName: 'dzoqli241',
+        uploadPreset: 'PingPongImages',
+        cropping: true
+      },
+      (err, result) => {
+        if (result.event !== 'success') {
+          return
+        }
+        updateFormData({
+          ...formData,
+          image: `${result.info.secure_url}`
+        })
+        updateUploadSuccess(true)
+      }
+    ).open()
+  }
+
   return <div className="section">
     <div className="column is-half is-offset-one-quarter">
       <Link className='button is-info' to={'/users'}>Back</Link>
@@ -110,6 +133,10 @@ function SingleUser({ match, history }) {
           <figure className="image is-1by1">
             <img className="is-rounded" src={user.image}></img>
           </figure>
+          {editState &&  <div className="field">
+            <button className="button is-hovered is-info" onClick={handleUpload}>Change profile pic</button>
+            {uploadSuccess && <div><small className="has-text-primary">Upload Complete, <br></br>reload page to see changes</small></div>}
+          </div>}
         </div>
       </div>
       <div className="section">
@@ -118,22 +145,27 @@ function SingleUser({ match, history }) {
           <div className="column" id="commentsScroll">
             {user.comments.map((comment, index) => {
               return <div key={index} className="columns">
-                <div className="column is-10">
+                <div className="column is-ful-width">
                   <article key={comment._id} className="media">
                     <div className="media-content">
                       <div className="content">
                         <p className="subtitle">
                           {comment.user.username}
                         </p>
-                        <p>{comment.text}</p>
+                        <p>
+                          {isCreator(comment.user._id) && <button
+                            className='delete is-small is-pulled-right'
+                            onClick={() => handleCommentDelete(comment._id)}
+                          ></button>}
+                          {comment.text}
+                        </p> 
                       </div>
                     </div>
                   </article>
                 </div>
-                {isCreator(comment.user._id) && <div className="column is-mulitline is-1">
+                {/* {isCreator(comment.user._id) && <div className="column is-mulitline is-1">
                   <button className="button is-danger is-hovered" onClick={() => handleCommentDelete(comment._id)}>Delete</button>
-                  <button className="button is-secondary is-hovered">Edit</button>
-                </div>}
+                </div>} */}
               </div>
             })}
           </div>

@@ -43,23 +43,6 @@ export default function EventsPage() {
   }, [])
 
   return <main>
-<<<<<<< HEAD
-
-    <section className="container">
-      <div className='columns'>
-        <div className={!sideCard ? 'column' : 'column is-two-thirds'}>
-          <div className="columns is-multiline">
-            {eventData.map((event) => {
-              return <div key={event._id} className={!sideCard ? 'column is-one-third' : 'column is-half'} >
-                <div className="card" onClick={() => handleSelectedEvent(event)}>
-                  <div className="card-content">
-                    <div className="media">
-                      <div className="media-content">
-                        <p className="title is-4">{event.name}</p>
-                        <p className="subtitle is-6">{event.location.name}</p>
-                        <p className="subtitle is-6">{event.time}</p>
-                        <img src={event.image} alt={event.name} />
-=======
     <div className="section">
       <section className="container">
         <div className='columns'>
@@ -78,7 +61,6 @@ export default function EventsPage() {
                             <img src={event.image} alt={event.name} />
                           </figure>
                         </div>
->>>>>>> development
                       </div>
                     </div>
                   </div>

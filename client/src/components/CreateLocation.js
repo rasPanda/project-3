@@ -1,64 +1,81 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
-import Select from 'react-select'
-import moment from 'moment'
+// import ReactMapGL from 'react-map-gl'
 
-export default function CreateEvent({ history }) {
-  const currentTime = moment().format('YYYY-MM-DDTHH:mm')
+export default function CreateLocation() {
+
+  // const [viewport, setViewport] = React.useState({
+  //   width: '88vw',
+  //   height: '70vh',
+  //   latitude: 37.7577,
+  //   longitude: -122.4376,
+  //   zoom: 8
+  // })
+
+  // return (
+  //   <div className="box" style={{ width: '93vw', height: '80vh', display: 'flex', justifyContent: 'center', borderRadius: '20px', margin: '100px auto 0 auto ', boxShadow: '0 5px 8px -2px black' }}>
+  //     <ReactMapGL
+  //       {...viewport}
+  //       mapboxApiAccessToken='pk.eyJ1IjoicmFzcGFuZGEiLCJhIjoiY2tsaTcwN3d4MWY3YjJvcHJ3NXdzMDFhNCJ9.LzNGp4G0vsrfsnG-SXBGag'
+  //       width="100%"
+  //       height="100%"
+  //       onViewportChange={(viewport) => setViewport(viewport)}
+  //     />
+  //   </div>
+  // )
+
   const token = localStorage.getItem('token')
 
-  const [eventData, updateEventData] = useState({
+  const [locationData, updateLocationData] = useState({
     name: '',
-    time: `${currentTime}`,
-    details: '',
-    location: '',
+    address: '',
+    numberOfTables: 1,
+    description: '',
+    long: '',
+    lat: '',
     image: 'https://data.nssmag.com/images/galleries/12244/26032017-IMG-5266AnyOkolie.jpg',
-    attendees: [],
-    results: [{}],
     comments: []
   })
 
   const [errors, updateErrors] = useState({
     name: '',
-    time: '',
-    details: '',
-    location: [],
+    address: '',
+    numberOfTables: '',
+    description: '',
+    long: '',
+    lat: '',
     image: '',
-    attendees: [],
-    results: [{}],
     comments: []
   })
 
-  const [locationOptions, updateLocationsOptions] = useState([])
-  const [locations, getLocations] = useState([])
   const [creationSuccess, updateCreationSuccess] = useState(false)
   const [uploadSuccess, updateUploadSuccess] = useState(false)
 
-  useEffect(() => {
-    axios.get('/api/location')
-      .then(({ data }) => {
-        getLocations(data)
-        const locationArr = data.map(location => {
-          return { value: location._id, label: location.name }
-        })
-        updateLocationsOptions(locationArr)
-      })
-  }, [])
+  // useEffect(() => {
+  //   axios.get('/api/location')
+  //     .then(({ data }) => {
+  //       getLocations(data)
+  //       const locationArr = data.map(location => {
+  //         return { value: location._id, label: location.name }
+  //       })
+  //       updateLocationsOptions(locationArr)
+  //     })
+  // }, [])
 
   function handleChange(event) {
     const { name, value } = event.target
-    updateEventData({ ...eventData, [name]: value })
+    updateLocationData({ ...locationData, [name]: value })
     // ! Whenever I make a change, I should remove any error for this particular field!
     updateErrors({ ...errors, [name]: '' })
   }
 
   async function handleSubmit(event) {
     event.preventDefault()
-    const selectedLocation = locations.find(location => location._id === eventData.location.value)
-    const timeStr = moment(eventData.time).format('dddd, MMMM Do YYYY, h:mm a')
-    const dataToSubmit = { ...eventData, time: timeStr, location: selectedLocation }
+    // const selectedLocation = locations.find(location => location._id === eventData.location.value)
+    // const timeStr = moment(eventData.time).format('dddd, MMMM Do YYYY, h:mm a')
+    // const dataToSubmit = { ...locationData, time: timeStr, location: selectedLocation }
     try {
-      const { data } = await axios.post('/api/event', dataToSubmit, {
+      const { data } = await axios.post('/api/event', locationData, {
         headers: { Authorization: `Bearer ${token}` }
       })
       updateCreationSuccess(true)
@@ -83,8 +100,8 @@ export default function CreateEvent({ history }) {
         if (result.event !== 'success') {
           return
         }
-        updateEventData({
-          ...eventData,
+        updateLocationData({
+          ...locationData,
           image: `${result.info.secure_url}`
         })
         updateUploadSuccess(true)
@@ -95,15 +112,15 @@ export default function CreateEvent({ history }) {
   return <main className='section'>
     <div className='box'>
       <form onSubmit={handleSubmit}>
-        <h2 className='title'>Create Event</h2>
+        <h2 className='title'>Add Location</h2>
         <div className='field'>
-          <label className='label'>Event Name</label>
+          <label className='label'>Location Name</label>
           <div className='control'>
             <input
               className='input'
-              placeholder='Pong in the park?'
+              placeholder='Great spot in the park?'
               type='text'
-              value={eventData.name}
+              value={locationData.name}
               onChange={handleChange}
               name={'name'}
             />
@@ -111,13 +128,12 @@ export default function CreateEvent({ history }) {
           </div>
         </div>
         <div className='field'>
-          <label className='label'>Time</label>
+          <label className='label'>Address</label>
           <div className='control'>
             <input
               className='input'
-              type='datetime-local'
-              min={currentTime}
-              value={eventData.time}
+              type='text'
+              value={locationData.address}
               onChange={handleChange}
               name={'time'}
             />
@@ -129,9 +145,9 @@ export default function CreateEvent({ history }) {
           <div className='control'>
             <textarea
               className='textarea'
-              placeholder='Casual or tournament? Other info?'
+              placeholder='Tables behind the cafe, or next to the tennis courts?'
               type='text'
-              value={eventData.details}
+              value={locationData.details}
               onChange={handleChange}
               name={'details'}
             />
@@ -139,28 +155,30 @@ export default function CreateEvent({ history }) {
           </div>
         </div>
         <div className='field'>
-          <label className='label'>Location</label>
+          <label className='label'>Number of Tables</label>
           <div className='control'>
-            <Select
-              name='location'
-              closeMenuOnSelect={true}
-              defaultValue={[]}
-              onChange={(location) => updateEventData({ ...eventData, location })}
-              options={locationOptions}
-              value={eventData.location}
+            <input
+              className='input'
+              type='number'
+              min='1'
+              value={locationData.numberOfTables}
+              onChange={handleChange}
+              name={'numberOfTables'}
             />
+            {errors.name && <small className='has-text-danger'>{errors.details.message}</small>}
           </div>
         </div>
 
 
         <div className="field">
-          <button className="button" onClick={handleUpload}>(Optional) Upload Event Image</button>
+          <button className="button" onClick={handleUpload}>(Optional) Upload Location Image</button>
           {uploadSuccess && <div><small className="has-text-primary">Upload Complete</small></div>}
         </div>
         <button className="button">Submit</button>
-        {creationSuccess && <div><small className="has-text-primary">Event Created! Redirecting...</small></div>}
+        {creationSuccess && <div><small className="has-text-primary">Location Added! Redirecting...</small></div>}
       </form>
     </div>
   </main>
+
 
 }

@@ -8,6 +8,7 @@ import Footer from './components/Footer'
 import EventsPage from './components/Events'
 import SingleEventPage from './components/EventDetails'
 import CreateEvent from './components/CreateEvent'
+import CreateLocation from './components/CreateLocation'
 import Users from './components/Users'
 import SingleUser from './components/SingleUser'
 import LoginAndRegister from './components/LoginAndRegister'
@@ -24,6 +25,7 @@ const App = () => (
       <Route exact path="/events" component={EventsPage}/>
       <Route exact path="/event/create" component={CreateEvent}/>
       <Route exact path="/event/:id" component={SingleEventPage}/>
+      <Route exact path="/location/create" component={CreateLocation}/>
       <Route exact path="/users" component={Users}/>
       <Route exact path="/user/:id" component={SingleUser}/>
       

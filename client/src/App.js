@@ -7,13 +7,14 @@ import Home from './components/Home'
 import Footer from './components/Footer'
 import EventsPage from './components/Events'
 import SingleEventPage from './components/EventDetails'
+import CreateEvent from './components/CreateEvent'
 import Users from './components/Users'
 import SingleUser from './components/SingleUser'
 import LoginAndRegister from './components/LoginAndRegister'
 import Location from './components/Location'
 
 
-import 'bulma'
+// import 'bulma'
 import './styles/style.scss'
 
 const App = () => (

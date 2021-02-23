@@ -10,6 +10,7 @@ import SingleEventPage from './components/EventDetails'
 import Users from './components/Users'
 import SingleUser from './components/SingleUser'
 import LoginAndRegister from './components/LoginAndRegister'
+import Location from './components/Location'
 
 
 import 'bulma'
@@ -19,13 +20,14 @@ const App = () => (
   <BrowserRouter>
     <Navbar />
     <Switch>
-      <Route exact path="/" component={Home}/>
-      <Route exact path="/events" component={EventsPage}/>
-      <Route exact path="/event/:id" component={SingleEventPage}/>
-      <Route exact path="/users" component={Users}/>
-      <Route exact path="/user/:id" component={SingleUser}/>
-      
-      <Route exact path="/login" component={LoginAndRegister}/>
+      <Route exact path="/" component={Home} />
+      <Route exact path="/events" component={EventsPage} />
+      <Route exact path="/event/:id" component={SingleEventPage} />
+      <Route exact path="/users" component={Users} />
+      <Route exact path="/users" component={Users} />
+      <Route exact path="/location" component={Location} />
+
+      <Route exact path="/login" component={LoginAndRegister} />
     </Switch>
     <Footer />
   </BrowserRouter>

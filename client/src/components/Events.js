@@ -43,7 +43,7 @@ export default function EventsPage() {
   }, [])
 
   return <main>
-    
+
     <section className="container">
       <div className='columns'>
         <div className={!sideCard ? 'column' : 'column is-two-thirds'}>
@@ -93,3 +93,4 @@ export default function EventsPage() {
     </section>
   </main>
 }
+

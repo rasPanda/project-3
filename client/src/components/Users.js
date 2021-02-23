@@ -28,30 +28,30 @@ const Users = () => {
     <div className="columns is-half is-offset-one-quarter">
 
       {/* <div className="column"> */}
-        <div className="container">
-          <div className="columns is-multiline">
-            {users.map((user, index) => {
-                return <div key={index} className={!isModal? "column is-one-third" : "column is-half"}>
-                  <div className="card" onClick={() => {showModal(user)}}>
-                    <div className="card-image">
-                      <figure className="image is-4by3">
-                        <img src={user.image}></img>
+      <div className="container">
+        <div className="columns is-multiline">
+          {users.map((user, index) => {
+            return <div key={index} className={!isModal ? "column is-one-third" : "column is-half"}>
+              <div className="card" onClick={() => { showModal(user) }}>
+                <div className="card-image">
+                  <figure className="image is-4by3">
+                    <img src={user.image}></img>
                         Image placeholder...
                       </figure>
-                    </div>
-                    <div className="content">
-                      <h3>{user.username}</h3>
-                      <h4>{user.location}</h4>
-                    </div>
-                  </div>
                 </div>
-              })}
-          </div>
+                <div className="content">
+                  <h3>{user.username}</h3>
+                  <h4>{user.location}</h4>
+                </div>
+              </div>
+            </div>
+          })}
         </div>
+      </div>
       {/* </div> */}
       {isModal && <div className="column is-narrow is-one-third">
         <div className="container" id="fixed">
-          <button className="delete" onClick={() => {setIsModal(false)}}></button>
+          <button className="delete" onClick={() => { setIsModal(false) }}></button>
           <div className="column is-full">
             <figure className="image is-1by1">
               <img className="is-rounded" id="modalImage" src={selectedUser.image}></img>

@@ -25,7 +25,7 @@ const App = () => (
       <Route exact path="/events" component={EventsPage} />
       <Route exact path="/event/:id" component={SingleEventPage} />
       <Route exact path="/users" component={Users} />
-      <Route exact path="/users" component={Users} />
+      <Route exact path="/user/:id" component={SingleUser} />
       <Route exact path="/location" component={Location} />
 
       <Route exact path="/login" component={LoginAndRegister} />

@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { isCreator } from '../lib/auth'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 
 import EventUpdateForm from './EventUpdate'
 import ShareButton from './ShareButton'
 
 export default function singleEventPage({ match, history }) {
+  const [locations, getLocations] = useState([])
   const [event, getEvent] = useState({})
   const [newComment, updateNewComment] = useState({
     text: ''
@@ -16,9 +18,10 @@ export default function singleEventPage({ match, history }) {
   const [editState, changeEditState] = useState(false)
   const [formData, updateFormData] = useState({
     name: '',
-    location: '',
+    location: {},
     time: '',
-    details: ''
+    details: '',
+    image: ''
   })
 
   useEffect(() => {
@@ -29,6 +32,13 @@ export default function singleEventPage({ match, history }) {
       updateFormData(mappedData)
     }
     fetchData()
+  }, [])
+
+  useEffect(() => {
+    axios.get('/api/location')
+      .then(({ data }) => {
+        getLocations(data)
+      })
   }, [])
 
   console.log(formData)
@@ -83,9 +93,13 @@ export default function singleEventPage({ match, history }) {
   }
 
   async function handleSave() {
-    const newFormData = { ...formData }
+    // event.preventDefault()
+    const selectedLocation = locations.find(location => location._id === formData.location.value)
+    const timeStr = moment(formData.time).format('dddd, MMMM Do YYYY, h:mm a')
+    const dataToSubmit = { ...formData, time: timeStr, location: selectedLocation }
+    // const newFormData = { ...formData }
     try {
-      const { data } = await axios.put(`/api/event/${id}`, newFormData, {
+      const { data } = await axios.put(`/api/event/${id}`, dataToSubmit, {
         headers: { Authorization: `Bearer ${token}` }
       })
       console.log(data)
@@ -105,12 +119,12 @@ export default function singleEventPage({ match, history }) {
       <div className="column">
         <img src={event.image} />
         <div className='columns'>
-          {isCreator(event.user._id) && <div className='column is-three-quarters'><button
+          {isCreator(event.user._id) && <div className='column is-two-quarters'><button
             className='button is-danger'
             onClick={handleDelete}
           >Delete & Cancel Event</button></div>}
           {isCreator(event.user._id) && <div className='column is-one-quarters'><button
-            className='button is-info'
+            className='button is-warning'
             onClick={() => changeEditState(true)}
           >Edit Event</button></div>}
         </div>
@@ -136,6 +150,7 @@ export default function singleEventPage({ match, history }) {
                   handleSave={handleSave}
                   handleFormChange={handleFormChange}
                   formData={formData}
+                  updateFormData={updateFormData}
                 />
               }
               {event.attendees.length > 0 &&

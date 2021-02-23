@@ -74,6 +74,11 @@ const Navbar = () => {
                   {userName && <strong>Hi {userName}</strong>}
                 </div>
                 <div className="column">
+                  <Link to={`/event/create`} className="button is-link">
+                    <strong>Create Event</strong>
+                  </Link>
+                </div>
+                <div className="column">
                   <Link to={`/user/${userId}`} className="button is-info">
                     <strong>My Profile</strong>
                   </Link>

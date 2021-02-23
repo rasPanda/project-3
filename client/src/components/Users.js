@@ -18,28 +18,30 @@ const Users = () => {
     }
   }, [])
 
-  async function filterByName(event) {
-    event.preventDefault()
-    console.log('filtering users')
-  }
 
   async function handleChange(event) {
     event.preventDefault()
     const value = event.target.value
     setFilterTerm(value)
-    try {
-      if (!value) {
-        axios.get('/api/user')
-        .then(axiosResp => {
-          setUsers(axiosResp.data)
-        })
-      } else {
-        const { data } = await axios.get(`/api/user/search/${filterTerm}`) 
-        setUsers(data)
-      }
-    } catch (err) {
-      console.log(err)
-    }
+    // try {
+    //   if (!value) {
+    //     axios.get('/api/user')
+    //     .then(axiosResp => {
+    //       setUsers(axiosResp.data)
+    //     })
+    //   } else {
+    //     const { data } = await axios.get(`/api/user/search/${filterTerm}`) 
+    //     setUsers(data)
+    //   }
+    // } catch (err) {
+    //   console.log(err)
+    // }
+  }
+
+  function filterUsers() {
+    return users.filter((user) => {
+      return user.username.toLowerCase().includes(filterTerm.toLowerCase())
+    })
   }
 
   function showModal(user) {
@@ -47,33 +49,36 @@ const Users = () => {
     setSelectedUser(user)
   }
 
+  function hideModal() {
+    setIsModal(false)
+    setSelectedUser({})
+  }
+
 
   return <div className="section">
     <div className="container">
 
       <div className="column">
-        <form onSubmit={filterByName} className="columns">
-          <input 
-            type="text"
-            placeholder="Search by name..."
-            className="input is-info is-rounded is-9"
-            onChange={(event) => handleChange(event)}
-            value={filterTerm}
-          />
-          <button className="button is-info is-rounded is-1">Search</button>
-        </form>
+        <input 
+          type="text"
+          placeholder="Search by name..."
+          className="input is-info is-rounded is-9"
+          onChange={(event) => handleChange(event)}
+          value={filterTerm}
+        />
       </div>
 
       <div className="columns">
         <div className={!isModal ? 'column' : 'column is-two-thirds'}>
 
           <div className="columns is-multiline">
-            {users.map((user, index) => {
+            {filterUsers().map((user, index) => {
               return <div key={index} className={!isModal ? 'column is-one-third' : 'column is-half'}>
-                <div className="card is-hovered" id="cardHover" onClick={() => { showModal(user) }}>
+                <div className="card is-hovered" id={selectedUser._id === user._id ? "highlighted" : "cardHover"} 
+                  onClick={() => { showModal(user) }}>
                   <div className="card-image">
                     <figure className="image is-1by1">
-                      <img src={user.image}></img>
+                      <img className="" src={user.image}></img>
                     </figure>
                   </div>
                   <div className="content">
@@ -87,7 +92,7 @@ const Users = () => {
         </div>
         {isModal && <div className="column is-narrow is-one-third">
           <div className="container" id="fixed">
-            <button className="delete" onClick={() => { setIsModal(false) }}></button>
+            <button className="delete" onClick={() => { hideModal() }}></button>
             <div className="column is-full">
               <figure className="image is-1by1">
                 <img className="is-rounded" id="modalImage" src={selectedUser.image}></img>

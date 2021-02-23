@@ -24,12 +24,12 @@ const Users = () => {
   // console.log(isModal)
   // console.log(selectedUser)
 
-  return <div className="section is-half is-offset-one-quarter">
-    <div className="columns">
+  return <div className="section">
+    <div className="columns is-half is-offset-one-quarter">
 
-      <div className="column">
+      {/* <div className="column"> */}
         <div className="container">
-          <div className="columns is-multiline is-mobile">
+          <div className="columns is-multiline">
             {users.map((user, index) => {
                 return <div key={index} className={!isModal? "column is-one-third" : "column is-half"}>
                   <div className="card" onClick={() => {showModal(user)}}>
@@ -42,17 +42,13 @@ const Users = () => {
                     <div className="content">
                       <h3>{user.username}</h3>
                       <h4>{user.location}</h4>
-                      {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                      <a href="#">#css</a> <a href="#">#responsive</a> */}
                     </div>
                   </div>
                 </div>
               })}
           </div>
         </div>
-      </div>
-
+      {/* </div> */}
       {isModal && <div className="column is-narrow is-one-third">
         <div className="container" id="fixed">
           <button className="delete" onClick={() => {setIsModal(false)}}></button>
@@ -67,24 +63,24 @@ const Users = () => {
             <Link to={`/user/${selectedUser._id}`}>
               <button className="button is-primary">User's Page</button>
             </Link>
-          </div>
-          {selectedUser.comments && <div className="container is-clipped">
-            <h4>Comments:</h4>
-            <div className="column" id="commentsScroll">
-              {selectedUser.comments.map((comment) => {
-                return <article key={comment._id} className="media">
-                  <div className="media-content">
-                    <div className="content">
-                      <p className="subtitle">
-                        {comment.user.username}
-                      </p>
-                      <p>{comment.text}</p>
+            {selectedUser.comments && <div className="container is-clipped">
+              <h4>Comments:</h4>
+              <div className="column" id="commentsScroll">
+                {selectedUser.comments.map((comment) => {
+                  return <article key={comment._id} className="media">
+                    <div className="media-content">
+                      <div className="content">
+                        <p className="subtitle">
+                          {comment.user.username}
+                        </p>
+                        <p>{comment.text}</p>
+                      </div>
                     </div>
-                  </div>
-                </article>
-              })}
-            </div>
-          </div>}
+                  </article>
+                })}
+              </div>
+            </div>}
+          </div>
         </div>
       </div>}
 

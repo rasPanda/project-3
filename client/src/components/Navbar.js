@@ -53,7 +53,7 @@ const Navbar = () => {
               </div> :
               <div className="buttons" onClick={logOut}>
                 <button className="button is-primary">
-                  <strong>LogOut</strong>
+                  <strong>Log Out</strong>
                 </button>
               </div>
             }

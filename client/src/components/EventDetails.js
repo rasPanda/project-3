@@ -73,10 +73,10 @@ export default function singleEventPage({ match, history }) {
       <div className="column">
         <img src={event.image} />
         {isCreator(event.user._id) && <div className='field'><button
-          className='button is-danger'
+          className='button is-danger is-hovered'
           onClick={handleDelete}
         >Delete & Cancel Event</button></div>}
-        <Link className='button is-warning' to={'/events'}>Back</Link>
+        <Link className='button is-info is-hovered' to={'/events'}>Back</Link>
       </div>
       <div className="container">
         <div className="columns is-centered">
@@ -117,7 +117,7 @@ export default function singleEventPage({ match, history }) {
                   onChange={handleChange}
                   name={'newComment'}
                 />
-                <button className='button is-warning mt-3'>Post</button>
+                <button className='button is-info is-hovered mt-3'>Post</button>
               </form>
             </div>
           </div>

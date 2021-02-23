@@ -7,7 +7,7 @@ export default function getEventData(users, location) {
       image: 'https://images.unsplash.com/photo-1557804500-7a58fbcd4d1a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80',
       time: ' Sunday 21st March at 3pm',
       details: 'meeting at the south corner of sweet park',
-      attendees: [users[0]],
+      attendees: [],
       results: [{}],
       comments: []
     },

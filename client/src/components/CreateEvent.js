@@ -3,8 +3,10 @@ import axios from 'axios'
 import Select from 'react-select'
 import moment from 'moment'
 
-export default function CreateEvent() {
+export default function CreateEvent({ history }) {
   const currentTime = moment().format('YYYY-MM-DDTHH:mm')
+  const token = localStorage.getItem('token')
+
   const [eventData, updateEventData] = useState({
     name: '',
     time: `${currentTime}`,
@@ -27,22 +29,21 @@ export default function CreateEvent() {
     comments: []
   })
 
-  const [locations, updateLocations] = useState([])
+  const [locationOptions, updateLocationsOptions] = useState([])
+  const [locations, getLocations] = useState([])
   const [creationSuccess, updateCreationSuccess] = useState(false)
   const [uploadSuccess, updateUploadSuccess] = useState(false)
 
   useEffect(() => {
     axios.get('/api/location')
       .then(({ data }) => {
+        getLocations(data)
         const locationArr = data.map(location => {
-          return { value: location.name, label: location.name }
+          return { value: location._id, label: location.name }
         })
-
-        updateLocations(locationArr)
+        updateLocationsOptions(locationArr)
       })
   }, [])
-
-  console.log(eventData)
 
   function handleChange(event) {
     const { name, value } = event.target
@@ -53,10 +54,16 @@ export default function CreateEvent() {
 
   async function handleSubmit(event) {
     event.preventDefault()
+    const selectedLocation = locations.find(location => location._id === eventData.location.value)
+    const dataToSubmit = { ...eventData, location: selectedLocation }
     try {
-      const { data } = await axios.post('/api/event', eventData)
-      console.log(data)
+      const { data } = await axios.post('/api/event', dataToSubmit, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
       updateCreationSuccess(true)
+      setTimeout(() => {
+        history.push(`/event/${data._id}`)
+      }, 2000)
     } catch (err) {
       console.log('hello', err.response.data.errors)
       updateErrors(err.response.data.errors)
@@ -138,7 +145,7 @@ export default function CreateEvent() {
               closeMenuOnSelect={true}
               defaultValue={[]}
               onChange={(location) => updateEventData({ ...eventData, location })}
-              options={locations}
+              options={locationOptions}
               value={eventData.location}
             />
           </div>
@@ -150,7 +157,7 @@ export default function CreateEvent() {
           {uploadSuccess && <div><small className="has-text-primary">Upload Complete</small></div>}
         </div>
         <button className="button">Submit</button>
-        {creationSuccess && <div><small className="has-text-primary">Event Created!</small></div>}
+        {creationSuccess && <div><small className="has-text-primary">Event Created! Redirecting...</small></div>}
       </form>
     </div>
   </main>

@@ -24,10 +24,7 @@ export default function singleEventPage({ match, history }) {
     async function fetchData() {
       const { data } = await axios.get(`/api/event/${id}`)
       getEvent(data)
-      const mappedData = {
-        ...data,
-        // location: data.location.name
-      }
+      const mappedData = { ...data }
       updateFormData(mappedData)
     }
     fetchData()
@@ -84,7 +81,7 @@ export default function singleEventPage({ match, history }) {
     updateFormData({ ...formData, [name]: value })
   }
 
-  async function handleSave(event) {
+  async function handleSave() {
     const newFormData = { ...formData }
     try {
       const { data } = await axios.put(`/api/event/${id}`, newFormData, {

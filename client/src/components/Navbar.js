@@ -23,7 +23,7 @@ const Navbar = () => {
 
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
-      <div className="navbar-brand">
+      {/* <div className="navbar-brand">
         <a className="navbar-item" href="https://bulma.io">
           <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
         </a>
@@ -33,9 +33,9 @@ const Navbar = () => {
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
-      </div>
+      </div> */}
 
-      <div id="navbarBasicExample" className="navbar-menu">
+      <div id="navbarBasicExample" className="navbar-menu is-active">
         <div className="navbar-start">
           <Link to="/" className="navbar-item">Home </Link>
           <Link to="/location" className="navbar-item"> Locations </Link>
@@ -47,7 +47,7 @@ const Navbar = () => {
           <div className="navbar-item">
             {!logIn ?
               <div className="buttons">
-                <Link to="/login" className="button is-primary">
+                <Link to="/login" className="button is-info">
                   <strong>Login/Register</strong>
                 </Link>
               </div> :

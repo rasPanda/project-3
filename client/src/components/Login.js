@@ -42,7 +42,7 @@ export default function Login(history) {
   }
 
   return <form onSubmit={handleLoginSubmit}>
-    <h2>Login</h2>
+    <h2 className="title">Login</h2>
     <div className="field">
       <label className="label">Email</label>
       <div className="control">
@@ -69,6 +69,6 @@ export default function Login(history) {
         {loginErrors.password && <small className="has-text-danger">{loginErrors.password}</small>}
       </div>
     </div>
-    <button className="button">Submit</button>
+    <button className="button is-hovered is-info">Submit</button>
   </form>
 }

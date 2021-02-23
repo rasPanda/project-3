@@ -29,12 +29,15 @@ export default function CreateLocation() {
   const [locationData, updateLocationData] = useState({
     name: '',
     address: '',
-    numberOfTables: 1,
-    description: '',
     long: '',
     lat: '',
     image: 'https://data.nssmag.com/images/galleries/12244/26032017-IMG-5266AnyOkolie.jpg',
     comments: []
+  })
+
+  const [facilitiesData, updateFacilitiesData] = useState({
+    numberOfTables: 1,
+    description: ''
   })
 
   const [errors, updateErrors] = useState({
@@ -62,25 +65,37 @@ export default function CreateLocation() {
   //     })
   // }, [])
 
-  function handleChange(event) {
+  function handleChangeMain(event) {
     const { name, value } = event.target
     updateLocationData({ ...locationData, [name]: value })
     // ! Whenever I make a change, I should remove any error for this particular field!
     updateErrors({ ...errors, [name]: '' })
   }
 
+  function handleChangeFacilities(event) {
+    const { name, value } = event.target
+    updateFacilitiesData({ ...facilitiesData, [name]: value })
+    // ! Whenever I make a change, I should remove any error for this particular field!
+    updateErrors({ ...errors, [name]: '' })
+  }
+
   async function handleSubmit(event) {
     event.preventDefault()
-    // const selectedLocation = locations.find(location => location._id === eventData.location.value)
     // const timeStr = moment(eventData.time).format('dddd, MMMM Do YYYY, h:mm a')
-    // const dataToSubmit = { ...locationData, time: timeStr, location: selectedLocation }
+    const dataToSubmit = {
+      ...locationData, facilities: {
+        numberOfTables: facilitiesData.numberOfTables,
+        description: facilitiesData.description
+      }
+    }
+    console.log(dataToSubmit)
     try {
-      const { data } = await axios.post('/api/event', locationData, {
+      const { data } = await axios.post('/api/location', dataToSubmit, {
         headers: { Authorization: `Bearer ${token}` }
       })
       updateCreationSuccess(true)
       setTimeout(() => {
-        history.push(`/event/${data._id}`)
+        history.push(`/location/${data._id}`)
       }, 2000)
     } catch (err) {
       console.log('hello', err.response.data.errors)
@@ -121,7 +136,7 @@ export default function CreateLocation() {
               placeholder='Great spot in the park?'
               type='text'
               value={locationData.name}
-              onChange={handleChange}
+              onChange={handleChangeMain}
               name={'name'}
             />
             {errors.name && <small className='has-text-danger'>{errors.name.message}</small>}
@@ -134,22 +149,22 @@ export default function CreateLocation() {
               className='input'
               type='text'
               value={locationData.address}
-              onChange={handleChange}
-              name={'time'}
+              onChange={handleChangeMain}
+              name={'address'}
             />
             {errors.time && <small className='has-text-danger'>{errors.time.message}</small>}
           </div>
         </div>
         <div className='field'>
-          <label className='label'>Details</label>
+          <label className='label'>Description</label>
           <div className='control'>
             <textarea
               className='textarea'
               placeholder='Tables behind the cafe, or next to the tennis courts?'
               type='text'
-              value={locationData.details}
-              onChange={handleChange}
-              name={'details'}
+              value={facilitiesData.description}
+              onChange={handleChangeFacilities}
+              name={'description'}
             />
             {errors.name && <small className='has-text-danger'>{errors.details.message}</small>}
           </div>
@@ -161,8 +176,8 @@ export default function CreateLocation() {
               className='input'
               type='number'
               min='1'
-              value={locationData.numberOfTables}
-              onChange={handleChange}
+              value={facilitiesData.numberOfTables}
+              onChange={handleChangeFacilities}
               name={'numberOfTables'}
             />
             {errors.name && <small className='has-text-danger'>{errors.details.message}</small>}

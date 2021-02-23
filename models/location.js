@@ -43,7 +43,7 @@ const locationSchema = new mongoose.Schema({
   },
   user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
   comments: [ commentSchema ],
-  events: { type: [Object], required: false }
+  events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event', required: false }]
 })
 
 export default mongoose.model('Location', locationSchema)

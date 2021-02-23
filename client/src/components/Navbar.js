@@ -37,7 +37,7 @@ const Navbar = () => {
     location.reload()
   }
 
-  console.log(userId)
+  // console.log(userId)
 
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">

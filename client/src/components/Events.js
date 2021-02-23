@@ -56,8 +56,8 @@ export default function EventsPage() {
   }
 
   return <main>
-    <div className="section">
-      <section className="container">
+    <section className="section">
+      <div className="container">
 
         <div className="column">
           <input 
@@ -116,8 +116,8 @@ export default function EventsPage() {
             </div>
           </div>}
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   </main>
 }
 

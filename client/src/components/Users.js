@@ -97,7 +97,7 @@ const Users = () => {
                   <div className="level-item has-text-centered">
                     <div className="image usersHeads">
                       <figure className="image is-1by1">
-                        <img className="is-rounded" id={selectedUser._id === user._id ? "highlighted" : "cardHover"} src={user.image}></img>
+                        <img className="box is-rounded noPadding" id={selectedUser._id === user._id ? "highlighted" : "cardHover"} src={user.image}></img>
                       </figure>
                     </div>
                   </div>

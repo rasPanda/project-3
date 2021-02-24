@@ -1,6 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { debounce } from 'lodash'
 
+const debouncedSave = debounce((searchQuery, updateSearchResults) => {
+  axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${searchQuery}.json?country=gb&access_token=${process.env.MAPBOX_TOKEN}`)
+    .then(({ data }) => {
+      const search = data.features.map(location => {
+        return {
+          id: location.id,
+          placeName: location.place_name,
+          location: {
+            lat: location.center[1],
+            long: location.center[0]
+          }
+        }
+      })
+      updateSearchResults(search)
+    })
+}, 500)
 
 export default function CreateLocation({ history }) {
 
@@ -35,31 +52,16 @@ export default function CreateLocation({ history }) {
     comments: []
   })
 
-  console.log(process.env.MAPBOX_TOKEN)
-
   const [creationSuccess, updateCreationSuccess] = useState(false)
   const [uploadSuccess, updateUploadSuccess] = useState(false)
   const [searchQuery, updateSearchQuery] = useState('')
   const [searchResults, updateSearchResults] = useState([])
 
+
   useEffect(() => {
-    if (searchQuery !== '') {
-      axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${searchQuery}.json?country=gb&access_token=${process.env.MAPBOX_TOKEN}`)
-        .then(({ data }) => {
-          const search = data.features.map(location => {
-            return {
-              id: location.id,
-              placeName: location.place_name,
-              location: {
-                lat: location.center[1],
-                long: location.center[0]
-              }
-            }
-          })
-          updateSearchResults(search)
-        })
-    }
+    debouncedSave(searchQuery, updateSearchResults)
   }, [searchQuery])
+
 
   function createSearchQuery(event) {
     updateSearchQuery(event.target.value)
@@ -111,8 +113,8 @@ export default function CreateLocation({ history }) {
     event.preventDefault()
     window.cloudinary.createUploadWidget(
       {
-        cloudName: 'dzoqli241',
-        uploadPreset: 'PingPongImages',
+        cloudName: `${process.env.cloudName}`,
+        uploadPreset: `${process.env.uploadPreset}`,
         cropping: true
       },
       (err, result) => {

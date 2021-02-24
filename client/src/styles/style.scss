@@ -98,6 +98,11 @@ align-items: center;
   border-radius: 100px;
 }
 
+#selected {
+  border: 5px solid #FF9B00;
+}
+
+
 //map toggle conatiner
 .toggle-container{
   display: flex;

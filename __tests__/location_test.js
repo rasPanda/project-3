@@ -53,8 +53,8 @@ describe('Testing locations', () => {
               numberOfTables: 3,
               description: 'Three tables, beautifully new'
             },
-            comments: [],
-            events: {}
+            comments: []
+            
           })
           .end((err, res) => {
             expect(res.status).to.eq(201)

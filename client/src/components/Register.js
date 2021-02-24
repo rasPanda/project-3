@@ -53,8 +53,8 @@ export default function Register() {
     event.preventDefault()
     window.cloudinary.createUploadWidget(
       {
-        cloudName: 'dzoqli241',
-        uploadPreset: 'PingPongImages',
+        cloudName: `${process.env.cloudName}`,
+        uploadPreset: `${process.env.uploadPreset}`,
         cropping: true
       },
       (err, result) => {

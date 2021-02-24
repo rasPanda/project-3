@@ -7,7 +7,7 @@ import EventUpdateForm from './EventUpdate'
 import ShareButton from './ShareButton'
 
 export default function singleEventPage({ match, history }) {
-  const [locations, getLocations] = useState([])
+  // const [locations, getLocations] = useState([])
   const [event, getEvent] = useState({})
   const [newComment, updateNewComment] = useState({
     text: ''
@@ -25,6 +25,14 @@ export default function singleEventPage({ match, history }) {
     details: '',
     image: ''
   })
+
+  // const [errors, updateErrors] = useState({
+  //   name: '',
+  //   location: {},
+  //   time: '',
+  //   details: '',
+  //   image: ''
+  // })
 
   function isLoggedInUserAttending(data) {
     return data.attendees.map((attendee) => {
@@ -45,12 +53,12 @@ export default function singleEventPage({ match, history }) {
     fetchData()
   }, [attendee])
 
-  useEffect(() => {
-    axios.get('/api/location')
-      .then(({ data }) => {
-        getLocations(data)
-      })
-  }, [])
+  // useEffect(() => {
+  //   axios.get('/api/location')
+  //     .then(({ data }) => {
+  //       getLocations(data)
+  //     })
+  // }, [])
 
   console.log(formData)
 
@@ -99,28 +107,49 @@ export default function singleEventPage({ match, history }) {
     }
   }
 
-  function handleFormChange(event) {
-    const { name, value } = event.target
-    updateFormData({ ...formData, [name]: value })
-  }
+  // function handleFormChange(event) {
+  //   const { name, value } = event.target
+  //   updateFormData({ ...formData, [name]: value })
+  //   updateErrors({ ...errors, [name]: '' })
+  // }
 
-  async function handleSave() {
-    // event.preventDefault()
-    const selectedLocation = locations.find(location => location._id === formData.location.value)
-    const timeStr = moment(formData.time).format('dddd, MMMM Do YYYY, h:mm a')
-    const dataToSubmit = { ...formData, time: timeStr, location: selectedLocation }
-    // const newFormData = { ...formData }
-    try {
-      const { data } = await axios.put(`/api/event/${id}`, dataToSubmit, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-      console.log(data)
-      changeEditState(false)
-      // history.push(`/user/${data._id}`)
-    } catch (err) {
-      console.log(err.response.data)
-    }
-  }
+  // async function handleSave() {
+  //   // event.preventDefault()
+  //   const selectedLocation = locations.find(location => location._id === formData.location.value)
+  //   const timeStr = moment(formData.time).format('dddd, MMMM Do YYYY, h:mm a')
+  //   const dataToSubmit = { ...formData, time: timeStr, location: selectedLocation }
+  //   // const newFormData = { ...formData }
+  //   try {
+  //     const { data } = await axios.put(`/api/event/${id}`, dataToSubmit, {
+  //       headers: { Authorization: `Bearer ${token}` }
+  //     })
+  //     console.log(data)
+  //     changeEditState(false)
+  //     // history.push(`/user/${data._id}`)
+  //   } catch (err) {
+  //     console.log(err.response.data)
+  //     updateErrors(err.response.data.errors)
+  //   }
+  // }
+
+  // async function handleSave(newFormData) {
+  //   // event.preventDefault()
+  //   const selectedLocation = locations.find(location => location._id === newFormData.location.value)
+  //   const timeStr = moment(newFormData.time).format('dddd, MMMM Do YYYY, h:mm a')
+  //   const dataToSubmit = { ...newFormData, time: timeStr, location: selectedLocation }
+  //   // const newFormData = { ...formData }
+  //   try {
+  //     const { data } = await axios.put(`/api/event/${id}`, dataToSubmit, {
+  //       headers: { Authorization: `Bearer ${token}` }
+  //     })
+  //     console.log(data)
+  //     changeEditState(false)
+  //     // history.push(`/user/${data._id}`)
+  //   } catch (err) {
+  //     console.log(err.response.data)
+  //     updateErrors(err.response.data.errors)
+  //   }
+  // }
 
   
 
@@ -199,10 +228,13 @@ export default function singleEventPage({ match, history }) {
                   <div><h3>Details:</h3><div>{event.details}</div></div>
                 </div>
                 : <EventUpdateForm
-                  handleSave={handleSave}
-                  handleFormChange={handleFormChange}
+                  // handleSave={handleSave}
+                  // handleFormChange={handleFormChange}
                   formData={formData}
                   updateFormData={updateFormData}
+                  changeEditState={changeEditState}
+                  id={id}
+                  // errors={errors}
                 />
               }
               {event.attendees.length > 0 &&

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { isCreator } from '../lib/auth'
+import { getLoggedInUserId, isCreator } from '../lib/auth'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
-
 import EventUpdateForm from './EventUpdate'
 import ShareButton from './ShareButton'
 
@@ -13,7 +12,10 @@ export default function singleEventPage({ match, history }) {
   const [newComment, updateNewComment] = useState({
     text: ''
   })
+  const [attendee, updateAttendee] = useState(false)
+  // * This is the event ID
   const id = match.params.id
+  //* This is the logged in user's token
   const token = localStorage.getItem('token')
   const [editState, changeEditState] = useState(false)
   const [formData, updateFormData] = useState({
@@ -32,15 +34,24 @@ export default function singleEventPage({ match, history }) {
   //   image: ''
   // })
 
+  function isLoggedInUserAttending(data) {
+    return data.attendees.map((attendee) => {
+      if (attendee.user._id === getLoggedInUserId()) {
+        updateAttendee(true)
+      } 
+    })
+  }
   useEffect(() => {
     async function fetchData() {
       const { data } = await axios.get(`/api/event/${id}`)
       getEvent(data)
       const mappedData = { ...data }
       updateFormData(mappedData)
+      console.log('data', data)
+      isLoggedInUserAttending(data)
     }
     fetchData()
-  }, [])
+  }, [attendee])
 
   // useEffect(() => {
   //   axios.get('/api/location')
@@ -48,6 +59,8 @@ export default function singleEventPage({ match, history }) {
   //       getLocations(data)
   //     })
   // }, [])
+
+  console.log(formData)
 
   function handleChange(e) {
     updateNewComment({ ...newComment, text: e.target.value })
@@ -138,6 +151,46 @@ export default function singleEventPage({ match, history }) {
   //   }
   // }
 
+  
+
+  function attendeeButton() {
+    if (!attendee) {
+      return <div>
+        <button className="button is-hovered is-info" onClick={attendEvent}>
+          Attend Event
+        </button>
+      </div>
+    } else {
+      return <div>
+        <button className="button is-hovered is-info" onClick={leaveEvent}>
+          Leave Event
+        </button>
+      </div>
+    }
+  }
+
+  async function attendEvent() {
+    try {
+      await axios.post(`/api/event/${id}/attendee`, {}, {
+        headers: { Authorization: `Bearer ${token}` } })
+      updateAttendee(true)
+    } catch (err) {
+      console.log(err.response)
+    }
+    
+  }
+
+  async function leaveEvent() {
+    try {
+      await axios.delete(`/api/event/${id}/attendee`, {
+        headers: { Authorization: `Bearer ${token}` } })
+      updateAttendee(false)
+    } catch (err) {
+      console.log(err.response.data)
+    }
+    
+  }
+
   if (!event.user) {
     return null
   }
@@ -217,6 +270,9 @@ export default function singleEventPage({ match, history }) {
                 <button className='button is-info is-hovered mt-3'>Post</button>
               </form>
             </div>
+            {getLoggedInUserId() &&
+            attendeeButton()
+            }
           </div>
         </div>
       </div>

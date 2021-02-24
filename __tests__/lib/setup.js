@@ -174,7 +174,6 @@ export default async function setup(done) {
         time: ' Sunday 21st March at 3pm',
         details: 'meeting at the south corner of sweet park',
         attendees: [users[1], users[2]],
-        results: [{}],
         comments: []
       },
       {
@@ -185,7 +184,7 @@ export default async function setup(done) {
         time: 'Saturday 20th March at 3pm',
         details: 'meeting at the near pub,  then walking  to the spot ',
         attendees: [users[3], users[4], users[5]],
-        results: [{}],
+
         comments: []
       },
       {
@@ -196,7 +195,6 @@ export default async function setup(done) {
         time: 'Tuesday 24th March 6:30pm',
         details: 'meeting at the main gate, buying drink and start palying',
         attendees: [users[1], users[2], users[5]],
-        results: [{}],
         comments: []
       },
       {
@@ -207,7 +205,6 @@ export default async function setup(done) {
         time: ' Thursday 18th March at 8pm',
         details: 'meeting at the main gate, buying drink and start palying',
         attendees: [users[4], users[6], users[7]],
-        results: [{}],
         comments: []
       },
       {
@@ -218,7 +215,6 @@ export default async function setup(done) {
         time: 'Thursday 18th March at 8pm',
         details: 'meeting at the main gate, buying drink and start palying',
         attendees: [users[1], users[2]],
-        results: [{}],
         comments: []
       },
       {
@@ -229,7 +225,6 @@ export default async function setup(done) {
         time: 'Saturday 27th March at 3pm',
         details: 'meeting at the near pub,  then walking  to the spot',
         attendees: [users[0], users[4]],
-        results: [{}],
         comments: []
       }
     ])

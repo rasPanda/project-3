@@ -29,11 +29,6 @@ $button-border-color: $success;
 // Import only what you need from Bulma
 @import "../../node_modules/bulma/bulma.sass";
 
-
-#fixed {
-  position: sticky; 
-  top: 0;
-}
 // styling home page starts here
 .home-container{
   width: 100vw;
@@ -77,6 +72,7 @@ align-items: center;
 
 #fixed {
   position: sticky;
+  background-color: #D9F1FF;
   top: 0;
 }
 

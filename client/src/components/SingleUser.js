@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { isCreator } from '../lib/auth'
+import { getLoggedInUserId, isCreator } from '../lib/auth'
 
 import UserUpdateForm from './UserUpdate'
 
@@ -112,7 +112,7 @@ function SingleUser({ match, history }) {
 
   return <div className="section">
     <div className="column is-half is-offset-one-quarter">
-      <Link className='button is-info' to={'/users'}>Back</Link>
+      <Link className='button is-info mb-4' to={'/users'}>Back</Link>
       <div className="columns">
         {editState === false 
           ? <div className="column">
@@ -133,8 +133,8 @@ function SingleUser({ match, history }) {
           <figure className="image is-1by1">
             <img className="is-rounded" src={user.image}></img>
           </figure>
-          {editState &&  <div className="field">
-            <button className="button is-hovered is-info" onClick={handleUpload}>Change profile pic</button>
+          {editState &&  <div className="field has-text-centered">
+            <button className="button is-hovered is-info mt-1" onClick={handleUpload}>Change profile pic</button>
             {uploadSuccess && <div><small className="has-text-primary">Upload Complete, <br></br>reload page to see changes</small></div>}
           </div>}
         </div>
@@ -171,13 +171,14 @@ function SingleUser({ match, history }) {
           </div>
         </div>
         }
+        {getLoggedInUserId() &&
         <article className="media">
           <div className="media-content">
             <div className="field">
               <p className="control">
                 <textarea
                   className="textarea"
-                  placeholder="Make a comment..."
+                  placeholder="Write a message..."
                   onChange={event => setText(event.target.value)}
                   value={text}
                 >
@@ -196,12 +197,12 @@ function SingleUser({ match, history }) {
               </p>
             </div>
           </div>
-        </article>
+        </article>}
       </div>
 
       <div className="container is-half is-offset-one-quarter">
-        {isCreator(userId) && <button className="button is-danger is-hovered" onClick={handleUserDelete}>Delete account</button>}
-        {isCreator(userId) && <button className="button is-warning is-hovered" onClick={() => changeEditState(true)}>Update account</button>}
+        {isCreator(userId) && <button className="button is-danger is-hovered m-4" onClick={handleUserDelete}>Delete account</button>}
+        {isCreator(userId) && <button className="button is-warning is-hovered m-4" onClick={() => changeEditState(true)}>Update account</button>}
       </div>
     </div>
   </div>

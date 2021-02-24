@@ -10,15 +10,11 @@ export default function Login(history) {
     password: ''
   })
 
-  const [loginErrors, updateLoginErrors] = useState({
-    email: '',
-    password: ''
-  })
+  const [loginErrors, updateLoginErrors] = useState(false)
 
   function handleLoginChange(event) {
     const { name, value } = event.target
     updateLoginData({ ...loginData, [name]: value })
-    updateLoginErrors({ ...loginErrors, [name]: '' })
   }
 
   async function handleLoginSubmit(event) {
@@ -34,10 +30,10 @@ export default function Login(history) {
       history.push('/')
       location.reload()
 
-      //! If need be, add browser history to App.js
     } catch (err) {
-      console.log(err.response.data.errors)
-      updateLoginErrors(err.response.data.errors)
+      console.log('ERROR ERROR')
+      console.log(err.response)
+      updateLoginErrors(true)
     }
   }
 
@@ -53,7 +49,6 @@ export default function Login(history) {
           onChange={handleLoginChange}
           name={'email'}
         />
-        {loginErrors.username && <small className="has-text-danger">{loginErrors.username} invalid</small>}
       </div>
     </div>
     <div className="field">
@@ -66,7 +61,7 @@ export default function Login(history) {
           onChange={handleLoginChange}
           name={'password'}
         />
-        {loginErrors.password && <small className="has-text-danger">{loginErrors.password}</small>}
+        {loginErrors && <small className="has-text-danger">Incorrect Login Details, Please Try Again</small>}
       </div>
     </div>
     <button className="button is-hovered is-info">Submit</button>

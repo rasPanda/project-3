@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 export default function EventsPage() {
+  const [filterTerm, setFilterTerm] = useState('')
   const [eventData, updateEventData] = useState([])
   const [sideCard, revealSideCard] = useState(false)
   const [selectedEvent, updateSelectedEvent] = useState({
@@ -42,13 +43,36 @@ export default function EventsPage() {
       })
   }, [])
 
+  function handleChange(event) {
+    event.preventDefault()
+    const value = event.target.value
+    setFilterTerm(value)
+  }
+
+  function filterEvents() {
+    return eventData.filter((event) => {
+      return event.name.toLowerCase().includes(filterTerm.toLowerCase())
+    })
+  }
+
   return <main>
-    <div className="section">
-      <section className="container">
+    <section className="section">
+      <div className="container">
+
+        <div className="column">
+          <input 
+            type="text"
+            placeholder="Search by name..."
+            className="input is-info is-rounded is-9"
+            onChange={(event) => handleChange(event)}
+            value={filterTerm}
+          />
+        </div>
+
         <div className='columns'>
           <div className={!sideCard ? 'column' : 'column is-two-thirds'}>
             <div className="columns is-multiline">
-              {eventData.map((event) => {
+              {filterEvents().map((event) => {
                 return <div key={event._id} className={!sideCard ? 'column is-one-third' : 'column is-half'} >
                   <div className="card" id="cardHover" onClick={() => handleSelectedEvent(event)}>
                     <div className="card-content">
@@ -92,8 +116,8 @@ export default function EventsPage() {
             </div>
           </div>}
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   </main>
 }
 

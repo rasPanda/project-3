@@ -12,6 +12,7 @@ async function getEvents(_req, res, next) {
 async function postEvent(req, res, next) {
   const body = req.body
   body.user = req.currentUser
+  console.log(req.currentUser)
   try {
     if (!req.currentUser) {
       return res.status(401).send({ message: 'Unauthorised' })

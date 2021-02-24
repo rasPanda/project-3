@@ -5,7 +5,7 @@ import Location from '../models/location.js'
 //list of all Locations
 async function getAllLocation(_req, res, next) {
   try {
-    const locationList = await Location.find().populate('comments.user').populate('user').populate('location')
+    const locationList = await Location.find().populate('comments.user').populate('user')
     res.status(200).send(locationList)
   } catch (err) {
     next(err)

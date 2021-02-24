@@ -37,7 +37,7 @@ const Navbar = () => {
     location.reload()
   }
 
-  console.log(userId)
+  // console.log(userId)
 
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -72,6 +72,11 @@ const Navbar = () => {
               <div className="buttons">
                 <div className="column">
                   {userName && <strong>Hi {userName}</strong>}
+                </div>
+                <div className="column">
+                  <Link to={`/event/create`} className="button is-link">
+                    <strong>Create Event</strong>
+                  </Link>
                 </div>
                 <div className="column">
                   <Link to={`/user/${userId}`} className="button is-info">

@@ -24,6 +24,7 @@ module.exports = () => {
         { test: /\.(png|jpe?g|gif|svg)$/i, use: 'file-loader' }
       ]
     },
+    devtool: 'eval-cheap-source-map',
     devServer: {
       contentBase: path.resolve('src'),
       hot: true,

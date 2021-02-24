@@ -30,6 +30,7 @@
     "@mapbox/mapbox-sdk": "^0.12.1",
     "axios": "^0.21.1",
     "bulma": "^0.9.2",
+    "lodash.debounce": "^4.0.8",
     "mapbox-gl": "^2.1.1",
     "moment": "^2.29.1",
     "monent": "0.0.2-security",

@@ -63,14 +63,12 @@ const Location = () => {
                 <div className="columns is-multiline">
                   {locations.map((location) => {
                     return <div key={location._id} className={!sideCard ? 'column is-one-third' : 'column is-half'} >
-                      <div className="card" id="cardHover" onClick={() => handleSelectedLocation(location)}>
+                      <div className="card" id={selectedLocation.id === location._id ? 'selected' : 'cardHover'} onClick={() => handleSelectedLocation(location)}>
                         <div className="card-content">
                           <div className="media">
                             <div className="media-content">
                               <p className="title is-4">{location.name}</p>
                               <p className="subtitle is-6">{location.address}</p>
-                              <p className="subtitle is-6">{location.facilities.description}</p>
-                              <p className="subtitle is-6">Created by: {location.user.username}</p>
                               <img src={location.image} alt={location.name} />
                             </div>
                           </div>
@@ -81,15 +79,19 @@ const Location = () => {
                 </div>
               </div>
               {sideCard && <div className="column is-one-third">
-                <div className='container' id='fixed'>
-                  <button className='delete is-pulled-right' onClick={() => revealSideCard(false)} />
-                  <p className="title is-4">{selectedLocation.name}</p>
-                  <img src={selectedLocation.image} alt={selectedLocation.name} />
-                  <p className="subtitle is-6">{selectedLocation.address}</p>
-                  <p className="subtitle is-6">{'Organiser: ' + selectedLocation.user.username}</p>
-                  <p className="subtitle is-6">{'Description: ' + selectedLocation.facilities.description}</p>
-                  <p className="subtitle is-6">{'Comment: ' + selectedLocation.comments}</p>
-                  <Link className='button is-info is-hovered' to={`/location/${selectedLocation.id}`}>Go to Location</Link>
+                <div className='card' id='fixed'>
+                  <div className="card-content">
+                    <div className="media">
+                      <div className="media-content">
+                        <button className='delete is-pulled-right' onClick={() => revealSideCard(false)} />
+                        <p className="title is-4">{selectedLocation.name}</p>
+                        <img src={selectedLocation.image} alt={selectedLocation.name} />
+                        <p className="subtitle is-6">{selectedLocation.address}</p>
+                        <p className="subtitle is-6">{'Description: ' + selectedLocation.facilities.description}</p>
+                        <Link className='button is-info is-hovered' to={`/location/${selectedLocation.id}`}>Go to Location</Link>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>}
             </div>

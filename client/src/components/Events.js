@@ -29,7 +29,6 @@ export default function EventsPage() {
       image: image,
       comments: comments
     }
-    console.log(event.id)
     updateSelectedEvent(event)
     if (!sideCard) {
       revealSideCard(true)
@@ -88,7 +87,7 @@ export default function EventsPage() {
             <div className="columns is-multiline">
               {filterEvents().map((event) => {
                 return <div key={event._id} className={!sideCard ? 'column is-one-third' : 'column is-half'} >
-                  <div className="card" id={selectedEvent.id === event._id ? 'highlighted' : 'cardHover'} onClick={() => handleSelectedEvent(event)}>
+                  <div className="card" id={selectedEvent.id === event._id ? 'selected' : 'cardHover'} onClick={() => handleSelectedEvent(event)}>
                     <div className="card-content">
                       <div className="media">
                         <div className="media-content">

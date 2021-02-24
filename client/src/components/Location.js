@@ -88,7 +88,6 @@ const Location = () => {
                   <p className="subtitle is-6">{selectedLocation.address}</p>
                   <p className="subtitle is-6">{'Organiser: ' + selectedLocation.user.username}</p>
                   <p className="subtitle is-6">{'Description: ' + selectedLocation.facilities.description}</p>
-                  <p className="subtitle is-6">{'Comment: ' + selectedLocation.comments}</p>
                   <Link className='button' to={`/location/${selectedLocation.id}`}>Go to Location</Link>
                 </div>
               </div>}
@@ -100,7 +99,7 @@ const Location = () => {
           return corrdinate.location
         }
         )}
-          id={locations.id}
+        id={locations.id}
         />
       }
     </main >

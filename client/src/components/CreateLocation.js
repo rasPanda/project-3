@@ -1,36 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-// import ReactMapGL from 'react-map-gl'
+import Select from 'react-select'
 
-export default function CreateLocation() {
 
-  // const [viewport, setViewport] = React.useState({
-  //   width: '88vw',
-  //   height: '70vh',
-  //   latitude: 37.7577,
-  //   longitude: -122.4376,
-  //   zoom: 8
-  // })
-
-  // return (
-  //   <div className="box" style={{ width: '93vw', height: '80vh', display: 'flex', justifyContent: 'center', borderRadius: '20px', margin: '100px auto 0 auto ', boxShadow: '0 5px 8px -2px black' }}>
-  //     <ReactMapGL
-  //       {...viewport}
-  //       mapboxApiAccessToken='pk.eyJ1IjoicmFzcGFuZGEiLCJhIjoiY2tsaTcwN3d4MWY3YjJvcHJ3NXdzMDFhNCJ9.LzNGp4G0vsrfsnG-SXBGag'
-  //       width="100%"
-  //       height="100%"
-  //       onViewportChange={(viewport) => setViewport(viewport)}
-  //     />
-  //   </div>
-  // )
+export default function CreateLocation({ history }) {
 
   const token = localStorage.getItem('token')
 
   const [locationData, updateLocationData] = useState({
     name: '',
     address: '',
-    long: '',
-    lat: '',
+    location: {
+      lat: '',
+      long: ''
+    },
     image: 'https://data.nssmag.com/images/galleries/12244/26032017-IMG-5266AnyOkolie.jpg',
     comments: []
   })
@@ -45,25 +28,45 @@ export default function CreateLocation() {
     address: '',
     numberOfTables: '',
     description: '',
-    long: '',
-    lat: '',
+    location: {
+      lat: '',
+      long: ''
+    },
     image: '',
     comments: []
   })
 
   const [creationSuccess, updateCreationSuccess] = useState(false)
   const [uploadSuccess, updateUploadSuccess] = useState(false)
+  const [searchQuery, updateSearchQuery] = useState('')
+  const [fetch, updateFetch] = useState(false)
+  const [searchResults, updateSearchResults] = useState()
+  const [options, updateOptions] = useState([])
 
-  // useEffect(() => {
-  //   axios.get('/api/location')
-  //     .then(({ data }) => {
-  //       getLocations(data)
-  //       const locationArr = data.map(location => {
-  //         return { value: location._id, label: location.name }
-  //       })
-  //       updateLocationsOptions(locationArr)
-  //     })
-  // }, [])
+  useEffect(() => {
+    axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${searchQuery}.json?country=gb&access_token=pk.eyJ1IjoicmFzcGFuZGEiLCJhIjoiY2tsaTcwN3d4MWY3YjJvcHJ3NXdzMDFhNCJ9.LzNGp4G0vsrfsnG-SXBGag`)
+      .then(({ data }) => {
+        data.features.map(location => {
+          const search = {
+            id: location.id,
+            placeName: location.place_name,
+            location: {
+              lat: location.center[1],
+              long: location.center[0]
+            }
+          }
+          updateSearchResults(search)
+        })
+        const optionsArr = data.features.map(location => {
+          return { value: location.place_name, label: location.id }
+        })
+        updateOptions(optionsArr)
+      })
+  }, [searchQuery])
+
+  function createSearchQuery(event) {
+    console.log(event.target)
+  }
 
   function handleChangeMain(event) {
     const { name, value } = event.target
@@ -88,7 +91,6 @@ export default function CreateLocation() {
         description: facilitiesData.description
       }
     }
-    console.log(dataToSubmit)
     try {
       const { data } = await axios.post('/api/location', dataToSubmit, {
         headers: { Authorization: `Bearer ${token}` }
@@ -147,10 +149,21 @@ export default function CreateLocation() {
           <div className='control'>
             <input
               className='input'
+              placeholder='Search...'
               type='text'
+              value={locationData.name}
+              onChange={createSearchQuery}
+              name={'search'}
+            />
+          </div>
+          <div className='control'>
+            <Select
+              name='address'
+              closeMenuOnSelect={true}
+              defaultValue={[]}
+              onChange={console.log('test')}
+              options={searchResults}
               value={locationData.address}
-              onChange={handleChangeMain}
-              name={'address'}
             />
             {errors.time && <small className='has-text-danger'>{errors.time.message}</small>}
           </div>

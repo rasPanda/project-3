@@ -10,9 +10,10 @@ export default function ShareButtonFacebook({ eventId }) {
     text: "Check out this ping pong event!",
     longtext:
       ""
-  };
+  }
 
   return <FacebookShareButton {...shareButtonProps}>
     <FacebookIcon></FacebookIcon>
   </FacebookShareButton>
+
 }

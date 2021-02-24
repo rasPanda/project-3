@@ -47,7 +47,7 @@ export default function singleEventPage({ match, history }) {
       getEvent(data)
       const mappedData = { ...data }
       updateFormData(mappedData)
-      console.log('data', data)
+      // console.log('data', data)
       isLoggedInUserAttending(data)
     }
     fetchData()
@@ -60,7 +60,7 @@ export default function singleEventPage({ match, history }) {
   //     })
   // }, [])
 
-  console.log(formData)
+  // console.log(formData)
 
   function handleChange(e) {
     updateNewComment({ ...newComment, text: e.target.value })
@@ -68,7 +68,7 @@ export default function singleEventPage({ match, history }) {
 
   async function handleCommentSubmit(e) {
     e.preventDefault()
-    console.log(id)
+    // console.log(id)
     try {
       await axios.post(`/api/event/${id}/`, newComment, {
         headers: {
@@ -106,52 +106,6 @@ export default function singleEventPage({ match, history }) {
       console.log(err.response)
     }
   }
-
-  // function handleFormChange(event) {
-  //   const { name, value } = event.target
-  //   updateFormData({ ...formData, [name]: value })
-  //   updateErrors({ ...errors, [name]: '' })
-  // }
-
-  // async function handleSave() {
-  //   // event.preventDefault()
-  //   const selectedLocation = locations.find(location => location._id === formData.location.value)
-  //   const timeStr = moment(formData.time).format('dddd, MMMM Do YYYY, h:mm a')
-  //   const dataToSubmit = { ...formData, time: timeStr, location: selectedLocation }
-  //   // const newFormData = { ...formData }
-  //   try {
-  //     const { data } = await axios.put(`/api/event/${id}`, dataToSubmit, {
-  //       headers: { Authorization: `Bearer ${token}` }
-  //     })
-  //     console.log(data)
-  //     changeEditState(false)
-  //     // history.push(`/user/${data._id}`)
-  //   } catch (err) {
-  //     console.log(err.response.data)
-  //     updateErrors(err.response.data.errors)
-  //   }
-  // }
-
-  // async function handleSave(newFormData) {
-  //   // event.preventDefault()
-  //   const selectedLocation = locations.find(location => location._id === newFormData.location.value)
-  //   const timeStr = moment(newFormData.time).format('dddd, MMMM Do YYYY, h:mm a')
-  //   const dataToSubmit = { ...newFormData, time: timeStr, location: selectedLocation }
-  //   // const newFormData = { ...formData }
-  //   try {
-  //     const { data } = await axios.put(`/api/event/${id}`, dataToSubmit, {
-  //       headers: { Authorization: `Bearer ${token}` }
-  //     })
-  //     console.log(data)
-  //     changeEditState(false)
-  //     // history.push(`/user/${data._id}`)
-  //   } catch (err) {
-  //     console.log(err.response.data)
-  //     updateErrors(err.response.data.errors)
-  //   }
-  // }
-
-  
 
   function attendeeButton() {
     if (!attendee) {

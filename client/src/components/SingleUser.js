@@ -135,7 +135,7 @@ function SingleUser({ match, history }) {
           </figure>
           {editState &&  <div className="field">
             <button className="button is-hovered is-info" onClick={handleUpload}>Change profile pic</button>
-            {uploadSuccess && <div><small className="has-text-primary">Upload Complete, <br></br>reload page to see changes</small></div>}
+            {uploadSuccess && <div><small className="has-text-primary">Upload Complete, <br></br>save to see changes</small></div>}
           </div>}
         </div>
       </div>

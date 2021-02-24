@@ -55,8 +55,8 @@ const Users = () => {
   }
 
 
-  return <div className="section">
-    <div className="container">
+  return <div className="section" id="userSectionBackground">
+    <div className="container" >
 
       <div className="column">
         <input 

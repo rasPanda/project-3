@@ -12,9 +12,9 @@ const Users = () => {
   useEffect(() => {
     if (!filterTerm) {
       axios.get('/api/user')
-      .then(axiosResp => {
-        setUsers(axiosResp.data)
-      })
+        .then(axiosResp => {
+          setUsers(axiosResp.data)
+        })
     }
   }, [])
 
@@ -59,7 +59,7 @@ const Users = () => {
     <div className="container" >
 
       <div className="column">
-        <input 
+        <input
           type="text"
           placeholder="Search by name..."
           className="input is-info is-rounded is-9"
@@ -71,11 +71,11 @@ const Users = () => {
       <div className="columns">
         <div className={!isModal ? 'column' : 'column is-two-thirds'}>
 
-          <div className="columns is-multiline">
+          {/* <div className="columns is-multiline">
             {filterUsers().map((user, index) => {
               return <div key={index} className={!isModal ? 'column is-one-third' : 'column is-half'}>
-                <div className="card is-hovered" id={selectedUser._id === user._id ? "highlighted" : "cardHover"} 
-                  onClick={() => { showModal(user) }}>
+                <div className="card is-hovered" id={selectedUser._id === user._id ? 'highlighted' : 'cardHover'}
+                  onClick={() => showModal(user)}>
                   <div className="card-image">
                     <figure className="image is-1by1">
                       <img className="" src={user.image}></img>
@@ -88,14 +88,35 @@ const Users = () => {
                 </div>
               </div>
             })}
+          </div> */}
+          <div className="columns is-multiline is-centered">
+            {filterUsers().map((user, index) => {
+              return <div key={index} className={!isModal ? 'column is-3' : 'column is-4'}>
+                <div className="is-hovered transparent"
+                  onClick={() => { showModal(user) }}>
+                  <div className="level-item has-text-centered">
+                    <div className="image usersHeads">
+                      <figure className="image is-1by1">
+                        <img className="is-rounded" id={selectedUser._id === user._id ? "highlighted" : "cardHover"} src={user.image}></img>
+                      </figure>
+                    </div>
+                  </div>
+    
+                  <div className="content column is-centered">
+                    <h3 className="title is-capitalized has-text-centered">{user.username}</h3>
+                    <h4 className="subtitle has-text-centered has-text-weight-light">{user.location}</h4>
+                  </div>
+                </div>
+              </div>
+            })}
           </div>
         </div>
         {isModal && <div className="column is-narrow is-one-third">
           <div className="container" id="fixed">
-            <button className="delete" onClick={() => { hideModal() }}></button>
+            <button className="delete" onClick={() => hideModal()}></button>
             <div className="column is-full">
               <figure className="image is-1by1">
-                <img className="is-rounded" id="modalImage" src={selectedUser.image}></img>
+                <img className="is-rounded" src={selectedUser.image}></img>
               </figure>
               <br></br>
               <h1 className="title">Name: {selectedUser.username}</h1>

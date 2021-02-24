@@ -43,6 +43,20 @@ export default function EventsPage() {
       })
   }, [])
 
+  function hideSideCard() {
+    updateSelectedEvent({
+      id: '',
+      name: '',
+      location: '',
+      user: '',
+      attendees: '',
+      time: '',
+      details: '',
+      image: ''
+    })
+    revealSideCard(false)
+  }
+
   function handleChange(event) {
     event.preventDefault()
     const value = event.target.value
@@ -60,7 +74,7 @@ export default function EventsPage() {
       <div className="container">
 
         <div className="column">
-          <input 
+          <input
             type="text"
             placeholder="Search by name..."
             className="input is-info is-rounded is-9"
@@ -74,16 +88,16 @@ export default function EventsPage() {
             <div className="columns is-multiline">
               {filterEvents().map((event) => {
                 return <div key={event._id} className={!sideCard ? 'column is-one-third' : 'column is-half'} >
-                  <div className="card" id="cardHover" onClick={() => handleSelectedEvent(event)}>
+                  <div className="card" id={selectedEvent.id === event._id ? 'highlighted' : 'cardHover'} onClick={() => handleSelectedEvent(event)}>
                     <div className="card-content">
                       <div className="media">
                         <div className="media-content">
                           <p className="title is-4">{event.name}</p>
-                          <p className="subtitle is-6">{event.location.name}</p>
-                          <p className="subtitle is-6">{event.time}</p>
-                          <figure className="image is-4by3">
+                          <figure className="image is-4by3 mb-2">
                             <img src={event.image} alt={event.name} />
                           </figure>
+                          <p className="subtitle is-6">{event.location.name}</p>
+                          <p className="subtitle is-6">{event.time}</p>
                         </div>
                       </div>
                     </div>
@@ -93,26 +107,20 @@ export default function EventsPage() {
             </div>
           </div>
           {sideCard && <div className="column is-one-third">
-            <div className='container' id='fixed'>
-              <button className='delete is-pulled-right' onClick={() => revealSideCard(false)} />
-              <p className="title is-4">{selectedEvent.name}</p>
-              <img src={selectedEvent.image} alt={selectedEvent.name} />
-              <p className="subtitle is-6">{selectedEvent.location}</p>
-              <p className="subtitle is-6">{'Host: ' + selectedEvent.user}</p>
-              <p className="subtitle is-6">{'Attendees: ' + selectedEvent.attendees}</p>
-              <p className="subtitle is-6">{selectedEvent.time}</p>
-              <p className="subtitle is-6">{selectedEvent.details}</p>
-              <Link className='button is-hovered is-info' to={`/event/${selectedEvent.id}`}>Go to Event</Link>
-              {selectedEvent.comments.length > 0 &&
-                <div>
-                  <p className="subtitle is-7">Comments:</p>
-                  {selectedEvent.comments.map(comment => {
-                    return <div key={comment._id} className='box'>
-                      {comment.user.username}
-                      {comment.text}
-                    </div>
-                  })}
-                </div>}
+            <div className='card' id='fixed'>
+              <div className="card-content">
+                <div className="media">
+                  <div className="media-content">
+                    <button className='delete is-pulled-right' onClick={() => hideSideCard()} />
+                    <p className="title is-4">{selectedEvent.name}</p>
+                    <img src={selectedEvent.image} alt={selectedEvent.name} />
+                    <p className="subtitle is-6">{selectedEvent.location}</p>
+                    <p className="subtitle is-6">{selectedEvent.time}</p>
+                    <p className="subtitle is-6">{'Host: ' + selectedEvent.user}</p>
+                    <Link className='button is-hovered is-info' to={`/event/${selectedEvent.id}`}>Go to Event</Link>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>}
         </div>

@@ -133,9 +133,9 @@ function SingleUser({ match, history }) {
           <figure className="image is-1by1">
             <img className="is-rounded" src={user.image}></img>
           </figure>
-          {editState &&  <div className="field has-text-centered">
-            <button className="button is-hovered is-info mt-1" onClick={handleUpload}>Change profile pic</button>
-            {uploadSuccess && <div><small className="has-text-primary">Upload Complete, <br></br>reload page to see changes</small></div>}
+          {editState &&  <div className="field">
+            <button className="button is-hovered is-info" onClick={handleUpload}>Change profile pic</button>
+            {uploadSuccess && <div><small className="has-text-primary">Upload Complete, <br></br>save to see changes</small></div>}
           </div>}
         </div>
       </div>

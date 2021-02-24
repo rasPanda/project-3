@@ -56,7 +56,7 @@ export default function EventsPage() {
   }
 
   return <main>
-    <section className="section">
+    <section className="section" id="eventSectionBackground">
       <div className="container">
 
         <div className="column">

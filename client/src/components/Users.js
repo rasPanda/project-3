@@ -113,7 +113,7 @@ const Users = () => {
         </div>
         {isModal && <div className="column is-narrow is-one-third">
           <div className="container" id="fixed">
-            <button className="delete" onClick={() => hideModal()}></button>
+            <button className="delete m-3" onClick={() => hideModal()}></button>
             <div className="column is-full">
               <figure className="image is-1by1">
                 <img className="is-rounded" src={selectedUser.image}></img>
@@ -122,12 +122,12 @@ const Users = () => {
               <h1 className="title">Name: {selectedUser.username}</h1>
               <h3 className="subtitle">Location: {selectedUser.location}</h3>
               <h4 className="subtitle">Bio:</h4>
-              <h3>{selectedUser.bio}</h3>
+              <h3 className="mb-3">{selectedUser.bio}</h3>
               <Link to={`/user/${selectedUser._id}`}>
                 <button className="button is-hovered is-info">User's Page</button>
               </Link>
               {selectedUser.comments && <div className="container is-clipped">
-                <h4 className="subtitle">Message board:</h4>
+                <h4 className="subtitle mt-3">Message board:</h4>
                 <div className="column" id="commentsScroll">
                   {selectedUser.comments.map((comment) => {
                     return <article key={comment._id} className="media">

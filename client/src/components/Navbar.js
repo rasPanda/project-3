@@ -52,7 +52,9 @@ const Navbar = () => {
           <span aria-hidden="true"></span>
         </a>
       </div> */}
-
+      <div className="navbar-brand" id="navbarImage">
+        <img src="https://as1.ftcdn.net/jpg/02/69/27/66/500_F_269276638_vZ8HnSpzbmi9eGhKQdibGE9a5nv6huCT.jpg" width="212" height="28" />
+      </div>
       <div id="navbarBasicExample" className="navbar-menu is-active">
         <div className="navbar-start">
           <Link to="/" className="navbar-item">Home </Link>

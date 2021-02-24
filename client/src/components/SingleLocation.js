@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { isCreator } from '../lib/auth'
+import { getLoggedInUserId, isCreator } from '../lib/auth'
 import { Link } from 'react-router-dom'
 
 import LocationUpdateForm from './LocationUpdate'
@@ -101,19 +101,11 @@ export default function singleLocationPage({ match, history }) {
   return <div className='container mt-4'>
     <div className="columns is-centered">
       <div className="column">
+        <Link className='button is-warning is-hovered mb-2' to={'/location'}>Back</Link>
         <img src={singleLocation.image} />
-        <div className='columns'>
-          {isCreator(singleLocation.user._id) && <div className='column is-three-quarters'><button
-            className='button is-danger'
-            onClick={handleDelete}
-          >Remove Location</button></div>}
-          {isCreator(singleLocation.user._id) && <div className='column is-one-quarters'><button
-            className='button is-info'
-            onClick={() => changeEditState(true)}
-          >Edit Location</button></div>}
-        </div>
 
-        <Link className='button is-warning' to={'/location'}>Back</Link>
+
+
         <ShareButton
           eventId={id}
         />
@@ -121,7 +113,7 @@ export default function singleLocationPage({ match, history }) {
       <div className="column is-half">
         <div className="columns is-centered">
           <div className="column">
-            <div className="box mt-3">
+            <div className="box mt-6">
               {editState === false
                 ? <div>
                   <div>{singleLocation.name}</div>
@@ -157,18 +149,29 @@ export default function singleLocationPage({ match, history }) {
                     </div>
                   })}
                 </div>}
-              <form className="box mt-3" onSubmit={handleCommentSubmit}>
-                <label className='label'>Add a comment!</label>
-                <textarea
-                  className="textarea"
-                  placeholder='Your comment here...'
-                  type="text"
-                  value={newComment.text}
-                  onChange={handleChange}
-                  name={'newComment'}
-                />
-                <button className='button is-info is-hovered mt-3'>Post</button>
-              </form>
+              {getLoggedInUserId() &&
+                <form className="box mt-3" onSubmit={handleCommentSubmit}>
+                  <label className='label'>Add a comment!</label>
+                  <textarea
+                    className="textarea"
+                    placeholder='Your comment here...'
+                    type="text"
+                    value={newComment.text}
+                    onChange={handleChange}
+                    name={'newComment'}
+                  />
+                  <button className='button is-info is-hovered mt-3'>Post</button>
+                </form>}
+            </div>
+            <div className='columns mt-2'>
+              {isCreator(singleLocation.user._id) && <div className='column is-two-quarters'><button
+                className='button is-danger is-hovered'
+                onClick={handleDelete}
+              >Remove Location</button></div>}
+              {isCreator(singleLocation.user._id) && <div className='column is-one-quarters'><button
+                className='button is-info is-hovered is-pulled-right'
+                onClick={() => changeEditState(true)}
+              >Edit Location</button></div>}
             </div>
           </div>
         </div>

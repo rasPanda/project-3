@@ -9,7 +9,7 @@ export default function LoginAndRegister({ history }) {
 
 
   return <div className="section">
-    <div className="box columns">
+    <div className="box columns mb-6" id="loginBackground">
       <div className="column is-half">
         {Register()}
       </div>

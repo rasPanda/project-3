@@ -3,6 +3,9 @@ import Location from '../../models/location.js'
 import Event from '../../models/event.js'
 export default async function setup(done) {
   try {
+    await User.deleteMany()
+    await Location.deleteMany()
+    await Event.deleteMany()
     const users = await User.create([
       {
         username: 'joe',
@@ -97,8 +100,7 @@ export default async function setup(done) {
           description: 'Three permanent tables located amoungst the play equipment in Chumleigh Playground in Burgess Park.'
         },
         user: users[0],
-        comments: [],
-        events: {}
+        comments: []
       },
       {
         name: 'Burgess Park Football Pitch',
@@ -113,8 +115,7 @@ export default async function setup(done) {
           description: 'Two tables located outside of Burgess Park Sports Centre, next to the football pitches.'
         },
         user: users[0],
-        comments: [],
-        events: {}
+        comments: []
       },
       {
         name: 'Fordham Park',
@@ -129,8 +130,7 @@ export default async function setup(done) {
           description: '2 Permanent Tables'
         },
         user: users[1],
-        comments: [],
-        events: {}
+        comments: []
       },
       {
         name: 'Deptford Park',
@@ -145,8 +145,7 @@ export default async function setup(done) {
           description: '1 table next to basketball court abd playground'
         },
         user: users[1],
-        comments: [],
-        events: {}
+        comments: []
       },
       {
         name: 'Folkestone Gardens',
@@ -161,8 +160,7 @@ export default async function setup(done) {
           description: '1 Permanent Table'
         },
         user: users[2],
-        comments: [],
-        events: {}
+        comments: []
       }
     ])
     await Event.create([
@@ -173,8 +171,6 @@ export default async function setup(done) {
         image: 'https://images.unsplash.com/photo-1557804500-7a58fbcd4d1a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80',
         time: ' Sunday 21st March at 3pm',
         details: 'meeting at the south corner of sweet park',
-        attendees: [users[1], users[2]],
-        results: [{}],
         comments: []
       },
       {
@@ -184,8 +180,6 @@ export default async function setup(done) {
         image: 'https://images.unsplash.com/photo-1568711146297-b8674c3c11b6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
         time: 'Saturday 20th March at 3pm',
         details: 'meeting at the near pub,  then walking  to the spot ',
-        attendees: [users[3], users[4], users[5]],
-        results: [{}],
         comments: []
       },
       {
@@ -195,8 +189,6 @@ export default async function setup(done) {
         image: 'https://images.unsplash.com/photo-1591154669695-5f2a8d20c089?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
         time: 'Tuesday 24th March 6:30pm',
         details: 'meeting at the main gate, buying drink and start palying',
-        attendees: [users[1], users[2], users[5]],
-        results: [{}],
         comments: []
       },
       {
@@ -206,8 +198,6 @@ export default async function setup(done) {
         image: 'https://images.unsplash.com/photo-1576617497557-22895ee5930b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
         time: ' Thursday 18th March at 8pm',
         details: 'meeting at the main gate, buying drink and start palying',
-        attendees: [users[4], users[6], users[7]],
-        results: [{}],
         comments: []
       },
       {
@@ -217,8 +207,6 @@ export default async function setup(done) {
         image: 'https://images.unsplash.com/photo-1572025442937-d55974d9815f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1231&q=80',
         time: 'Thursday 18th March at 8pm',
         details: 'meeting at the main gate, buying drink and start palying',
-        attendees: [users[1], users[2]],
-        results: [{}],
         comments: []
       },
       {
@@ -228,8 +216,6 @@ export default async function setup(done) {
         image: 'https://images.unsplash.com/photo-1559077184-562609f0a10b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1349&q=80',
         time: 'Saturday 27th March at 3pm',
         details: 'meeting at the near pub,  then walking  to the spot',
-        attendees: [users[0], users[4]],
-        results: [{}],
         comments: []
       }
     ])

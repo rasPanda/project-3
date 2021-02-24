@@ -36,7 +36,7 @@ const eventSchema = new mongoose.Schema({
   results: {
     type: [Object],
     required: false,
-    validate: (types) => Array.isArray(types) && types.length > 0 && types.every(e => typeof e === 'object')
+    validate: (types) => Array.isArray(types) && types.every(e => typeof e === 'object')
   },
   attendees: [attendeeSchema],
   comments: [commentSchema]

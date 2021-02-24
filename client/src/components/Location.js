@@ -40,10 +40,8 @@ const Location = () => {
     axios.get('/api/location')
       .then(axiosResp => {
         updateLocation(axiosResp.data)
-        // console.log(axiosResp.data)
       })
   }, [])
-  // console.log('location', locations)
   return (
     <main>
       <section className="section">

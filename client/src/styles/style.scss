@@ -101,3 +101,23 @@ align-items: center;
   border: 5px solid #FF9B00;
   border-radius: 5px;
 }
+
+
+//map toggle conatiner
+.toggle-container{
+  display: flex;
+  flex-direction:column;
+  align-items:flex-end;
+  position:fixed;
+  right: 8%;
+  top:20%;
+  z-index: 10;
+  margin-right: 0px;
+}
+.toggle{
+  margin:8px;
+  background-color: #4287f5;
+  color: white;
+  border-radius:10px;
+  outline-style: none;
+}

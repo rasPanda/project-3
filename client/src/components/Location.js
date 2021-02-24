@@ -62,7 +62,7 @@ const Location = () => {
               <div className={!sideCard ? 'column' : 'column is-two-thirds'}>
                 <div className="columns is-multiline">
                   {locations.map((location) => {
-                    return <div key={location._id} className={!sideCard ? 'column is-one-third' : 'column is-half'} >
+                    return <div key={location._id} className={!sideCard ? 'column is-one-third' : 'column is-half'}>
                       <div className="card" onClick={() => handleSelectedLocation(location)}>
                         <div className="card-content">
                           <div className="media">

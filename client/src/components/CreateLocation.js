@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import Select from 'react-select'
 
 
 export default function CreateLocation({ history }) {
@@ -39,33 +38,35 @@ export default function CreateLocation({ history }) {
   const [creationSuccess, updateCreationSuccess] = useState(false)
   const [uploadSuccess, updateUploadSuccess] = useState(false)
   const [searchQuery, updateSearchQuery] = useState('')
-  const [fetch, updateFetch] = useState(false)
-  const [searchResults, updateSearchResults] = useState()
-  const [options, updateOptions] = useState([])
+  const [searchResults, updateSearchResults] = useState([])
 
   useEffect(() => {
-    axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${searchQuery}.json?country=gb&access_token=pk.eyJ1IjoicmFzcGFuZGEiLCJhIjoiY2tsaTcwN3d4MWY3YjJvcHJ3NXdzMDFhNCJ9.LzNGp4G0vsrfsnG-SXBGag`)
-      .then(({ data }) => {
-        data.features.map(location => {
-          const search = {
-            id: location.id,
-            placeName: location.place_name,
-            location: {
-              lat: location.center[1],
-              long: location.center[0]
+    if (searchQuery !== '') {
+      axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${searchQuery}.json?country=gb&access_token=pk.eyJ1IjoicmFzcGFuZGEiLCJhIjoiY2tsaTcwN3d4MWY3YjJvcHJ3NXdzMDFhNCJ9.LzNGp4G0vsrfsnG-SXBGag`)
+        .then(({ data }) => {
+          const search = data.features.map(location => {
+            return {
+              id: location.id,
+              placeName: location.place_name,
+              location: {
+                lat: location.center[1],
+                long: location.center[0]
+              }
             }
-          }
+          })
           updateSearchResults(search)
         })
-        const optionsArr = data.features.map(location => {
-          return { value: location.place_name, label: location.id }
-        })
-        updateOptions(optionsArr)
-      })
+    }
   }, [searchQuery])
 
   function createSearchQuery(event) {
-    console.log(event.target)
+    updateSearchQuery(event.target.value)
+  }
+
+  function handlePlaceSelect({ placeName, location }) {
+    updateLocationData({ ...locationData, address: placeName, location: location, search: placeName })
+    updateSearchQuery('')
+    updateSearchResults([])
   }
 
   function handleChangeMain(event) {
@@ -84,7 +85,6 @@ export default function CreateLocation({ history }) {
 
   async function handleSubmit(event) {
     event.preventDefault()
-    // const timeStr = moment(eventData.time).format('dddd, MMMM Do YYYY, h:mm a')
     const dataToSubmit = {
       ...locationData, facilities: {
         numberOfTables: facilitiesData.numberOfTables,
@@ -145,28 +145,30 @@ export default function CreateLocation({ history }) {
           </div>
         </div>
         <div className='field'>
-          <label className='label'>Address</label>
+          <label className='label'>Nearby address</label>
           <div className='control'>
             <input
               className='input'
               placeholder='Search...'
               type='text'
-              value={locationData.name}
+              value={locationData.search}
               onChange={createSearchQuery}
               name={'search'}
             />
           </div>
-          <div className='control'>
-            <Select
-              name='address'
-              closeMenuOnSelect={true}
-              defaultValue={[]}
-              onChange={console.log('test')}
-              options={searchResults}
-              value={locationData.address}
-            />
-            {errors.time && <small className='has-text-danger'>{errors.time.message}</small>}
-          </div>
+          {searchResults.length > 0 &&
+            <div className='dropdown is-active'>
+              <div className='dropdown-menu'>
+                <div className='dropdown-content'>
+                  {searchResults.map((place) => {
+                    return <div key={place.id}>
+                      <div className='dropdown-item' id='cardHover' onClick={() => handlePlaceSelect(place)}>{place.placeName}</div>
+                      <hr className="dropdown-divider"></hr></div>
+                  })}
+                </div>
+              </div>
+            </div>}
+          {errors.time && <small className='has-text-danger'>{errors.time.message}</small>}
         </div>
         <div className='field'>
           <label className='label'>Description</label>
@@ -196,8 +198,6 @@ export default function CreateLocation({ history }) {
             {errors.name && <small className='has-text-danger'>{errors.details.message}</small>}
           </div>
         </div>
-
-
         <div className="field">
           <button className="button" onClick={handleUpload}>(Optional) Upload Location Image</button>
           {uploadSuccess && <div><small className="has-text-primary">Upload Complete</small></div>}

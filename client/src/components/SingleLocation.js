@@ -127,6 +127,7 @@ export default function singleLocationPage({ match, history }) {
                   <div>{singleLocation.name}</div>
                   <div><span>Address: </span>{singleLocation.address}</div>
                   {/* <div><span>Location: </span>{<Link to={`/user/${event.user._id}`}>{event.user.username}</Link>}</div> */}
+                  <div><span>Added by: </span>{singleLocation.user.username}</div>
                   <div><span>Number of Tables: </span>{singleLocation.facilities.numberOfTables}</div>
                   <div><h3>Description:</h3><div>{singleLocation.facilities.description}</div></div>
                 </div>

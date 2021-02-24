@@ -63,7 +63,7 @@ const Location = () => {
                 <div className="columns is-multiline">
                   {locations.map((location) => {
                     return <div key={location._id} className={!sideCard ? 'column is-one-third' : 'column is-half'} >
-                      <div className="card" onClick={() => handleSelectedLocation(location)}>
+                      <div className="card" id="cardHover" onClick={() => handleSelectedLocation(location)}>
                         <div className="card-content">
                           <div className="media">
                             <div className="media-content">
@@ -81,7 +81,7 @@ const Location = () => {
                 </div>
               </div>
               {sideCard && <div className="column is-one-third">
-                <div className='box' id='fixed'>
+                <div className='container' id='fixed'>
                   <button className='delete is-pulled-right' onClick={() => revealSideCard(false)} />
                   <p className="title is-4">{selectedLocation.name}</p>
                   <img src={selectedLocation.image} alt={selectedLocation.name} />
@@ -89,7 +89,7 @@ const Location = () => {
                   <p className="subtitle is-6">{'Organiser: ' + selectedLocation.user.username}</p>
                   <p className="subtitle is-6">{'Description: ' + selectedLocation.facilities.description}</p>
                   <p className="subtitle is-6">{'Comment: ' + selectedLocation.comments}</p>
-                  <Link className='button' to={`/location/${selectedLocation.id}`}>Go to Location</Link>
+                  <Link className='button is-info is-hovered' to={`/location/${selectedLocation.id}`}>Go to Location</Link>
                 </div>
               </div>}
             </div>
@@ -100,7 +100,7 @@ const Location = () => {
           return corrdinate.location
         }
         )}
-          id={locations.id}
+        id={locations.id}
         />
       }
     </main >

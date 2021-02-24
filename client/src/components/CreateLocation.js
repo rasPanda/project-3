@@ -35,6 +35,8 @@ export default function CreateLocation({ history }) {
     comments: []
   })
 
+  console.log(process.env.MAPBOX_TOKEN)
+
   const [creationSuccess, updateCreationSuccess] = useState(false)
   const [uploadSuccess, updateUploadSuccess] = useState(false)
   const [searchQuery, updateSearchQuery] = useState('')
@@ -42,7 +44,7 @@ export default function CreateLocation({ history }) {
 
   useEffect(() => {
     if (searchQuery !== '') {
-      axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${searchQuery}.json?country=gb&access_token=pk.eyJ1IjoicmFzcGFuZGEiLCJhIjoiY2tsaTcwN3d4MWY3YjJvcHJ3NXdzMDFhNCJ9.LzNGp4G0vsrfsnG-SXBGag`)
+      axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${searchQuery}.json?country=gb&access_token=${process.env.MAPBOX_TOKEN}`)
         .then(({ data }) => {
           const search = data.features.map(location => {
             return {

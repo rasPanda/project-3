@@ -121,3 +121,20 @@ align-items: center;
   border-radius:10px;
   outline-style: none;
 }
+#eventSectionBackground {
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  width: 100vw;
+  background-image: url("https://as2.ftcdn.net/jpg/02/04/94/27/500_F_204942786_6CJif6eBJKXEA2vmaC3IXMfg7tuuwYks.jpg");
+  background-position:  center;
+  background-size:cover
+}
+
+#userSectionBackground {
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  width: 100vw;
+  background-image: url("https://as2.ftcdn.net/jpg/02/04/94/23/500_F_204942362_jPsRI45GDcFi1Y6KoQ1MEhQrw5b0GfLq.jpg");
+  background-position:  center;
+  background-size:cover
+}

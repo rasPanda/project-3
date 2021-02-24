@@ -79,6 +79,11 @@ const Navbar = () => {
                   </Link>
                 </div>
                 <div className="column">
+                  <Link to={`/location/create`} className="button is-warning">
+                    <strong>Create Location</strong>
+                  </Link>
+                </div>
+                <div className="column">
                   <Link to={`/user/${userId}`} className="button is-info">
                     <strong>My Profile</strong>
                   </Link>

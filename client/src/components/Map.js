@@ -3,14 +3,14 @@ import ReactMapGL, { Marker } from 'react-map-gl'
 import { Link } from 'react-router-dom'
 const imgUrl = 'https://media.istockphoto.com/photos/ping-pong-ball-picture-id160451900?k=6&m=160451900&s=170667a&w=0&h=MC5wNmfsrbgRsryC4GBSABLYGgr6YddbwKYJ-PPlJb8='
 
-const Map = ({ id, corrdinate }) => {
+const Map = ({ coordinate }) => {
   const [markerData, setMarkerData] = useState([])
   const [viewport, setViewport] = React.useState({
     width: '88vw',
     height: '70vh',
     latitude: 51.5167,
     longitude: -0.05,
-    zoom: 11
+    zoom: 12
   })
 
   // let markers = ''
@@ -29,13 +29,13 @@ const Map = ({ id, corrdinate }) => {
         <ReactMapGL
           {...viewport}
           onViewportChange={(viewport) => setViewport(viewport)}
-          mapboxApiAccessToken={'pk.eyJ1IjoieXVzdWY5NjMiLCJhIjoiY2traTc5N2cxMWtscjJ3cXRycHVxbnM5ayJ9.ZyAS9QfUaYL-HexSX-UVDQ'}
+          mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
         >
-          {corrdinate.map((corr) =>
+          {coordinate.map((coor, index) =>
             <Marker
-              key={id}
-              latitude={corr.lat}
-              longitude={corr.long}
+              key={index}
+              latitude={coor.lat}
+              longitude={coor.long}
             >
               <Link to='/'><img width={30} src={imgUrl} /></Link>
             </Marker>

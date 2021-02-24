@@ -98,11 +98,10 @@ const Location = () => {
           </div>
         </section>
         :
-        <Map corrdinate={locations.map((corrdinate) => {
-          return corrdinate.location
+        <Map coordinate={locations.map((coordinate) => {
+          return coordinate.location
         }
         )}
-        id={locations.id}
         />
       }
     </main >

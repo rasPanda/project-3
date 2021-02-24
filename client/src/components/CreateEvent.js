@@ -93,73 +93,86 @@ export default function CreateEvent({ history }) {
   }
 
   return <main className='section'>
-    <div className='box'>
-      <form onSubmit={handleSubmit}>
-        <h2 className='title'>Create Event</h2>
-        <div className='field'>
-          <label className='label'>Event Name</label>
-          <div className='control'>
-            <input
-              className='input'
-              placeholder='Pong in the park?'
-              type='text'
-              value={eventData.name}
-              onChange={handleChange}
-              name={'name'}
-            />
-            {errors.name && <small className='has-text-danger'>{errors.name.message}</small>}
-          </div>
+    <div className='columns is-centered'>
+      <div className='column is-two-thirds'>
+        <div className='box'>
+          <h2 className='title'>Create Event</h2>
+          <form className='columns' onSubmit={handleSubmit}>
+            <div className='column'>
+              <div className='field'>
+                <label className='label'>Event Name</label>
+                <div className='control'>
+                  <input
+                    className='input'
+                    placeholder='Pong in the park?'
+                    type='text'
+                    value={eventData.name}
+                    onChange={handleChange}
+                    name={'name'}
+                  />
+                  {errors.name && <small className='has-text-danger'>{errors.name.message}</small>}
+                </div>
+              </div>
+              <div className='field'>
+                <label className='label'>Location</label>
+                <div className='control'>
+                  <Select
+                    name='location'
+                    closeMenuOnSelect={true}
+                    defaultValue={[]}
+                    onChange={(location) => updateEventData({ ...eventData, location })}
+                    options={locationOptions}
+                    value={eventData.location}
+                  />
+                </div>
+              </div>
+              <label className='label'>Time</label>
+              <div className='field'>
+                <div className='control'>
+                  <input
+                    className='input'
+                    type='datetime-local'
+                    min={currentTime}
+                    value={eventData.time}
+                    onChange={handleChange}
+                    name={'time'}
+                  />
+                  {errors.time && <small className='has-text-danger'>{errors.time.message}</small>}
+                </div>
+              </div>
+              <div className='field'>
+                <div className='control'>
+                  <button className="button is-info is-hovered" onClick={handleUpload}>(Optional) Upload Event Image</button>
+                  {uploadSuccess && <div><small className="has-text-primary">Upload Complete</small></div>}
+                </div>
+              </div>
+              <div className='field'>
+                <div className='control'>
+                  <button className="button is-primary is-hovered">Submit</button>
+                  {creationSuccess && <div><small className="has-text-primary">Event Created! Redirecting...</small></div>}
+                </div>
+              </div>
+            </div>
+            <div className='column'>
+              <div className='field'>
+                <label className='label'>Details</label>
+                <div className='control'>
+                  <textarea
+                    rows='12'
+                    className='textarea'
+                    placeholder='Casual or tournament? Other info?'
+                    type='text'
+                    value={eventData.details}
+                    onChange={handleChange}
+                    name={'details'}
+                  />
+                  {errors.name && <small className='has-text-danger'>{errors.details.message}</small>}
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
-        <div className='field'>
-          <label className='label'>Time</label>
-          <div className='control'>
-            <input
-              className='input'
-              type='datetime-local'
-              min={currentTime}
-              value={eventData.time}
-              onChange={handleChange}
-              name={'time'}
-            />
-            {errors.time && <small className='has-text-danger'>{errors.time.message}</small>}
-          </div>
-        </div>
-        <div className='field'>
-          <label className='label'>Details</label>
-          <div className='control'>
-            <textarea
-              className='textarea'
-              placeholder='Casual or tournament? Other info?'
-              type='text'
-              value={eventData.details}
-              onChange={handleChange}
-              name={'details'}
-            />
-            {errors.name && <small className='has-text-danger'>{errors.details.message}</small>}
-          </div>
-        </div>
-        <div className='field'>
-          <label className='label'>Location</label>
-          <div className='control'>
-            <Select
-              name='location'
-              closeMenuOnSelect={true}
-              defaultValue={[]}
-              onChange={(location) => updateEventData({ ...eventData, location })}
-              options={locationOptions}
-              value={eventData.location}
-            />
-          </div>
-        </div>
-
-
-        <div className="field">
-          <button className="button" onClick={handleUpload}>(Optional) Upload Event Image</button>
-          {uploadSuccess && <div><small className="has-text-primary">Upload Complete</small></div>}
-        </div>
-        <button className="button">Submit</button>
-        {creationSuccess && <div><small className="has-text-primary">Event Created! Redirecting...</small></div>}
-      </form>
+      </div>
     </div>
   </main>
 

@@ -65,6 +65,7 @@ export default function CreateLocation({ history }) {
 
   function createSearchQuery(event) {
     updateSearchQuery(event.target.value)
+    updateLocationData({ ...locationData, search: event.target.value })
   }
 
   function handlePlaceSelect({ placeName, location }) {
@@ -131,84 +132,97 @@ export default function CreateLocation({ history }) {
   }
 
   return <main className='section'>
-    <div className='box'>
-      <form onSubmit={handleSubmit}>
-        <h2 className='title'>Add Location</h2>
-        <div className='field'>
-          <label className='label'>Location Name</label>
-          <div className='control'>
-            <input
-              className='input'
-              placeholder='Great spot in the park?'
-              type='text'
-              value={locationData.name}
-              onChange={handleChangeMain}
-              name={'name'}
-            />
-            {errors.name && <small className='has-text-danger'>{errors.name.message}</small>}
-          </div>
-        </div>
-        <div className='field'>
-          <label className='label'>Nearby address</label>
-          <div className='control'>
-            <input
-              className='input'
-              placeholder='Search...'
-              type='text'
-              value={locationData.search}
-              onChange={createSearchQuery}
-              name={'search'}
-            />
-          </div>
-          {searchResults.length > 0 &&
-            <div className='dropdown is-active'>
-              <div className='dropdown-menu'>
-                <div className='dropdown-content'>
-                  {searchResults.map((place) => {
-                    return <div key={place.id}>
-                      <div className='dropdown-item' id='cardHover' onClick={() => handlePlaceSelect(place)}>{place.placeName}</div>
-                      <hr className="dropdown-divider"></hr></div>
-                  })}
+    <div className='columns is-centered'>
+      <div className='column is-two-thirds'>
+        <div className='box'>
+          <h2 className='title'>Add Location</h2>
+          <form className='columns' onSubmit={handleSubmit}>
+            <div className='column'>
+              <div className='field'>
+                <label className='label'>Location Name</label>
+                <div className='control'>
+                  <input
+                    className='input'
+                    placeholder='Great spot in the park?'
+                    type='text'
+                    value={locationData.name}
+                    onChange={handleChangeMain}
+                    name={'name'}
+                  />
+                  {errors.name && <small className='has-text-danger'>{errors.name.message}</small>}
                 </div>
               </div>
-            </div>}
-          {errors.time && <small className='has-text-danger'>{errors.time.message}</small>}
+              <div className='field'>
+                <label className='label'>Nearby address</label>
+                <div className='control'>
+                  <input
+                    className='input'
+                    placeholder='Search...'
+                    type='text'
+                    value={locationData.search}
+                    onChange={createSearchQuery}
+                    name={'search'}
+                  />
+                </div>
+                {searchResults.length > 0 &&
+                  <div className='dropdown is-active is-fullwidth'>
+                    <div className='dropdown-menu'>
+                      <div className='dropdown-content'>
+                        {searchResults.map((place) => {
+                          return <div key={place.id}>
+                            <div className='dropdown-item' id='cardHover' onClick={() => handlePlaceSelect(place)}>{place.placeName}</div>
+                            <hr className="dropdown-divider"></hr></div>
+                        })}
+                      </div>
+                    </div>
+                  </div>}
+                {errors.time && <small className='has-text-danger'>{errors.time.message}</small>}
+              </div>
+              <label className='label'>Number of Tables</label>
+              <div className='field is-grouped'>
+                <div className='control is-expanded'>
+                  <input
+                    className='input'
+                    type='number'
+                    min='1'
+                    value={facilitiesData.numberOfTables}
+                    onChange={handleChangeFacilities}
+                    name={'numberOfTables'}
+                  />
+                  {errors.name && <small className='has-text-danger'>{errors.details.message}</small>}
+                </div>
+                <div className='control'>
+                  <button className="button is-info is-hovered" onClick={handleUpload}>(Optional) Upload Location Image</button>
+                  {uploadSuccess && <div><small className="has-text-primary">Upload Complete</small></div>}
+                </div>
+              </div>
+              <div className="field">
+                <div className='control'>
+                  <button className="button is-primary is-hovered" id='submit'>Submit</button>
+                  {creationSuccess && <div><small className="has-text-primary">Location Added! Redirecting...</small></div>}
+                </div>
+              </div>
+            </div>
+            <div className='column'>
+              <div className='field'>
+                <label className='label'>Description</label>
+                <div className='control'>
+                  <textarea
+                    rows='10'
+                    className='textarea'
+                    placeholder='Tables behind the cafe, or next to the tennis courts?'
+                    type='text'
+                    value={facilitiesData.description}
+                    onChange={handleChangeFacilities}
+                    name={'description'}
+                  />
+                  {errors.name && <small className='has-text-danger'>{errors.details.message}</small>}
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
-        <div className='field'>
-          <label className='label'>Description</label>
-          <div className='control'>
-            <textarea
-              className='textarea'
-              placeholder='Tables behind the cafe, or next to the tennis courts?'
-              type='text'
-              value={facilitiesData.description}
-              onChange={handleChangeFacilities}
-              name={'description'}
-            />
-            {errors.name && <small className='has-text-danger'>{errors.details.message}</small>}
-          </div>
-        </div>
-        <div className='field'>
-          <label className='label'>Number of Tables</label>
-          <div className='control'>
-            <input
-              className='input'
-              type='number'
-              min='1'
-              value={facilitiesData.numberOfTables}
-              onChange={handleChangeFacilities}
-              name={'numberOfTables'}
-            />
-            {errors.name && <small className='has-text-danger'>{errors.details.message}</small>}
-          </div>
-        </div>
-        <div className="field">
-          <button className="button" onClick={handleUpload}>(Optional) Upload Location Image</button>
-          {uploadSuccess && <div><small className="has-text-primary">Upload Complete</small></div>}
-        </div>
-        <button className="button">Submit</button>
-        {creationSuccess && <div><small className="has-text-primary">Location Added! Redirecting...</small></div>}
-      </form>
+      </div>
     </div>
   </main>
 

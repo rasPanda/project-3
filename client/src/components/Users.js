@@ -103,8 +103,8 @@ const Users = () => {
                   </div>
     
                   <div className="content column is-centered">
-                    <h3 className="title is-capitalized has-text-centered">{user.username}</h3>
-                    <h4 className="subtitle has-text-centered has-text-weight-light">{user.location}</h4>
+                    <h3 className="title is-capitalized has-text-centered has-text-white">{user.username}</h3>
+                    <h4 className="subtitle has-text-centered has-text-weight-light has-text-white">{user.location}</h4>
                   </div>
                 </div>
               </div>

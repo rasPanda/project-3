@@ -38,7 +38,7 @@ export default function singleEventPage({ match, history }) {
     return data.attendees.map((attendee) => {
       if (attendee.user._id === getLoggedInUserId()) {
         updateAttendee(true)
-      } 
+      }
     })
   }
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function singleEventPage({ match, history }) {
       getEvent(data)
       const mappedData = { ...data }
       updateFormData(mappedData)
-      console.log('data', data)
+      // console.log('data', data)
       isLoggedInUserAttending(data)
     }
     fetchData()
@@ -60,7 +60,7 @@ export default function singleEventPage({ match, history }) {
   //     })
   // }, [])
 
-  console.log(formData)
+  // console.log(formData)
 
   function handleChange(e) {
     updateNewComment({ ...newComment, text: e.target.value })
@@ -68,7 +68,7 @@ export default function singleEventPage({ match, history }) {
 
   async function handleCommentSubmit(e) {
     e.preventDefault()
-    console.log(id)
+    // console.log(id)
     try {
       await axios.post(`/api/event/${id}/`, newComment, {
         headers: {
@@ -107,62 +107,16 @@ export default function singleEventPage({ match, history }) {
     }
   }
 
-  // function handleFormChange(event) {
-  //   const { name, value } = event.target
-  //   updateFormData({ ...formData, [name]: value })
-  //   updateErrors({ ...errors, [name]: '' })
-  // }
-
-  // async function handleSave() {
-  //   // event.preventDefault()
-  //   const selectedLocation = locations.find(location => location._id === formData.location.value)
-  //   const timeStr = moment(formData.time).format('dddd, MMMM Do YYYY, h:mm a')
-  //   const dataToSubmit = { ...formData, time: timeStr, location: selectedLocation }
-  //   // const newFormData = { ...formData }
-  //   try {
-  //     const { data } = await axios.put(`/api/event/${id}`, dataToSubmit, {
-  //       headers: { Authorization: `Bearer ${token}` }
-  //     })
-  //     console.log(data)
-  //     changeEditState(false)
-  //     // history.push(`/user/${data._id}`)
-  //   } catch (err) {
-  //     console.log(err.response.data)
-  //     updateErrors(err.response.data.errors)
-  //   }
-  // }
-
-  // async function handleSave(newFormData) {
-  //   // event.preventDefault()
-  //   const selectedLocation = locations.find(location => location._id === newFormData.location.value)
-  //   const timeStr = moment(newFormData.time).format('dddd, MMMM Do YYYY, h:mm a')
-  //   const dataToSubmit = { ...newFormData, time: timeStr, location: selectedLocation }
-  //   // const newFormData = { ...formData }
-  //   try {
-  //     const { data } = await axios.put(`/api/event/${id}`, dataToSubmit, {
-  //       headers: { Authorization: `Bearer ${token}` }
-  //     })
-  //     console.log(data)
-  //     changeEditState(false)
-  //     // history.push(`/user/${data._id}`)
-  //   } catch (err) {
-  //     console.log(err.response.data)
-  //     updateErrors(err.response.data.errors)
-  //   }
-  // }
-
-  
-
   function attendeeButton() {
     if (!attendee) {
       return <div>
-        <button className="button is-hovered is-info" onClick={attendEvent}>
+        <button className="button is-hovered is-info mb-2" onClick={attendEvent}>
           Attend Event
         </button>
       </div>
     } else {
       return <div>
-        <button className="button is-hovered is-info" onClick={leaveEvent}>
+        <button className="button is-hovered is-info mb-2" onClick={leaveEvent}>
           Leave Event
         </button>
       </div>
@@ -172,23 +126,25 @@ export default function singleEventPage({ match, history }) {
   async function attendEvent() {
     try {
       await axios.post(`/api/event/${id}/attendee`, {}, {
-        headers: { Authorization: `Bearer ${token}` } })
+        headers: { Authorization: `Bearer ${token}` }
+      })
       updateAttendee(true)
     } catch (err) {
       console.log(err.response)
     }
-    
+
   }
 
   async function leaveEvent() {
     try {
       await axios.delete(`/api/event/${id}/attendee`, {
-        headers: { Authorization: `Bearer ${token}` } })
+        headers: { Authorization: `Bearer ${token}` }
+      })
       updateAttendee(false)
     } catch (err) {
       console.log(err.response.data)
     }
-    
+
   }
 
   if (!event.user) {
@@ -198,27 +154,19 @@ export default function singleEventPage({ match, history }) {
   return <div className='container mt-4'>
     <div className="columns is-centered">
       <div className="column">
+        <Link className='button is-warning is-hovered mb-2' to={'/events'}>Back</Link>
         <img src={event.image} />
-        <div className='columns'>
-          {isCreator(event.user._id) && <div className='column is-two-quarters'><button
-            className='button is-danger'
-            onClick={handleDelete}
-          >Delete & Cancel Event</button></div>}
-          {isCreator(event.user._id) && <div className='column is-one-quarters'><button
-            className='button is-warning'
-            onClick={() => changeEditState(true)}
-          >Edit Event</button></div>}
-        </div>
 
-        <Link className='button is-warning' to={'/events'}>Back</Link>
-        <ShareButton
+
+
+        <div><ShareButton
           eventId={id}
-        />
+        /></div>
       </div>
       <div className="column is-half">
         <div className="columns is-centered">
           <div className="column">
-            <div className="box mt-3">
+            <div className="box mt-6">
               {editState === false
                 ? <div>
                   <div>{event.name}</div>
@@ -234,7 +182,7 @@ export default function singleEventPage({ match, history }) {
                   updateFormData={updateFormData}
                   changeEditState={changeEditState}
                   id={id}
-                  // errors={errors}
+                // errors={errors}
                 />
               }
               {event.attendees.length > 0 &&
@@ -244,35 +192,47 @@ export default function singleEventPage({ match, history }) {
                   })}
                 </div>}
             </div>
-            <div>
-              {event.comments.length > 0 &&
-                <div><h3>Comments:</h3>
-                  {event.comments.map(comment => {
-                    return <div key={comment._id} className='notification is-size-7'>
-                      {isCreator(comment.user._id) && <button
-                        className='delete is-small is-pulled-right'
-                        onClick={() => handleCommentDelete(comment._id)}
-                      ></button>}
-                      {comment.text}
-                    </div>
-                  })}
-                </div>}
-              <form className="box mt-3" onSubmit={handleCommentSubmit}>
-                <label className='label'>Add a comment!</label>
-                <textarea
-                  className="textarea"
-                  placeholder='Your comment here...'
-                  type="text"
-                  value={newComment.text}
-                  onChange={handleChange}
-                  name={'newComment'}
-                />
-                <button className='button is-info is-hovered mt-3'>Post</button>
-              </form>
-            </div>
             {getLoggedInUserId() &&
-            attendeeButton()
-            }
+              <div>
+                {event.comments.length > 0 &&
+                  <div><h3>Comments:</h3>
+                    {event.comments.map(comment => {
+                      return <div key={comment._id} className='notification is-size-7'>
+                        {isCreator(comment.user._id) && <button
+                          className='delete is-small is-pulled-right'
+                          onClick={() => handleCommentDelete(comment._id)}
+                        ></button>}
+                        {comment.text}
+                      </div>
+                    })}
+                  </div>}
+                {getLoggedInUserId() &&
+                  attendeeButton()
+                }
+                <form className="box mt-3" onSubmit={handleCommentSubmit}>
+                  <label className='label'>Add a comment!</label>
+                  <textarea
+                    className="textarea"
+                    placeholder='Your comment here...'
+                    type="text"
+                    value={newComment.text}
+                    onChange={handleChange}
+                    name={'newComment'}
+                  />
+                  <button className='button is-info is-hovered mt-3'>Post</button>
+                </form>
+              </div>}
+            <div className='columns mt-2'>
+              {isCreator(event.user._id) && <div className='column is-two-quarters'><button
+                className='button is-danger is-hovered'
+                onClick={handleDelete}
+              >Delete & Cancel Event</button></div>}
+              {isCreator(event.user._id) && <div className='column is-one-quarters'><button
+                className='button is-warning is-hovered is-pulled-right'
+                onClick={() => changeEditState(true)}
+              >Edit Event</button></div>}
+            </div>
+
           </div>
         </div>
       </div>

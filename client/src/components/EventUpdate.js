@@ -12,6 +12,7 @@ export default function EventUpdateForm({ formData, updateFormData, changeEditSt
   const [locations, getLocations] = useState([])
   const token = localStorage.getItem('token')
 
+  const [uploadSuccess, updateUploadSuccess] = useState(false)
   const [newFormData, updateNewFormData] = useState({ ...formData,  time: formTime, location: formData.location })
   const [errors, updateErrors] = useState({
     name: '',
@@ -19,6 +20,7 @@ export default function EventUpdateForm({ formData, updateFormData, changeEditSt
     details: '',
     location: [],
   })
+  console.log(newFormData)
 
   const locationName = newFormData.location.name
   const indexOfLocation = locationOptions.findIndex((location) => {
@@ -49,6 +51,27 @@ export default function EventUpdateForm({ formData, updateFormData, changeEditSt
     updateErrors({ ...errors, [name]: '' })
   }
 
+  function handleUpload() {
+    event.preventDefault()
+    window.cloudinary.createUploadWidget(
+      {
+        cloudName: 'dzoqli241',
+        uploadPreset: 'PingPongImages',
+        cropping: true
+      },
+      (err, result) => {
+        if (result.event !== 'success') {
+          return
+        }
+        updateNewFormData({
+          ...newFormData,
+          image: `${result.info.secure_url}`
+        })
+        updateUploadSuccess(true)
+      }
+    ).open()
+  }
+
   async function handleSave(newFormData) {
     // event.preventDefault()
     const selectedLocation = locations.find(location => location._id === newFormData.location.value)
@@ -59,9 +82,9 @@ export default function EventUpdateForm({ formData, updateFormData, changeEditSt
       const { data } = await axios.put(`/api/event/${id}`, dataToSubmit, {
         headers: { Authorization: `Bearer ${token}` }
       })
-      console.log(data)
+      // console.log(data)
       changeEditState(false)
-      // history.push(`/user/${data._id}`)
+      history.push(`/event/${id}`)
     } catch (err) {
       console.log(err.response.data)
       updateErrors(err.response.data.errors)
@@ -124,6 +147,10 @@ export default function EventUpdateForm({ formData, updateFormData, changeEditSt
         />
         {errors.name && <small className='has-text-danger'>{errors.details.message}</small>}
       </div>
+    </div>
+    <div className="field">
+      <button className="button is-hovered is-link" onClick={handleUpload}>Change event pic</button>
+      {uploadSuccess && <div><small className="has-text-primary">Upload Complete, <br></br>save to see changes</small></div>}
     </div>
 
     <button className="button mt-5 is-success" onClick={() => {handleSave(newFormData)}}>Save</button>

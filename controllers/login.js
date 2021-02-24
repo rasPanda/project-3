@@ -4,6 +4,7 @@ import { secret } from '../config/environment.js'
 
 async function login(req, res, next) {
   const password = req.body.password
+  console.log('password', password)
   try {
     const user = await User.findOne({ email: req.body.email })
     console.log('Logged in user: ')

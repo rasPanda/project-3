@@ -70,7 +70,7 @@ const Navbar = () => {
                 </Link>
               </div> :
               <div className="buttons">
-                <div className="column">
+                <div className="column is-capitalized">
                   {userName && <strong>Hi {userName}</strong>}
                 </div>
                 <div className="column">

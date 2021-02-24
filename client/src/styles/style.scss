@@ -101,3 +101,40 @@ align-items: center;
   border: 5px solid #FF9B00;
   border-radius: 5px;
 }
+
+
+//map toggle conatiner
+.toggle-container{
+  display: flex;
+  flex-direction:column;
+  align-items:flex-end;
+  position:fixed;
+  right: 8%;
+  top:20%;
+  z-index: 10;
+  margin-right: 0px;
+}
+.toggle{
+  margin:8px;
+  background-color: #4287f5;
+  color: white;
+  border-radius:10px;
+  outline-style: none;
+}
+#eventSectionBackground {
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  width: 100vw;
+  background-image: url("https://as2.ftcdn.net/jpg/02/04/94/27/500_F_204942786_6CJif6eBJKXEA2vmaC3IXMfg7tuuwYks.jpg");
+  background-position:  center;
+  background-size:cover
+}
+
+#userSectionBackground {
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  width: 100vw;
+  background-image: url("https://as2.ftcdn.net/jpg/02/04/94/23/500_F_204942362_jPsRI45GDcFi1Y6KoQ1MEhQrw5b0GfLq.jpg");
+  background-position:  center;
+  background-size:cover
+}

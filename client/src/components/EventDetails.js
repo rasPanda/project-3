@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { isCreator } from '../lib/auth'
+import { getLoggedInUserId, isCreator } from '../lib/auth'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
-
 import EventUpdateForm from './EventUpdate'
 import ShareButton from './ShareButton'
 
 export default function singleEventPage({ match, history }) {
-  const [locations, getLocations] = useState([])
+  // const [locations, getLocations] = useState([])
   const [event, getEvent] = useState({})
   const [newComment, updateNewComment] = useState({
     text: ''
   })
+  const [attendee, updateAttendee] = useState(false)
+  // * This is the event ID
   const id = match.params.id
+  //* This is the logged in user's token
   const token = localStorage.getItem('token')
   const [editState, changeEditState] = useState(false)
   const [formData, updateFormData] = useState({
@@ -24,24 +26,42 @@ export default function singleEventPage({ match, history }) {
     image: ''
   })
 
+  // const [errors, updateErrors] = useState({
+  //   name: '',
+  //   location: {},
+  //   time: '',
+  //   details: '',
+  //   image: ''
+  // })
+
+  function isLoggedInUserAttending(data) {
+    return data.attendees.map((attendee) => {
+      if (attendee.user._id === getLoggedInUserId()) {
+        updateAttendee(true)
+      } 
+    })
+  }
   useEffect(() => {
     async function fetchData() {
       const { data } = await axios.get(`/api/event/${id}`)
       getEvent(data)
       const mappedData = { ...data }
       updateFormData(mappedData)
+      console.log('data', data)
+      isLoggedInUserAttending(data)
     }
     fetchData()
-  }, [])
+  }, [attendee])
 
-  useEffect(() => {
-    axios.get('/api/location')
-      .then(({ data }) => {
-        getLocations(data)
-      })
-  }, [])
+  // useEffect(() => {
+  //   axios.get('/api/location')
+  //     .then(({ data }) => {
+  //       getLocations(data)
+  //     })
+  // }, [])
 
   console.log(formData)
+
   function handleChange(e) {
     updateNewComment({ ...newComment, text: e.target.value })
   }
@@ -87,27 +107,88 @@ export default function singleEventPage({ match, history }) {
     }
   }
 
-  function handleFormChange(event) {
-    const { name, value } = event.target
-    updateFormData({ ...formData, [name]: value })
+  // function handleFormChange(event) {
+  //   const { name, value } = event.target
+  //   updateFormData({ ...formData, [name]: value })
+  //   updateErrors({ ...errors, [name]: '' })
+  // }
+
+  // async function handleSave() {
+  //   // event.preventDefault()
+  //   const selectedLocation = locations.find(location => location._id === formData.location.value)
+  //   const timeStr = moment(formData.time).format('dddd, MMMM Do YYYY, h:mm a')
+  //   const dataToSubmit = { ...formData, time: timeStr, location: selectedLocation }
+  //   // const newFormData = { ...formData }
+  //   try {
+  //     const { data } = await axios.put(`/api/event/${id}`, dataToSubmit, {
+  //       headers: { Authorization: `Bearer ${token}` }
+  //     })
+  //     console.log(data)
+  //     changeEditState(false)
+  //     // history.push(`/user/${data._id}`)
+  //   } catch (err) {
+  //     console.log(err.response.data)
+  //     updateErrors(err.response.data.errors)
+  //   }
+  // }
+
+  // async function handleSave(newFormData) {
+  //   // event.preventDefault()
+  //   const selectedLocation = locations.find(location => location._id === newFormData.location.value)
+  //   const timeStr = moment(newFormData.time).format('dddd, MMMM Do YYYY, h:mm a')
+  //   const dataToSubmit = { ...newFormData, time: timeStr, location: selectedLocation }
+  //   // const newFormData = { ...formData }
+  //   try {
+  //     const { data } = await axios.put(`/api/event/${id}`, dataToSubmit, {
+  //       headers: { Authorization: `Bearer ${token}` }
+  //     })
+  //     console.log(data)
+  //     changeEditState(false)
+  //     // history.push(`/user/${data._id}`)
+  //   } catch (err) {
+  //     console.log(err.response.data)
+  //     updateErrors(err.response.data.errors)
+  //   }
+  // }
+
+  
+
+  function attendeeButton() {
+    if (!attendee) {
+      return <div>
+        <button className="button is-hovered is-info" onClick={attendEvent}>
+          Attend Event
+        </button>
+      </div>
+    } else {
+      return <div>
+        <button className="button is-hovered is-info" onClick={leaveEvent}>
+          Leave Event
+        </button>
+      </div>
+    }
   }
 
-  async function handleSave() {
-    // event.preventDefault()
-    const selectedLocation = locations.find(location => location._id === formData.location.value)
-    const timeStr = moment(formData.time).format('dddd, MMMM Do YYYY, h:mm a')
-    const dataToSubmit = { ...formData, time: timeStr, location: selectedLocation }
-    // const newFormData = { ...formData }
+  async function attendEvent() {
     try {
-      const { data } = await axios.put(`/api/event/${id}`, dataToSubmit, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-      console.log(data)
-      changeEditState(false)
-      // history.push(`/user/${data._id}`)
+      await axios.post(`/api/event/${id}/attendee`, {}, {
+        headers: { Authorization: `Bearer ${token}` } })
+      updateAttendee(true)
+    } catch (err) {
+      console.log(err.response)
+    }
+    
+  }
+
+  async function leaveEvent() {
+    try {
+      await axios.delete(`/api/event/${id}/attendee`, {
+        headers: { Authorization: `Bearer ${token}` } })
+      updateAttendee(false)
     } catch (err) {
       console.log(err.response.data)
     }
+    
   }
 
   if (!event.user) {
@@ -147,10 +228,13 @@ export default function singleEventPage({ match, history }) {
                   <div><h3>Details:</h3><div>{event.details}</div></div>
                 </div>
                 : <EventUpdateForm
-                  handleSave={handleSave}
-                  handleFormChange={handleFormChange}
+                  // handleSave={handleSave}
+                  // handleFormChange={handleFormChange}
                   formData={formData}
                   updateFormData={updateFormData}
+                  changeEditState={changeEditState}
+                  id={id}
+                  // errors={errors}
                 />
               }
               {event.attendees.length > 0 &&
@@ -186,6 +270,9 @@ export default function singleEventPage({ match, history }) {
                 <button className='button is-info is-hovered mt-3'>Post</button>
               </form>
             </div>
+            {getLoggedInUserId() &&
+            attendeeButton()
+            }
           </div>
         </div>
       </div>

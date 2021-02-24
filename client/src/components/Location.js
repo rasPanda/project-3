@@ -57,8 +57,6 @@ const Location = () => {
                           <div className="media-content">
                             <p className="title is-4">{location.name}</p>
                             <p className="subtitle is-6">{location.address}</p>
-                            <p className="subtitle is-6">{location.facilities.description}</p>
-                            <p className="subtitle is-6">Created by: {location.user.username}</p>
                             <img src={location.image} alt={location.name} />
                           </div>
                         </div>
@@ -74,9 +72,8 @@ const Location = () => {
                 <p className="title is-4">{selectedLocation.name}</p>
                 <img src={selectedLocation.image} alt={selectedLocation.name} />
                 <p className="subtitle is-6">{selectedLocation.address}</p>
-                <p className="subtitle is-6">{'Organiser: ' + selectedLocation.user.username}</p>
+                <p className="subtitle is-6">{'Added by: ' + selectedLocation.user.username}</p>
                 <p className="subtitle is-6">{'Description: ' + selectedLocation.facilities.description}</p>
-                <p className="subtitle is-6">{'Comment: ' + selectedLocation.comments}</p>
                 <Link className='button' to={`/location/${selectedLocation.id}`}>Go to Location</Link>
               </div>
             </div>}

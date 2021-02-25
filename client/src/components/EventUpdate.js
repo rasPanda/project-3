@@ -51,7 +51,7 @@ export default function EventUpdateForm({ formData, updateFormData, changeEditSt
     updateErrors({ ...errors, [name]: '' })
   }
 
-  function handleUpload() {
+  function handleUpload(event) {
     event.preventDefault()
     window.cloudinary.createUploadWidget(
       {

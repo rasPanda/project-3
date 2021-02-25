@@ -75,25 +75,6 @@ export default function singleLocationPage({ match, history }) {
     }
   }
 
-  function handleFormChange(event) {
-    const { name, value } = event.target
-    updateFormData({ ...formData, [name]: value })
-  }
-
-  async function handleSave() {
-    const newFormData = { ...formData }
-    try {
-      const { data } = await axios.put(`/api/location/${id}`, newFormData, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-      console.log(data)
-      changeEditState(false)
-      // history.push(`/user/${data._id}`)
-    } catch (err) {
-      console.log(err.response.data)
-    }
-  }
-
   if (!singleLocation.user) {
     return null
   }
@@ -132,9 +113,9 @@ export default function singleLocationPage({ match, history }) {
                   <div><h3>Description:</h3><div>{singleLocation.facilities.description}</div></div>
                 </div>
                 : <LocationUpdateForm
-                  handleSave={handleSave}
-                  handleFormChange={handleFormChange}
                   formData={formData}
+                  id={id}
+                  changeEditState={changeEditState}
                 />
               }
               {singleLocation.events.length > 0 &&

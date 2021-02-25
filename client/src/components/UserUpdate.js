@@ -20,16 +20,19 @@ export default function UserUpdateForm({ formData, handleSave, handleChange }) {
         </div>
       </div>
     })}
-    <label className="label">Bio</label>
-    <div className="control">
-      <textarea
-        className="input"
-        type="text"
-        value={formData.bio}
-        onChange={handleChange}
-        name='bio'
-      />
+    <div className="field">
+      <label className="label">Bio</label>
+      <div className="control">
+        <textarea
+          className="input"
+          type="text"
+          value={formData.bio}
+          onChange={handleChange}
+          name='bio'
+        />
+      </div>
     </div>
+
     <button className="button mt-5 is-success" onClick={handleSave}>Save</button>
   </form>
 }

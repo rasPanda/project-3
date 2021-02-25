@@ -71,7 +71,7 @@ export default function getUserData() {
       location: 'Dublin'
     },
     {
-      username: 'Beth Tudor',
+      username: 'Beth',
       email: 'beth@beth.com',
       password: 'beth',
       passwordConfirmation: 'beth',
@@ -81,7 +81,7 @@ export default function getUserData() {
       location: 'Hampton'
     },
     {
-      username: 'Simon Pegg',
+      username: 'SimonPegg',
       email: 'simon@simon.com',
       password: 'simon',
       passwordConfirmation: 'simon',
@@ -91,7 +91,7 @@ export default function getUserData() {
       location: 'Boston'
     },
     {
-      username: 'Jasper Casper',
+      username: 'JasperCasper',
       email: 'jasper@jasper.com',
       password: 'jasper',
       passwordConfirmation: 'jasper',
@@ -111,7 +111,7 @@ export default function getUserData() {
       location: 'Santa Monica'
     },
     {
-      username: 'Ada Selby',
+      username: 'AdaSelby',
       email: 'ada@ada.com',
       password: 'ada',
       passwordConfirmation: 'ada',
@@ -121,7 +121,7 @@ export default function getUserData() {
       location: 'Galway'
     },
     {
-      username: 'Patricia Sanders',
+      username: 'PatriciaSanders',
       email: 'patricia@patricia.com',
       password: 'patricia',
       passwordConfirmation: 'patricia',
@@ -133,7 +133,7 @@ export default function getUserData() {
       location: 'Stafford'
     },
     {
-      username: 'Paul Simon',
+      username: 'PaulSimon',
       email: 'paul@paul.com',
       password: 'paul',
       passwordConfirmation: 'paul',

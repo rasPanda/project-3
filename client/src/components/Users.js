@@ -59,7 +59,7 @@ const Users = () => {
     <p className="title has-text-white has-text-centered is-size-1">
       Park Pong
     </p>
-    <div className="container" >
+    <div className="container mb-3" >
 
       <div className="column">
         <input

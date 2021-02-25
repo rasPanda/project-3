@@ -64,6 +64,6 @@ export default function Login(history) {
         {loginErrors && <small className="has-text-danger">Incorrect Login Details, Please Try Again</small>}
       </div>
     </div>
-    <button className="button is-hovered is-info">Submit</button>
+    <button className="button is-hovered is-primary">Submit</button>
   </form>
 }

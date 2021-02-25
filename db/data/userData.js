@@ -7,7 +7,7 @@ export default function getUserData() {
       passwordConfirmation: 'joe',
       isAdmin: true,
       image: 'https://res.cloudinary.com/dzoqli241/image/upload/v1614266117/gbchafvomcrnw4dah5ol.jpg',
-      bio: 'Hi I\'m Joe! I served up code in the ace that is Park Pong! Top skin skills to match my JavaScript, game on!!!',
+      bio: 'Hi I\'m Joe! I served up code in the ace project that is Park Pong! Top spin skills to match my JavaScript, game on!!!',
       location: 'Bristol'
     },
     {

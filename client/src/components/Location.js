@@ -116,9 +116,8 @@ export default function Location({ location }) {
           lat={lat}
           zoom={zoom}
           coordinate={locations.map((coordinate) => {
-            return coordinate.location
-          }
-          )}
+            return { coordinate: coordinate.location, id: coordinate._id }
+          })}
         />
       }
     </main >

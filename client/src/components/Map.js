@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import ReactMapGL, { Marker } from 'react-map-gl'
 import { Link } from 'react-router-dom'
 const imgUrl = '../asset/MapPingPongPin.png'
 
-const Map = ({ coordinate }) => {
+const Map = ({ long, lat, zoom, coordinate }) => {
   const [markerData, setMarkerData] = useState([])
   const [viewport, setViewport] = React.useState({
     width: '88vw',
     height: '70vh',
-    latitude: 51.5167,
-    longitude: -0.05,
-    zoom: 12
+    latitude: lat,
+    longitude: long,
+    zoom: zoom
   })
 
   // let markers = ''

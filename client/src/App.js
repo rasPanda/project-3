@@ -18,6 +18,7 @@ import Location from './components/Location'
 
 // import 'bulma'
 import './styles/style.scss'
+import 'mapbox-gl/dist/mapbox-gl.css'
 
 const App = () => (
   <BrowserRouter>

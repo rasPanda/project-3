@@ -79,6 +79,86 @@ export default function getLocationData(users, event) {
       user: users[2],
       comments: [],
       events: []
-    }
+    },
+    {
+      name: 'Regents Park',
+      image: 'https://upload.wikimedia.org/wikipedia/commons/5/59/Regent%27s_Park_bandstand.jpg',
+      location: {
+        lat: 51.5289041304773,
+        long: -0.15405130307000162
+      },
+      address: 'York Bridge Road, NW1',
+      facilities: {
+        numberOfTables: 1,
+        description: '1 table near to the Will to Win tennis courts'
+      },
+      user: users[5],
+      comments: [],
+      events: []
+    },
+    {
+      name: 'Paddington Recreation Ground',
+      image: 'https://upload.wikimedia.org/wikipedia/commons/8/80/Pavilion%2C_Paddington_Recreation_Ground_-_geograph.org.uk_-_530411.jpg',
+      location: {
+        lat: 51.53001412812487,
+        long: -0.1910337451534186
+      },
+      address: 'Maida Vale, W9',
+      facilities: {
+        numberOfTables: 2,
+        description: '2 tables near the tennis courts'
+      },
+      user: users[6],
+      comments: [],
+      events: []
+    },
+    {
+      name: 'Central Park',
+      image: 'https://www.u-la.com/wp-content/uploads/2017/01/Central-Park-Newham_-61-smaller-square.jpg',
+      location: {
+        lat: 51.529097204590556, 
+        long: 0.0524200674727445
+      },
+      address: 'High Street South, E6',
+      facilities: {
+        numberOfTables: 2,
+        description: '2 tables near the tennis courts'
+      },
+      user: users[7],
+      comments: [],
+      events: []
+    },
+    {
+      name: 'New Beckton Park',
+      image: 'https://media-cdn.tripadvisor.com/media/photo-s/05/59/60/60/new-beckton-park.jpg',
+      location: {
+        lat: 51.51089142545319,  
+        long: 0.05850973670276127
+      },
+      address: 'Savage Gardens, E6',
+      facilities: {
+        numberOfTables: 2,
+        description: '2 tables within the redeveloped play area'
+      },
+      user: users[10],
+      comments: [],
+      events: []
+    },
+    {
+      name: 'Stratford Park',
+      image: 'https://media-cdn.tripadvisor.com/media/photo-s/0f/72/cc/33/stratford-park.jpg',
+      location: {
+        lat: 51.53837518017357,   
+        long: 0.006914027432348728
+      },
+      address: 'Densford Road, E15',
+      facilities: {
+        numberOfTables: 1,
+        description: '1 table by the fountain & 1 by the play area'
+      },
+      user: users[8],
+      comments: [],
+      events: []
+    },
   ]
 }

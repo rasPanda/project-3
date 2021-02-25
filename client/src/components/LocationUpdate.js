@@ -60,6 +60,27 @@ export default function LocationUpdateForm({ formData, id, changeEditState }) {
     updateNewFormData({ ...newFormData, [name]: value })
   }
 
+  function handleUpload(event) {
+    event.preventDefault()
+    window.cloudinary.createUploadWidget(
+      {
+        cloudName: `${process.env.cloudName}`,
+        uploadPreset: `${process.env.uploadPreset}`,
+        cropping: true
+      },
+      (err, result) => {
+        if (result.event !== 'success') {
+          return
+        }
+        updateNewFormData({
+          ...newFormData,
+          image: `${result.info.secure_url}`
+        })
+        updateUploadSuccess(true)
+      }
+    ).open()
+  }
+
   async function handleSave() {
     const dataToSubmit = {
       ...newFormData,
@@ -150,6 +171,10 @@ export default function LocationUpdateForm({ formData, id, changeEditState }) {
         />
         {errors.name && <small className='has-text-danger'>{errors.details.message}</small>}
       </div>
+    </div>
+    <div className="field">
+      <button className="button is-hovered is-link" onClick={handleUpload}>Change location image</button>
+      {uploadSuccess && <div><small className="has-text-primary">Upload Complete, <br></br>save to see changes</small></div>}
     </div>
     <button className="button mt-5 is-success" onClick={() => handleSave()}>Save</button>
   </form>

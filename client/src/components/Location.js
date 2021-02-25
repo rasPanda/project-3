@@ -82,7 +82,9 @@ export default function Location({ location }) {
                             <div className="media-content">
                               <p className="title is-4 titleHeight">{location.name}</p>
                               <p className="subtitle is-6">{location.address}</p>
-                              <img src={location.image} alt={location.name} />
+                              <figure className="image is-3by2 mb-2">
+                                <img src={location.image} alt={location.name} />
+                              </figure>
                             </div>
                           </div>
                         </div>

@@ -205,7 +205,7 @@ export default function getLocationData(users) {
     },
     {
       name: 'Avery Hill Park',
-      image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FAvery_Hill&psig=AOvVaw2Of6zKNtyaE4ncmMlpxrgO&ust=1614360062938000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMjpzoTGhe8CFQAAAAAdAAAAABAD',
+      image: 'https://upload.wikimedia.org/wikipedia/commons/5/52/Avery_Hill_Park_hothouse_%2817767255915%29.jpg',
       location: {
         lat: 51.45029831,
         long: 0.08054373
@@ -237,7 +237,7 @@ export default function getLocationData(users) {
     },
     {
       name: 'Eltham Park South',
-      image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.inspirock.com%2Funited-kingdom%2Flondon%2Feltham-park-south-a8476018287&psig=AOvVaw2Fqalq4_tzNqifLymsbZdy&ust=1614360216492000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCICOt9DGhe8CFQAAAAAdAAAAABAD',
+      image: 'https://lh3.googleusercontent.com/p/AF1QipMgMBt0-q0VCnwUnMVri3iTrtyTcKSnuRXuc_kz=s1600-w1600',
       location: {
         lat: 51.45511,
         long: 0.06710

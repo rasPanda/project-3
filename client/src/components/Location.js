@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import Map from './Map.js'
 import '../styles/style.scss'
-const Location = () => {
+export default function Location({ location }) {
   const [locations, updateLocation] = useState([])
   const [sideCard, revealSideCard] = useState(false)
   const [toggle, updateToggle] = useState(false)
@@ -98,14 +98,14 @@ const Location = () => {
           </div>
         </section>
         :
-        <Map coordinate={locations.map((coordinate) => {
-          return coordinate.location
-        }
-        )}
+        <Map
+          style="mapbox://styles/mapbox/streets-v8"
+          coordinate={locations.map((coordinate) => {
+            return coordinate.location
+          }
+          )}
         />
       }
     </main >
   )
 }
-
-export default Location

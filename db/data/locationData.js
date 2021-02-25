@@ -1,4 +1,4 @@
-export default function getLocationData(users, event) {
+export default function getLocationData(users) {
   return [
     {
       name: 'Burgess Park Chumleigh Gardens Playground',
@@ -77,6 +77,102 @@ export default function getLocationData(users, event) {
         description: '1 Permanent Table'
       },
       user: users[2],
+      comments: [],
+      events: []
+    },
+    {
+      name: 'Clissold Park',
+      image: 'https://live.staticflickr.com/7484/15780807076_272d9cf0d2_b.jpg',
+      location: {
+        lat: 51.56115461942914,
+        long: -0.08622767264339917
+      },
+      address: 'Clissold Park Mansions, Stoke Newington Church St, Stoke Newington, London N16 9HJ',
+      facilities: {
+        numberOfTables: 1,
+        description: '1 Table in front of Cafe'
+      },
+      user: users[0],
+      comments: [],
+      events: []
+    },
+    {
+      name: 'Butterfield Green',
+      image: 'https://www.pingengland.co.uk/wp-content/uploads/2018/03/Butterfield-Green-1-1.jpg',
+      location: {
+        lat: 51.5549611833832,
+        long: -0.08063635730193504
+      },
+      address: '16 Allen Rd, Stoke Newington, London N16 8SD',
+      facilities: {
+        numberOfTables: 2,
+        description: '1 table in the play area and 1 near the bandstand'
+      },
+      user: users[0],
+      comments: [],
+      events: []
+    },
+    {
+      name: 'Haggerston Park',
+      image: 'https://live.staticflickr.com/5763/20791238029_658fa93026_b.jpg',
+      location: {
+        lat: 51.53289226055541, 
+        long: -0.06698543031505157
+      },
+      address: 'Yorkton St, London E2 8NH',
+      facilities: {
+        numberOfTables: 1,
+        description: '1 table near the play area'
+      },
+      user: users[0],
+      comments: [],
+      events: []
+    },
+    {
+      name: 'Shoreditch Park',
+      image: 'https://live.staticflickr.com/5763/20791238029_658fa93026_b.jpg',
+      location: {
+        lat: 51.53411861856026, 
+        long: -0.08456587822803766
+      },
+      address: '188 New N Rd, Hoxton, London N1 5EP',
+      facilities: {
+        numberOfTables: 2,
+        description: '2 tables by the playground'
+      },
+      user: users[0],
+      comments: [],
+      events: []
+    },
+    {
+      name: 'Shoreditch Park',
+      image: 'https://live.staticflickr.com/5605/15619126547_50e597c407_n.jpg',
+      location: {
+        lat: 51.53411861856026, 
+        long: -0.08456587822803766
+      },
+      address: '188 New N Rd, Hoxton, London N1 5EP',
+      facilities: {
+        numberOfTables: 2,
+        description: '2 tables by the playground'
+      },
+      user: users[0],
+      comments: [],
+      events: []
+    },
+    {
+      name: 'Camberwell Green',
+      image: 'https://i0.wp.com/www.brixtonbuzz.com/images/camberwell-green-walk-09.jpg?w=735',
+      location: {
+        lat: 51.474996492246525, 
+        long: -0.09260894140400495
+      },
+      address: 'Camberwell, London SE5 7BU',
+      facilities: {
+        numberOfTables: 1,
+        description: '1 table near the play area'
+      },
+      user: users[0],
       comments: [],
       events: []
     }

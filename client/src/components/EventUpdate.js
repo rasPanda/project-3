@@ -6,14 +6,14 @@ import axios from 'axios'
 export default function EventUpdateForm({ formData, updateFormData, changeEditState, id }) {
   const currentTime = moment().format('YYYY-MM-DDTHH:mm')
   let formTime = moment(formData.time, 'dddd, MMMM Do YYYY, h:mm a').format('YYYY-MM-DDTHH:mm')
-  if (formTime === 'Invalid date') {formTime = currentTime}
+  if (formTime === 'Invalid date') { formTime = currentTime }
 
   const [locationOptions, updateLocationsOptions] = useState([])
   const [locations, getLocations] = useState([])
   const token = localStorage.getItem('token')
 
   const [uploadSuccess, updateUploadSuccess] = useState(false)
-  const [newFormData, updateNewFormData] = useState({ ...formData,  time: formTime, location: formData.location })
+  const [newFormData, updateNewFormData] = useState({ ...formData, time: formTime, location: formData.location })
   const [errors, updateErrors] = useState({
     name: '',
     time: '',
@@ -121,7 +121,7 @@ export default function EventUpdateForm({ formData, updateFormData, changeEditSt
       </div>
     </div>
     <div className='field'>
-    <label className='label'>Time</label>
+      <label className='label'>Time</label>
       <div className='control'>
         <input
           className='input'
@@ -136,7 +136,7 @@ export default function EventUpdateForm({ formData, updateFormData, changeEditSt
       </div>
     </div>
     <div className='field'>
-    <label className='label'>Details</label>
+      <label className='label'>Details</label>
       <div className='control'>
         <textarea
           className='textarea'
@@ -153,6 +153,6 @@ export default function EventUpdateForm({ formData, updateFormData, changeEditSt
       {uploadSuccess && <div><small className="has-text-primary">Upload Complete, <br></br>save to see changes</small></div>}
     </div>
 
-    <button className="button mt-5 is-success" onClick={() => {handleSave(newFormData)}}>Save</button>
+    <button className="button mt-5 is-success" onClick={() => handleSave(newFormData)}>Save</button>
   </form>
 }

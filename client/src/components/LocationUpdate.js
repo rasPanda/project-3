@@ -1,15 +1,31 @@
 import React, { useState, useEffect } from 'react'
-import Select from 'react-select'
-import moment from 'moment'
 import axios from 'axios'
+import { debounce } from 'lodash'
+
+const debouncedSave = debounce((searchQuery, updateSearchResults) => {
+  axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${searchQuery}.json?country=gb&access_token=${process.env.MAPBOX_TOKEN}`)
+    .then(({ data }) => {
+      const search = data.features.map(location => {
+        return {
+          id: location.id,
+          placeName: location.place_name,
+          location: {
+            lat: location.center[1],
+            long: location.center[0]
+          }
+        }
+      })
+      updateSearchResults(search)
+    })
+}, 500)
 
 export default function LocationUpdateForm({ formData, id, changeEditState }) {
-  
-  const [locationOptions, updateLocationsOptions] = useState([])
-  const [locations, getLocations] = useState([])
+
+  const [searchQuery, updateSearchQuery] = useState('')
+  const [searchResults, updateSearchResults] = useState([])
   const token = localStorage.getItem('token')
-  const [newFormData, updateNewFormData] = useState({ 
-    ...formData, 
+  const [newFormData, updateNewFormData] = useState({
+    ...formData,
     location: formData.location,
     numberTables: formData.facilities.numberOfTables,
     description: formData.facilities.description
@@ -19,8 +35,24 @@ export default function LocationUpdateForm({ formData, id, changeEditState }) {
     name: '',
     time: '',
     details: '',
-    location: [],
+    location: []
   })
+
+
+  useEffect(() => {
+    debouncedSave(searchQuery, updateSearchResults)
+  }, [searchQuery])
+
+  function createSearchQuery(event) {
+    updateSearchQuery(event.target.value)
+    updateNewFormData({ ...newFormData, search: event.target.value })
+  }
+
+  function handlePlaceSelect({ placeName, location }) {
+    updateNewFormData({ ...newFormData, address: placeName, location: location, search: placeName })
+    updateSearchQuery('')
+    updateSearchResults([])
+  }
 
   function handleFormChange(event) {
     console.log(event.target)
@@ -29,7 +61,7 @@ export default function LocationUpdateForm({ formData, id, changeEditState }) {
   }
 
   async function handleSave() {
-    const dataToSubmit = { 
+    const dataToSubmit = {
       ...newFormData,
       facilities: {
         numberOfTables: newFormData.numberTables,
@@ -66,22 +98,34 @@ export default function LocationUpdateForm({ formData, id, changeEditState }) {
     </div>
     <div className="field">
       <label className="label">
-          Address
+        Address
       </label>
       <div className="control">
         <input
           className="input"
           type="text"
-          value={newFormData.address}
-          onChange={handleFormChange}
+          value={newFormData.search}
+          onChange={createSearchQuery}
           name='address'
         />
-        {errors.name && <small className='has-text-danger'>{errors.name.message}</small>}
       </div>
+      {searchResults.length > 0 &&
+        <div className='dropdown is-active is-fullwidth'>
+          <div className='dropdown-menu'>
+            <div className='dropdown-content'>
+              {searchResults.map((place) => {
+                return <div key={place.id}>
+                  <div className='dropdown-item' id='cardHover' onClick={() => handlePlaceSelect(place)}>{place.placeName}</div>
+                  <hr className="dropdown-divider"></hr></div>
+              })}
+            </div>
+          </div>
+        </div>}
+      {errors.name && <small className='has-text-danger'>{errors.name.message}</small>}
     </div>
     <div className="field">
       <label className="label">
-          Number of Tables
+        Number of Tables
       </label>
       <div className="control">
         <input
@@ -96,14 +140,14 @@ export default function LocationUpdateForm({ formData, id, changeEditState }) {
     </div>
     <div className='field'>
       <label className='label'>Description</label>
-        <div className='control'>
-          <textarea
-            className='textarea'
-            type='text'
-            value={newFormData.description}
-            onChange={handleFormChange}
-            name={'description'}
-          />
+      <div className='control'>
+        <textarea
+          className='textarea'
+          type='text'
+          value={newFormData.description}
+          onChange={handleFormChange}
+          name={'description'}
+        />
         {errors.name && <small className='has-text-danger'>{errors.details.message}</small>}
       </div>
     </div>

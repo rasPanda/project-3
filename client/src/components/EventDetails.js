@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { getLoggedInUserId, isCreator } from '../lib/auth'
 import { Link } from 'react-router-dom'
-import moment from 'moment'
 import EventUpdateForm from './EventUpdate'
 import ShareButton from './ShareButton'
 
@@ -174,6 +173,12 @@ export default function singleEventPage({ match, history }) {
                   <div><span>Host: </span>{<Link to={`/user/${event.user._id}`}>{event.user.username}</Link>}</div>
                   <div><span>Time: </span>{event.time}</div>
                   <div><h3>Details:</h3><div>{event.details}</div></div>
+                  {event.attendees.length > 0 &&
+                    <div><h3>Attendees:</h3>
+                      {event.attendees.map(attendee => {
+                        return <Link key={attendee._id} to={`/user/${event.user._id}`}>{attendee.user.username}</Link>
+                      })}
+                    </div>}
                 </div>
                 : <EventUpdateForm
                   // handleSave={handleSave}
@@ -185,12 +190,6 @@ export default function singleEventPage({ match, history }) {
                 // errors={errors}
                 />
               }
-              {event.attendees.length > 0 &&
-                <div><h3>Attendees:</h3>
-                  {event.attendees.map(attendee => {
-                    return <Link key={attendee._id} to={`/user/${event.user._id}`}>{attendee.user.username}</Link>
-                  })}
-                </div>}
             </div>
             {getLoggedInUserId() &&
               <div>
@@ -232,7 +231,6 @@ export default function singleEventPage({ match, history }) {
                 onClick={() => changeEditState(true)}
               >Edit Event</button></div>}
             </div>
-
           </div>
         </div>
       </div>

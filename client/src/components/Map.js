@@ -33,11 +33,11 @@ const Map = ({ long, lat, zoom, coordinate }) => {
         >
           {coordinate.map((coor) =>
             <Marker
-              key={coor._id}
+              key={coor.id}
               latitude={coor.coordinate.lat}
               longitude={coor.coordinate.long}
             >
-              <Link to={`/location/${coor._id}`}><img width={30} src={imgUrl} /></Link>
+              <Link to={`/location/${coor.id}`}><img width={30} src={imgUrl} /></Link>
             </Marker>
           )}
         </ReactMapGL >

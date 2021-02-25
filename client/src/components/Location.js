@@ -49,6 +49,11 @@ export default function Location({ location }) {
       revealSideCard(true)
     }
   }
+
+  function closeModal() {
+    revealSideCard(false)
+    updateselectedLocation({})
+  }
   //toggle between map or card loation
   // const toggling = () => {
   //   updateToggle(!toggle)
@@ -98,7 +103,7 @@ export default function Location({ location }) {
                   <div className="card-content">
                     <div className="media">
                       <div className="media-content">
-                        <button className='delete is-pulled-right' onClick={() => revealSideCard(false)} />
+                        <button className='delete is-pulled-right' onClick={() => closeModal()} />
                         <p className="title is-4">{selectedLocation.name}</p>
                         <img src={selectedLocation.image} alt={selectedLocation.name} />
                         <p className="subtitle is-6">{selectedLocation.address}</p>

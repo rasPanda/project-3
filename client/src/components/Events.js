@@ -70,7 +70,10 @@ export default function EventsPage() {
 
   return <main>
     <section className="section" id="eventSectionBackground">
-      <div className="container">
+      <p className="title has-text-secondary has-text-centered is-size-1">
+        Park Pong
+      </p>
+      <div className="container mb-3">
 
         <div className="column">
           <input

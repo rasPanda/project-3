@@ -18,7 +18,7 @@ export default function getLocationData(users, event) {
     },
     {
       name: 'Burgess Park Football Pitch',
-      image: 'https://bestoutdoorpingpongtables.com/wp-content/uploads/2017/02/Cornilleau-Park-Outdoor.jpg',
+      image: 'https://res.cloudinary.com/dzoqli241/image/upload/v1614098680/wgk8bo513y4zwrf62cww.jpg',
       location: {
         lat: 51.48381979870768,
         long: -0.07752475562416844
@@ -34,7 +34,7 @@ export default function getLocationData(users, event) {
     },
     {
       name: 'Fordham Park',
-      image: 'https://bestoutdoorpingpongtables.com/wp-content/uploads/2017/02/Cornilleau-Park-Outdoor.jpg',
+      image: 'https://res.cloudinary.com/dzoqli241/image/upload/v1614177765/dekjrealrdmdmgj9s8bv.jpg',
       location: {
         lat: 51.478314, 
         long: -0.034986
@@ -50,7 +50,7 @@ export default function getLocationData(users, event) {
     },
     {
       name: 'Deptford Park',
-      image: 'https://bestoutdoorpingpongtables.com/wp-content/uploads/2017/02/Cornilleau-Park-Outdoor.jpg',
+      image: 'https://images.unsplash.com/photo-1572025442937-d55974d9815f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1231&q=80',
       location: {
         lat: 51.487237,
         long: -0.039467
@@ -66,7 +66,7 @@ export default function getLocationData(users, event) {
     },
     {
       name: 'Folkestone Gardens',
-      image: 'https://bestoutdoorpingpongtables.com/wp-content/uploads/2017/02/Cornilleau-Park-Outdoor.jpg',
+      image: 'https://res.cloudinary.com/dzoqli241/image/upload/v1614177703/iqctyqiv9p7npiowaqjt.jpg',
       location: {
         lat: 51.48309452004964,
         long: -0.039833118796243544

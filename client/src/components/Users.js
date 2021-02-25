@@ -56,7 +56,10 @@ const Users = () => {
 
 
   return <div className="section" id="userSectionBackground">
-    <div className="container" >
+    <p className="title has-text-white has-text-centered is-size-1">
+      Park Pong
+    </p>
+    <div className="container mb-3" >
 
       <div className="column">
         <input
@@ -71,24 +74,6 @@ const Users = () => {
       <div className="columns">
         <div className={!isModal ? 'column' : 'column is-two-thirds'}>
 
-          {/* <div className="columns is-multiline">
-            {filterUsers().map((user, index) => {
-              return <div key={index} className={!isModal ? 'column is-one-third' : 'column is-half'}>
-                <div className="card is-hovered" id={selectedUser._id === user._id ? 'highlighted' : 'cardHover'}
-                  onClick={() => showModal(user)}>
-                  <div className="card-image">
-                    <figure className="image is-1by1">
-                      <img className="" src={user.image}></img>
-                    </figure>
-                  </div>
-                  <div className="content">
-                    <h3 className="title">{user.username}</h3>
-                    <h4 className="subtitle">{user.location}</h4>
-                  </div>
-                </div>
-              </div>
-            })}
-          </div> */}
           <div className="columns is-multiline is-centered">
             {filterUsers().map((user, index) => {
               return <div key={index} className={!isModal ? 'column is-3' : 'column is-4'}>

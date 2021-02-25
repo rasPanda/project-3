@@ -12,7 +12,7 @@ export default function Register() {
     email: '',
     password: '',
     passwordConfirmation: '',
-    image: 'https://i.pinimg.com/564x/f2/b6/e4/f2b6e41cda9aed63ecbcd32de69b825a.jpg',
+    image: 'https://res.cloudinary.com/dzoqli241/image/upload/v1614267313/f2b6e41cda9aed63ecbcd32de69b825a_kszij3.jpg',
     bio: '',
     location: ''
   })
@@ -156,7 +156,7 @@ export default function Register() {
       <button className="button is-hovered is-info" onClick={handleUpload}>Click to Upload Image</button>
       {uploadSuccess && <div><small className="has-text-primary">Upload Complete</small></div>}
     </div>
-    <button className="button is-hovered is-info">Submit</button>
+    <button className="button is-hovered is-primary">Submit</button>
     {registrationSuccess && <div><small className="has-text-primary">Registration Successful!</small></div>}
   </form>
 

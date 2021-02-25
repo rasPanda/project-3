@@ -56,7 +56,11 @@ export default function Home({ history }) {
 
   return (
     <div className="home-container">
+
       <div className="home-search-container" id='fixedDropdown'>
+        <p className="title has-text-white has-text-centered is-size-1">
+          Park Pong
+        </p>
         <form onSubmit={handleSubmit}>
           <div className="field is-grouped">
             <div className="control">

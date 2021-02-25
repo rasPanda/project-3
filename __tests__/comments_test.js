@@ -3,7 +3,7 @@ import { expect } from 'chai'
 import setup from './lib/setup.js'
 import tearDown from './lib/tearDown.js'
 
-xdescribe('Testing comments', () => {
+describe('Testing comments', () => {
 
   beforeEach(done => {
     setup(done)
@@ -80,8 +80,8 @@ xdescribe('Testing comments', () => {
               numberOfTables: 3,
               description: 'Three tables, beautifully new'
             },
-            comments: [],
-            events: {}
+            comments: []
+
           })
           .end((err, res) => {
             expect(res.status).to.eq(201)
@@ -110,7 +110,7 @@ xdescribe('Testing comments', () => {
       })
   })
 
-  it('should login, create a new event, post a comment and delete the comment', done => {
+  it('should login, find an event, post a comment and delete the comment', done => {
     api.post('/api/login')
       .send({
         email: 'joe@joe.com',
@@ -120,64 +120,33 @@ xdescribe('Testing comments', () => {
       .end((err, res) => {
         expect(res.status).to.eq(202)
         expect(res.body.token).to.be.a('string')
-        done()
-        // const token = res.body.token
+        const token = res.body.token
 
-        // api.post('/api/event')
-        //   .set('Authorization', `Bearer ${token}`)
-        //   .send(
-        //     {
-        //       name: 'King Pong',
-        //       location: {
-        //         lat: 51.483857,
-        //         long: -0.084035
-        //       },
-        //       user: {
-        //         username: 'peter',
-        //         email: 'peter@peter.com',
-        //         password: 'peter',
-        //         passwordConfirmation: 'peter',
-        //         image: 'petersFace.com',
-        //         bio: 'Lorem ipsum, caecalius est in horto',
-        //         location: 'A city somewhere nowhere'
-        //       }
-        //       ,
-        //       image: 'https://images.unsplash.com/photo-1568711146297-b8674c3c11b6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-        //       time: 'Saturday 20th March at 3pm',
-        //       details: 'meeting at the near pub,  then walking  to the spot ',
-        //       attendees: [],
-        //       results: [{}],
-        //       comments: []
-        //     }
-        //   )
-        //   .end((err, res) => {
-        //     console.log(res.status)
-        //     console.log(res)
-        //     expect(res.status).to.eq(201)
-        //     expect(res.body).to.be.a('object')
-        //     done()
-        //     const eventId = res.body._id
+        api.get('/api/event')
+          .end((err, res) => {
+            expect(res.status).to.eq(200)
+            const eventId = res.body[0]._id
+            console.log(eventId)
 
-        // api.post(`/api/event/${eventId}`)
-        //   .set('Authorization', `Bearer ${token}`)
-        //   .send({
-        //     text: 'Can\'t wait!'
-        //   })
-        //   .end((err, res) => {
-        //     expect(res.status).to.eq(201)
-        //     expect(res.body).to.be.a('object')
+            api.post(`/api/event/${eventId}`)
+              .set('Authorization', `Bearer ${token}`)
+              .send({
+                text: 'Can\'t wait!'
+              })
+              .end((err, res) => {
+                expect(res.status).to.eq(201)
+                expect(res.body).to.be.a('object')
+                const commentId = res.body.comments[0]._id
 
-        // const commentId = res.body.comments[0]._id
-
-        // api.delete(`/api/location/${eventId}/comment/${commentId}`)
-        //   .set('Authorization', `Bearer ${token}`)
-        //   .end((err, res) => {
-        //     expect(res.status).to.eq(202)
-        //     expect(res.body).to.be.a('object')
-        //     done()
-        //   })
-        //     })
-        // })
+                api.delete(`/api/event/${eventId}/comment/${commentId}`)
+                  .set('Authorization', `Bearer ${token}`)
+                  .end((err, res) => {
+                    expect(res.status).to.eq(202)
+                    expect(res.body).to.be.a('object')
+                    done()
+                  })
+              })
+          })
       })
   })
 

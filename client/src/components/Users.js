@@ -56,7 +56,7 @@ const Users = () => {
 
 
   return <div className="section" id="userSectionBackground">
-    <div className="container" >
+    <div className="container mb-3" >
 
       <div className="column">
         <input

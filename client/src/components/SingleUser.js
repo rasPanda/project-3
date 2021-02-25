@@ -189,7 +189,7 @@ function SingleUser({ match, history }) {
             <div className="field">
               <p className="control">
                 <button
-                  className="button is-info is-hovered"
+                  className="button is-primary is-hovered"
                   onClick={handleComment}
                 >
                   Submit

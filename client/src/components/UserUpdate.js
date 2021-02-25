@@ -5,7 +5,7 @@ export default function UserUpdateForm({ formData, handleSave, handleChange }) {
 
   return <form className="column">
     {inputFields.map(field => {
-    return <div key={field} className="field">
+      return <div key={field} className="field">
         <label className="label">
           {field[0].toUpperCase() + field.slice(1)}
         </label>

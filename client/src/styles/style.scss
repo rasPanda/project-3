@@ -134,8 +134,7 @@ align-items: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
   width: 100vw;
-  // background-image: url("https://as2.ftcdn.net/jpg/02/04/94/27/500_F_204942786_6CJif6eBJKXEA2vmaC3IXMfg7tuuwYks.jpg");
-  background-image: url('https://as2.ftcdn.net/jpg/01/77/64/67/500_F_177646745_c2gxsZ9JndzqehvD3lQJslC9pjEI8u3a.jpg');
+    background-image: url('../asset/EventPageBackground.jpeg');
   background-position:  center;
   background-size:cover
 }
@@ -145,8 +144,7 @@ align-items: center;
   background-repeat: no-repeat;
   width: 100vw;
   min-height: 100vh;
-  // background-image: url("https://as2.ftcdn.net/jpg/02/04/94/23/500_F_204942362_jPsRI45GDcFi1Y6KoQ1MEhQrw5b0GfLq.jpg");
-  background-image: url("https://image.freepik.com/free-photo/ping-pong-racket-ball-blue-background_93675-60061.jpg");
+    background-image: url("../asset/UserPageBackground.jpeg");
   background-position:  center;
   background-size:cover
 }
@@ -179,8 +177,16 @@ align-items: center;
 }
 
 #loginBackground {
-  background-image: url('https://as1.ftcdn.net/jpg/03/68/30/96/500_F_368309655_JSkeE3dCPLTPe9ZMHviMwpn1tpWeI4lS.jpg');
+  background-image: url('../asset/LoginPageBackground.jpeg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.cardHeight {
+  min-height: 400px;
+}
+
+.titleHeight {
+  min-height: 90px;
 }

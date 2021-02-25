@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ReactMapGL, { Marker } from 'react-map-gl'
 import { Link } from 'react-router-dom'
-const imgUrl = 'https://media.istockphoto.com/photos/ping-pong-ball-picture-id160451900?k=6&m=160451900&s=170667a&w=0&h=MC5wNmfsrbgRsryC4GBSABLYGgr6YddbwKYJ-PPlJb8='
+const imgUrl = '../asset/MapPingPongPin.png'
 
 const Map = ({ coordinate }) => {
   const [markerData, setMarkerData] = useState([])

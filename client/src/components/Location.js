@@ -57,17 +57,17 @@ const Location = () => {
       </div>
       {toggle ?
         <section className="section">
-          <div className="container">
+          <div className="container mb-3">
             <div className='columns'>
               <div className={!sideCard ? 'column' : 'column is-two-thirds'}>
                 <div className="columns is-multiline">
                   {locations.map((location) => {
                     return <div key={location._id} className={!sideCard ? 'column is-one-third' : 'column is-half'} >
-                      <div className="card" id={selectedLocation.id === location._id ? 'selected' : 'cardHover'} onClick={() => handleSelectedLocation(location)}>
+                      <div className="card cardHeight" id={selectedLocation.id === location._id ? 'selected' : 'cardHover'} onClick={() => handleSelectedLocation(location)}>
                         <div className="card-content">
                           <div className="media">
                             <div className="media-content">
-                              <p className="title is-4">{location.name}</p>
+                              <p className="title is-4 titleHeight">{location.name}</p>
                               <p className="subtitle is-6">{location.address}</p>
                               <img src={location.image} alt={location.name} />
                             </div>

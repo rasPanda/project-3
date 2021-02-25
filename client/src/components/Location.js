@@ -5,6 +5,10 @@ import { Link } from 'react-router-dom'
 import Map from './Map.js'
 import '../styles/style.scss'
 export default function Location({ location }) {
+  const [long, getLong] = useState(-0.118)
+  const [lat, getLat] = useState(51.519)
+  const [zoom, setZoom] = useState(12)
+  const [ready, setReady] = useState(false)
   const [locations, updateLocation] = useState([])
   const [sideCard, revealSideCard] = useState(false)
   const [toggle, updateToggle] = useState(false)
@@ -19,6 +23,15 @@ export default function Location({ location }) {
     image: '',
     comments: ''
   })
+
+  if (location.state && !ready) {
+    getLong(location.state.place.long)
+    getLat(location.state.place.lat)
+    setZoom(13)
+    setReady(true)
+  } 
+
+
   function handleSelectedLocation({ _id, name, location, address, facilities, description, image, comments, user }) {
     const LocationDetails = {
       id: _id,
@@ -99,7 +112,9 @@ export default function Location({ location }) {
         </section>
         :
         <Map
-          style="mapbox://styles/mapbox/streets-v8"
+          long={long}
+          lat={lat}
+          zoom={zoom}
           coordinate={locations.map((coordinate) => {
             return coordinate.location
           }

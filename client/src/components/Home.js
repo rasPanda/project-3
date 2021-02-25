@@ -43,7 +43,7 @@ export default function Home({ history }) {
     history.push({
       pathname: '/location/',
       state: {
-        location: selectedLocation
+        place: selectedLocation
       }
     })
   }

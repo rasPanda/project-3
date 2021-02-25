@@ -1,6 +1,6 @@
 @charset "utf-8";
 // Import a Google Font
-// @import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 // Set your brand colors
 $orange: #FF9B00;
 $pink: #E44466;
@@ -11,8 +11,9 @@ $table-blue: #3C638E;
 $table-green: #6C935C;
 $white: #FFFFFF;
 // Update Bulma's global variables
-// $family-sans-serif: "Nunito", sans-serif;
+$family-sans-serif: "Varela Round", sans-serif;
 $grey-dark: $table-blue;
+$primary: $table-green;
 $light: $yellow;
 $danger: $pink;
 $link: $orange;
@@ -74,6 +75,7 @@ align-items: center;
   position: sticky;
   background-color: #D9F1FF;
   top: 0;
+  border-radius: 5px;
 }
 
 #commentsScroll {
@@ -102,6 +104,13 @@ align-items: center;
   border: 5px solid #FF9B00;
 }
 
+#submit {
+  border: solid $table-green;
+}
+
+.dropdown {
+  width: 100%;
+}
 
 //map toggle conatiner
 .toggle-container{
@@ -125,7 +134,8 @@ align-items: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
   width: 100vw;
-  background-image: url("https://as2.ftcdn.net/jpg/02/04/94/27/500_F_204942786_6CJif6eBJKXEA2vmaC3IXMfg7tuuwYks.jpg");
+  // background-image: url("https://as2.ftcdn.net/jpg/02/04/94/27/500_F_204942786_6CJif6eBJKXEA2vmaC3IXMfg7tuuwYks.jpg");
+  background-image: url('https://as2.ftcdn.net/jpg/01/77/64/67/500_F_177646745_c2gxsZ9JndzqehvD3lQJslC9pjEI8u3a.jpg');
   background-position:  center;
   background-size:cover
 }
@@ -166,4 +176,11 @@ align-items: center;
 
 .noPadding {
   padding: 5px;
+}
+
+#loginBackground {
+  background-image: url('https://as1.ftcdn.net/jpg/03/68/30/96/500_F_368309655_JSkeE3dCPLTPe9ZMHviMwpn1tpWeI4lS.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

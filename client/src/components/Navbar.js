@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { getLoggedInUserId } from '../lib/auth'
 import axios from 'axios'
 
@@ -42,17 +42,17 @@ const Navbar = () => {
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       {/* <div className="navbar-brand">
-        <a className="navbar-item" href="https://bulma.io">
-          <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
-        </a>
+        <img src="https://logodix.com/logo/758709.jpg" width='150'/> */
 
-        <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        /* <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
       </div> */}
-
+      <div className="navbar-brand" id="navbarImage">
+        <img src="https://as1.ftcdn.net/jpg/02/69/27/66/500_F_269276638_vZ8HnSpzbmi9eGhKQdibGE9a5nv6huCT.jpg" width="212" height="28" />
+      </div>
       <div id="navbarBasicExample" className="navbar-menu is-active">
         <div className="navbar-start">
           <Link to="/" className="navbar-item">Home </Link>
@@ -74,12 +74,12 @@ const Navbar = () => {
                   {userName && <strong>Hi {userName}</strong>}
                 </div>
                 <div className="column">
-                  <Link to={`/event/create`} className="button is-link">
+                  <Link to={'/event/create'} className="button is-link">
                     <strong>Create Event</strong>
                   </Link>
                 </div>
                 <div className="column">
-                  <Link to={`/location/create`} className="button is-warning">
+                  <Link to={'/location/create'} className="button is-warning">
                     <strong>Create Location</strong>
                   </Link>
                 </div>
@@ -92,11 +92,6 @@ const Navbar = () => {
                   <strong>Log Out</strong>
                 </button>
               </div>
-              // <div className="buttons" onClick={logOut}>
-              //   <button className="button is-primary">
-              //     <strong>Log Out</strong>
-              //   </button>
-              // </div>
             }
           </div>
         </div>

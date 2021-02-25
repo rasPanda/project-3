@@ -13,19 +13,9 @@ const Map = ({ long, lat, zoom, coordinate }) => {
     zoom: zoom
   })
 
-  // let markers = ''
-  // if (corrdinate) {
-  //   markers = corrdinate.map((location, i) => {
-  //     const latLong = {
-  //       lat: Number(location.lat),
-  //       long: Number(location.long)
-  //     }
-  //     console.log(latLong)
-  //   })
-  // }
   return (
     <>
-      <div className="map-container" style={{ width: '93vw', height: '80vh', display: 'flex', justifyContent: 'center', borderRadius: '20px', margin: '100px auto 0 auto ', boxShadow: '0 5px 8px -2px black' }}>
+      <div className="map-container mg-large" style={{ width: '93vw', height: '80vh', display: 'flex', justifyContent: 'center', borderRadius: '20px', margin: '100px auto 0 auto ', boxShadow: '0 5px 8px -2px black' }}>
         <ReactMapGL
           {...viewport}
           onViewportChange={(viewport) => setViewport(viewport)}

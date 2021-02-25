@@ -31,13 +31,13 @@ const Map = ({ long, lat, zoom, coordinate }) => {
           onViewportChange={(viewport) => setViewport(viewport)}
           mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
         >
-          {coordinate.map((coor, index) =>
+          {coordinate.map((coor) =>
             <Marker
-              key={index}
-              latitude={coor.lat}
-              longitude={coor.long}
+              key={coor.id}
+              latitude={coor.coordinate.lat}
+              longitude={coor.coordinate.long}
             >
-              <Link to='/'><img width={30} src={imgUrl} /></Link>
+              <Link to={`/location/${coor.id}`}><img width={30} src={imgUrl} /></Link>
             </Marker>
           )}
         </ReactMapGL >

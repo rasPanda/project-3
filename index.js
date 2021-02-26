@@ -17,17 +17,21 @@ dotenv.config()
 const app = express()
 
 async function startServer() {
-  await connectToDb()
-  console.log('Successfully connected to mongo')
-  app.use(express.json())
-  app.use(logger)
-  app.use('/api', router)
-  app.use(errorHandler)
-  app.use('/', express.static(dist))
-  app.get('*', function(req, res) {
-    res.sendFile(path.join(dist, 'index.html'))
-  })
-  app.listen(port, () => console.log(`Up and Running on Port ${port}`))
+  try {
+    await connectToDb()
+    console.log('Successfully connected to mongo')
+    app.use(express.json())
+    app.use(logger)
+    app.use('/api', router)
+    app.use(errorHandler)
+    app.use('/', express.static(dist))
+    app.get('*', function(req, res) {
+      res.sendFile(path.join(dist, 'index.html'))
+    })
+    app.listen(port, () => console.log(`Up and Running on Port ${port}`))
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 startServer()

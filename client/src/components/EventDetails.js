@@ -25,13 +25,7 @@ export default function singleEventPage({ match, history }) {
     image: ''
   })
 
-  // const [errors, updateErrors] = useState({
-  //   name: '',
-  //   location: {},
-  //   time: '',
-  //   details: '',
-  //   image: ''
-  // })
+ 
 
   function isLoggedInUserAttending(data) {
     return data.attendees.map((attendee) => {
@@ -46,20 +40,13 @@ export default function singleEventPage({ match, history }) {
       getEvent(data)
       const mappedData = { ...data }
       updateFormData(mappedData)
-      // console.log('data', data)
+
       isLoggedInUserAttending(data)
     }
     fetchData()
   }, [attendee])
 
-  // useEffect(() => {
-  //   axios.get('/api/location')
-  //     .then(({ data }) => {
-  //       getLocations(data)
-  //     })
-  // }, [])
-
-  // console.log(formData)
+ 
 
   function handleChange(e) {
     updateNewComment({ ...newComment, text: e.target.value })
@@ -67,7 +54,7 @@ export default function singleEventPage({ match, history }) {
 
   async function handleCommentSubmit(e) {
     e.preventDefault()
-    // console.log(id)
+ 
     try {
       await axios.post(`/api/event/${id}/`, newComment, {
         headers: {

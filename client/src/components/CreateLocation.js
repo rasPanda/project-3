@@ -105,7 +105,6 @@ export default function CreateLocation({ history }) {
         history.push(`/location/${data._id}`)
       }, 2000)
     } catch (err) {
-      console.log('hello', err.response.data.errors)
       updateErrors(err.response.data.errors)
     }
   }

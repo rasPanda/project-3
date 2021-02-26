@@ -126,7 +126,6 @@ describe('Testing comments', () => {
           .end((err, res) => {
             expect(res.status).to.eq(200)
             const eventId = res.body[0]._id
-            console.log(eventId)
 
             api.post(`/api/event/${eventId}`)
               .set('Authorization', `Bearer ${token}`)

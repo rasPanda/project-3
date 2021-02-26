@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getLoggedInUserId } from '../lib/auth'
 import axios from 'axios'
+import Logo from '../asset/Logo.jpeg'
 
 const Navbar = () => {
   const [logIn, updateLogin] = useState(false)
@@ -37,21 +38,13 @@ const Navbar = () => {
     location.reload()
   }
 
-  // console.log(userId)
+  
 
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
-      {/* <div className="navbar-brand">
-        <img src="https://logodix.com/logo/758709.jpg" width='150'/> */
-
-        /* <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div> */}
+      
       <div className="navbar-brand" id="navbarImage">
-        <img src='../asset/Logo.jpeg' width="212" height="28" />
+        <img src={Logo} width="212" height="28" />
       </div>
       <div id="navbarBasicExample" className="navbar-menu is-active">
         <div className="navbar-start">

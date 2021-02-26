@@ -31,7 +31,7 @@ async function updateEventComment(req, res, next) {
   const { commentId, id } = req.params
   try {
     const event = await Event.findById(id).populate('user').populate('comments.user')
-    console.log(event)
+    
     if (!event) {
       notFound(res)
     }
@@ -44,7 +44,7 @@ async function updateEventComment(req, res, next) {
     res.status(200).send(updatedEvent)
   } catch (err) {
     next(err)
-    console.log(err)
+
   }
 }
 

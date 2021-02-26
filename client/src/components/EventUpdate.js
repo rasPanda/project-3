@@ -20,7 +20,7 @@ export default function EventUpdateForm({ formData, updateFormData, changeEditSt
     details: '',
     location: [],
   })
-  console.log(newFormData)
+ 
 
   const locationName = newFormData.location.name
   const indexOfLocation = locationOptions.findIndex((location) => {
@@ -30,7 +30,6 @@ export default function EventUpdateForm({ formData, updateFormData, changeEditSt
   useEffect(() => {
     axios.get('/api/location')
       .then(({ data }) => {
-        // getLocations(data)
         const locationArr = data.map(location => {
           return { value: location._id, label: location.name }
         })
@@ -73,20 +72,20 @@ export default function EventUpdateForm({ formData, updateFormData, changeEditSt
   }
 
   async function handleSave(newFormData) {
-    // event.preventDefault()
+    
     const selectedLocation = locations.find(location => location._id === newFormData.location.value)
     const timeStr = moment(newFormData.time).format('dddd, MMMM Do YYYY, h:mm a')
     const dataToSubmit = { ...newFormData, time: timeStr, location: selectedLocation }
-    // const newFormData = { ...formData }
+    
     try {
       const { data } = await axios.put(`/api/event/${id}`, dataToSubmit, {
         headers: { Authorization: `Bearer ${token}` }
       })
-      // console.log(data)
+
       changeEditState(false)
       history.push(`/event/${id}`)
     } catch (err) {
-      console.log(err.response.data)
+  
       updateErrors(err.response.data.errors)
     }
   }

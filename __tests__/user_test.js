@@ -95,9 +95,6 @@ describe('Testing USER', () => {
               })
               .end((err, res) => {
                 expect(res.body).to.be.a('Object')
-                // expect(res.status).to.eq(201)
-                // console.log(res.body.username)
-                // expect(res.body.username).to.eq('james')
                 done()
               })
           })

@@ -25,10 +25,10 @@ async function register(req, res, next) {
         <img width="100vw" src="https://images.unsplash.com/photo-1611251126118-b1d4f99600a1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"/>
         `
       }))
-    console.log('new user')
+    
   } catch (err) {
     next(err)
-    console.log('registration error')
+  
   }
 }
 

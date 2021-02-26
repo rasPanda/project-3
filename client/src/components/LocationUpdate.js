@@ -55,7 +55,7 @@ export default function LocationUpdateForm({ formData, id, changeEditState }) {
   }
 
   function handleFormChange(event) {
-    console.log(event.target)
+
     const { name, value } = event.target
     updateNewFormData({ ...newFormData, [name]: value })
   }
@@ -93,9 +93,8 @@ export default function LocationUpdateForm({ formData, id, changeEditState }) {
       const { data } = await axios.put(`/api/location/${id}`, dataToSubmit, {
         headers: { Authorization: `Bearer ${token}` }
       })
-      console.log(data)
+      
       changeEditState(false)
-      // history.push(`/user/${data._id}`)
     } catch (err) {
       console.log(err.response.data)
     }

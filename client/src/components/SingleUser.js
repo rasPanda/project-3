@@ -66,9 +66,9 @@ function SingleUser({ match, history }) {
       const { data } = await axios.put(`/api/user/${userId}`, newFormData, {
         headers: { Authorization: `Bearer ${token}` }
       })
-      console.log(data._id)
+      
       changeEditState(false)
-      // history.push(`/user/${data._id}`)
+     
     } catch (err) {
       console.log(err.response.data)
     }
@@ -90,7 +90,7 @@ function SingleUser({ match, history }) {
   }
 
   function handleUpload() {
-    //event.preventDefault()
+    
     window.cloudinary.createUploadWidget(
       {
         cloudName: `${process.env.cloudName}`,

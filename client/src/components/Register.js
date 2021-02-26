@@ -41,10 +41,9 @@ export default function Register() {
     event.preventDefault()
     try {
       const { data } = await axios.post('/api/register', regData)
-      console.log(data)
+
       updateRegistrationSuccess(true)
     } catch (err) {
-      console.log('hello', err.response.data.errors)
       updateRegErrors(err.response.data.errors)
     }
   }

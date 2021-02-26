@@ -1,10 +1,9 @@
 import React from 'react'
 import ReactMapGL, { Marker } from 'react-map-gl'
 import { Link } from 'react-router-dom'
-const imgUrl = '../asset/MapPingPongPin.png'
+import Pin from '../asset/MapPingPongPin.png'
 
 const Map = ({ long, lat, zoom, coordinate }) => {
-  // const [markerData, setMarkerData] = useState([])
   const [viewport, setViewport] = React.useState({
     width: '88vw',
     height: '70vh',
@@ -27,7 +26,7 @@ const Map = ({ long, lat, zoom, coordinate }) => {
               latitude={coor.coordinate.lat}
               longitude={coor.coordinate.long}
             >
-              <Link to={`/location/${coor.id}`}><img width={30} src={imgUrl} /></Link>
+              <Link to={`/location/${coor.id}`}><img width={30} src={Pin} /></Link>
             </Marker>
           )}
         </ReactMapGL >

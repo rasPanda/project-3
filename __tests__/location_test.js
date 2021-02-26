@@ -38,7 +38,6 @@ describe('Testing locations', () => {
       })
       .end((err, res) => {
         expect(res.status).to.eq(202)
-        console.log(res.body.token)
         api.post('/api/location')
           .set('Authorization', `Bearer ${res.body.token}`)
           .send({
@@ -61,8 +60,6 @@ describe('Testing locations', () => {
             api.delete(`/api/location/${res.body._id}`)
               .set('Authorization', `Bearer ${res.body.token}`)
               .end((err, res) => {
-                console.log('hello world')
-                console.log(err, res)
                 expect(res.body).to.be.a('object')
                 done()
               })

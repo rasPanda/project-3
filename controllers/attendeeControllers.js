@@ -35,7 +35,7 @@ async function deleteAttendee(req, res, next) {
 
   try {
     const event = await Event.findById(eventId).populate('attendee.user')
-    console.log(event)
+
     if (!event) {
       notFound(res)
     }

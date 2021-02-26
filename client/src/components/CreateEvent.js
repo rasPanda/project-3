@@ -66,7 +66,6 @@ export default function CreateEvent({ history }) {
         history.push(`/event/${data._id}`)
       }, 2000)
     } catch (err) {
-      console.log('hello', err.response.data.errors)
       updateErrors(err.response.data.errors)
     }
   }

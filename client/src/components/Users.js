@@ -23,19 +23,7 @@ const Users = () => {
     event.preventDefault()
     const value = event.target.value
     setFilterTerm(value)
-    // try {
-    //   if (!value) {
-    //     axios.get('/api/user')
-    //     .then(axiosResp => {
-    //       setUsers(axiosResp.data)
-    //     })
-    //   } else {
-    //     const { data } = await axios.get(`/api/user/search/${filterTerm}`) 
-    //     setUsers(data)
-    //   }
-    // } catch (err) {
-    //   console.log(err)
-    // }
+    
   }
 
   function filterUsers() {

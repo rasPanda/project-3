@@ -163,7 +163,7 @@ export default function singleEventPage({ match, history }) {
                   {event.attendees.length > 0 &&
                     <div><h3>Attendees:</h3>
                       {event.attendees.map(attendee => {
-                        return <Link key={attendee._id} to={`/user/${event.user._id}`}>{attendee.user.username}</Link>
+                        return <Link key={attendee._id} to={`/user/${attendee.user._id}`}>{attendee.user.username}</Link>
                       })}
                     </div>}
                 </div>

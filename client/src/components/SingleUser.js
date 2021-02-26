@@ -129,7 +129,7 @@ function SingleUser({ match, history }) {
             formData={formData}
           />
         }
-        <div className="column">
+        <div className="column has-text-centered">
           <figure className="image is-1by1">
             <img className="is-rounded" src={user.image}></img>
           </figure>

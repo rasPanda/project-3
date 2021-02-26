@@ -74,7 +74,7 @@ export default function singleEventPage({ match, history }) {
           'Authorization': `Bearer ${token}`
         }
       })
-      history.push('/event')
+      history.push('/events')
     } catch (err) {
       console.log(err.response)
     }

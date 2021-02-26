@@ -35,6 +35,8 @@
     "mapbox-gl": "^2.1.1",
     "moment": "^2.29.1",
     "monent": "0.0.2-security",
+    "nodemailer": "^6.5.0",
+    "nodemailer-sendgrid-transport": "^0.2.0",
     "react": "^16.13.1",
     "react-custom-share": "^0.4.8",
     "react-dom": "^16.13.1",

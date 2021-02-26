@@ -5,7 +5,7 @@ import Location from '../models/location.js'
 import Event from '../models/event.js'
 import getUserData from './data/userData.js'
 import getLocationData from './data/locationData.js'
-import getEventData from './data/EventData.js'
+import getEventData from './data/eventData.js'
 
 
 //* A function to seed our database

@@ -7,7 +7,7 @@ export const dbURI = environment === 'production'
   : `mongodb://localhost/pingpongdb-${environment}`
 
 console.log(dbURI)
-export const port = process.env.PORT
+export const port = process.env.PORT || 8000
 export const secret = process.env.SECRET
 export const MapboxAccessToken = process.env.MAPBOX_TOKEN
 export const API_KEY = process.env.API_KEY

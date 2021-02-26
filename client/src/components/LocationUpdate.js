@@ -150,7 +150,7 @@ export default function LocationUpdateForm({ formData, id, changeEditState }) {
       <div className="control">
         <input
           className="input"
-          type="text"
+          type="number"
           value={newFormData.numberTables}
           onChange={handleFormChange}
           name='numberTables'

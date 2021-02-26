@@ -1,3 +1,7 @@
+import path from 'path'
+const __dirname = path.resolve()
+const dist = path.join(__dirname, 'dist')
+
 import express from 'express'
 import router from './views/router.js'
 import logger from './middleware/logger.js'
@@ -19,6 +23,10 @@ async function startServer() {
   app.use(logger)
   app.use('/api', router)
   app.use(errorHandler)
+  app.use('/', express.static(dist))
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(dist, 'index.html'))
+  })
   app.listen(8000, () => console.log(`Up and Running on Port ${port}`))
 }
 

@@ -99,7 +99,7 @@ const Users = () => {
               <Link to={`/user/${selectedUser._id}`}>
                 <button className="button is-hovered is-info">User's Page</button>
               </Link>
-              {selectedUser.comments && <div className="container is-clipped">
+              {(selectedUser.comments.length > 0) && <div className="container is-clipped">
                 <h4 className="subtitle mt-3">Message board:</h4>
                 <div className="column" id="commentsScroll">
                   {selectedUser.comments.map((comment) => {

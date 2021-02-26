@@ -27,7 +27,7 @@ async function startServer() {
   app.get('*', function(req, res) {
     res.sendFile(path.join(dist, 'index.html'))
   })
-  app.listen(8000, () => console.log(`Up and Running on Port ${port}`))
+  app.listen(port, () => console.log(`Up and Running on Port ${port}`))
 }
 
 startServer()

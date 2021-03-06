@@ -12,7 +12,7 @@ The project set by General Assembly was fairly open - as a group of four we were
 
 We decided to create a Ping Pong table finding website, where users could create profiles and then create locations of free ping pong tables. Furthermore, they could set up events at different locations, see all the locations created by all users, and interact with other users by writing on their message boards. 
 
-You can check out the website here: [](https://park-pong.herokuapp.com/)
+You can check out the website here: [Park Pong](https://parkpong.herokuapp.com//)
 
 ### The Brief
 
@@ -86,18 +86,6 @@ For each day, Joe wrote a plan of tasks and between us we selected who would do 
 
 Once the main components were created we came together to plan the overall design of the website and set about how we would create a uniform user experience. 
 
-### Run the web app locally
-
-To run this web app , simply you have to fork the repository, clone it into your machine and cd to the project-3 folder and run the following command
-
-```Javascript
-npm install
-npm run serve
-```
-The web app will then run on localhost:8000
-​
-We hope you enjoy it! 
-
 ## The Back-End
 ​
 Having made a clear plan of how to build our back end using the MVC system, we started by focusing on the schemas to ensure the infrastructure was in place, and that the project could be scalable. 
@@ -106,11 +94,11 @@ As such, the back end is easily broken up into three parts with their own schema
 ​
 ### Schemas
 ​
-​We used Mongoose to build our schema frameworks, and nested other schemas using MongoDb. 
+​We used Mongoose to build our schema frameworks, and nested other schemas using MongoDB. 
 ​
 #### Users
 ​
-Our users was in many ways the simplest model in that it only had one nested schema, that being comments. The code looked as follows:
+Our users model was in many ways the simplest in that it only had one nested schema, that being comments. The code looked as follows:
 ​
 ```Javascript
 
@@ -261,9 +249,9 @@ export default function getEventData(users, location) {
 ​
 #### Testing
 ​
-​We used Mocha and Chai with supertest to test the functionality of our main endpoints. We made sure to test the full user experience from registration, login, through creating, editing and deleting locations, events and comments, and deleting their account. 
+​We used Mocha and Chai with supertest to test the functionality of our main endpoints. We made sure to test the full user experience from registration, login, through creating, editing and deleting locations, events and comments, and deleting their account.
 ​
-Our full testing suite can be found in the test folder, but an example test to log in, create and delete a location is shown below:
+​Our full testing suite can be found in the test folder, but an example test to log in, create and delete a location is shown below:
 
 ```Javascript
 it('should login, create and delete a new location', done => {
@@ -888,7 +876,7 @@ James was then able to handle the form in the same way as on the create document
 ## Other wins
 
 ### Well functioning back-end
-Overall, our back-end was well set up and was easy to work with. This was especially satisfying given that we had 29 different endpoints (and we used 28 of them!). We accomplished this through good planning, and setting this up in full before we started any work on the client. 
+Overall, our back-end was well set up and was easy to work with. This was especially satisfying given that we had 29 different CRUD operations (and we used 28 of them!). We accomplished this through good planning, and setting this up in full before we started any work on the client. 
 
 We shared responsibility of working on the back-end, which meant that we were all very familiar and comfortable with all parts of the MVC design of our back-end. Finally, Carl did extensive endpoint testing, and the whole group wrote a series of tests to ensure that we were all very confident of the functionality.
 

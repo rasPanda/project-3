@@ -101,7 +101,6 @@ As such, the back end is easily broken up into three parts with their own schema
 Our users model was in many ways the simplest in that it only had one nested schema, that being comments. The code looked as follows:
 ​
 ```Javascript
-
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
@@ -113,8 +112,8 @@ const userSchema = new mongoose.Schema({
   bio: { type: String, required: true },
   location: { type: String, required: true }
 })
-​
 ```
+
 ​We used NPM packages to add security such as
 ​
 ```Javascript

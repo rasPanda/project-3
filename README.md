@@ -697,7 +697,7 @@ Therefore, Carl opted to simply use the search query retrieved from the client i
        <button className="button is-info is-medium">Search</button>
      </div>
 
-// ! functions to handle query creation.
+// ! Functions to handle query creation.
 
 function createSearchQuery(event) {
   updateQuery(event.target.value)

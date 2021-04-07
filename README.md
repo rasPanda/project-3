@@ -681,7 +681,8 @@ Initially, Carl attempted to find a library/plugin which we could simply "plug-a
 Therefore, Carl opted to simply use the search query retrieved from the client in a simple GET request to the Mapbox Geocoding API. This forward geocoding request retrieved location data based on the query, and sent back a response with search results. 
 
 ```Javascript
-// ! Code for search bar on the homepage
+// ! Code for search bar on the homepage.
+
 <div className="field is-grouped">
   <div className="control">
     <input
@@ -696,7 +697,7 @@ Therefore, Carl opted to simply use the search query retrieved from the client i
        <button className="button is-info is-medium">Search</button>
      </div>
 
-// ! functions to handle query creation
+// ! functions to handle query creation.
 
 function createSearchQuery(event) {
   updateQuery(event.target.value)

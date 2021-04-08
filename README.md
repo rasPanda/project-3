@@ -399,13 +399,14 @@ For example, instead of creating unique pages for all three updating endpoints, 
 
 ### Single Pages
 
-  On the 'single pages', the user can find even more information about the item they have selected. Between each model - users, events and locations - these pages are very similar in their display and functionality. 
+On the 'single pages', the user can find even more information about the item they have selected. Between each model - users, events and locations - these pages are very similar in their display and functionality. 
   
 ![SingleEvent](ReadMeImages/SingleEvent.png)
-  
+
+
 #### Comments
 
-  We wanted to add to the social aspect of the site's theme and decided to add a message board/comments functionality to each page. To achieve this, we needed to navigate user authetication and form submission. We came up with three main principles:
+We wanted to add to the social aspect of the site's theme and decided to add a message board/comments functionality to each page. To achieve this, we needed to navigate user authetication and form submission. We came up with three main principles:
   
    * A user must be logged-in to comment on any other user, event or location page. 
    * That same user must be able to delete their own comments.  
@@ -835,7 +836,7 @@ We wanted to have a seamless experience in the client, with the update/edit feat
 
 James was able to work through all the implementation of these features, with some debugging help from myself!
 
-![singleevent](ReadMeImages/singleevent.png)
+![singleevent](ReadMeImages/SingleEvent.png)
 ![singleeventupdate](ReadMeImages/singleeventupdate.png)
 
 Due to the complexity and size of the single event/location/profile files, we needed to separate the update code into separate files. This brought additional issues of having different state variables which were out of scope. 

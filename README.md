@@ -668,7 +668,7 @@ This was a major pain point during the project, and took a significant amount of
 
 The challenge was how we would take a search query from the client, and auto-populate search results below the search bar. These results would need to be clickable and store data in order to change the viewport on the map once the user clicks and proceeds on the search journey.
 
-Carl worked through this functionality throughout the projct and created the used solution.
+I personally worked through this functionality throughout the projct and created the used solution.
 
 The final search journey: 
 
@@ -676,9 +676,9 @@ The final search journey:
 ![searchjourney2](ReadMeImages/searchjourney2.png)
 ![searchjourney3](ReadMeImages/searchjourney3.png)
 
-Initially, Carl attempted to find a library/plugin which we could simply "plug-and-play". However we were limited to using a non-Google API solution (due to costs), and the react-map-gl library we opted to use did not have any apparent examples for a geocoding search box which was of interest.
+Initially, I attempted to find a library/plugin which we could simply "plug-and-play". However we were limited to using a non-Google API solution (due to costs), and the react-map-gl library we opted to use did not have any apparent examples for a geocoding search box which was of interest.
 
-Therefore, Carl opted to simply use the search query retrieved from the client in a simple GET request to the Mapbox Geocoding API. This forward geocoding request retrieved location data based on the query, and sent back a response with search results. 
+Therefore, I opted to simply use the search query retrieved from the client in a simple GET request to the Mapbox Geocoding API. This forward geocoding request retrieved location data based on the query, and sent back a response with search results. 
 
 ```Javascript
 // ! Code for search bar on the homepage.
@@ -784,7 +784,7 @@ This functionality was also put to use elsewhere, on the location update pages!
 
 ### 2. Mapbox
 
-Using and implementing react-mapbox-gl was quite challenging, and also took our group more time than other features. Yusuf took on most of this work, while James advised as he had some experience of using the library. Carl finalised the map through the geocoding challenge (above), while Joe finalised the styling and icon customisation.
+Using and implementing react-mapbox-gl was quite challenging, and also took our group more time than other features. Yusuf took on most of this work, while James advised as he had some experience of using the library. I finalised the map through the geocoding challenge (above), while Joe finalised the styling and icon customisation.
 
 ![finalmap](ReadMeImages/finalmap.png)
 
@@ -833,7 +833,7 @@ Editing a location, event, or profile was central features of our website. In or
 
 We wanted to have a seamless experience in the client, with the update/edit feature found on the same page as the single event/location/profile page. This was opposed to a separate page for update/edit, which we reserved for if we could not make the same-page functionality work.
 
-James was able to work through all the implementation of these features, with some debugging help from Carl!
+James was able to work through all the implementation of these features, with some debugging help from myself!
 
 ![singleevent](ReadMeImages/singleevent.png)
 ![singleeventupdate](ReadMeImages/singleeventupdate.png)
@@ -878,7 +878,7 @@ James was then able to handle the form in the same way as on the create document
 ### Well functioning back-end
 Overall, our back-end was well set up and was easy to work with. This was especially satisfying given that we had 29 different CRUD operations (and we used 28 of them!). We accomplished this through good planning, and setting this up in full before we started any work on the client. 
 
-We shared responsibility of working on the back-end, which meant that we were all very familiar and comfortable with all parts of the MVC design of our back-end. Finally, Carl did extensive endpoint testing, and the whole group wrote a series of tests to ensure that we were all very confident of the functionality.
+We shared responsibility of working on the back-end, which meant that we were all very familiar and comfortable with all parts of the MVC design of our back-end. Finally, I personally did extensive endpoint testing, and the whole group wrote a series of tests to ensure that we were all very confident of the functionality.
 
 ### High level of interactivity and connectivity
 When we got to the front-end development, we were able to create a lot of interactivity with all of our back-end endpoints throughout the site. As mentioned above we were able to use 28 of 29 endpoints created. In addition, several of our models nest other models and schemas within themselves, with no issues when associating them to each other (e.g. connecting an event to a location, or attendee to an event)

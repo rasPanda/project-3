@@ -2,7 +2,7 @@
 
 ### General Assembly Software Engineering Immersive
 
-#Project 3: Park Pong
+# Project 3: Park Pong
 
 ![Homepage](ReadMeImages/HomePageScreenshot.png)
 

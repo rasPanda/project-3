@@ -8,11 +8,13 @@
 
 ## The Overview:
 
-The project set by General Assembly was fairly open - as a group of four we were tasked with creating a full stack application using MERN - Mongoose, Express, React and Node. 
+This was my third project at General Assembly, which was a group project where our group of 4 was tasked to create a full-stack web-app using the MERN stack (Mongoose, Express, React, Node).
 
-We decided to create a Ping Pong table finding website, where users could create profiles and then create locations of free ping pong tables. Furthermore, they could set up events at different locations, see all the locations created by all users, and interact with other users by writing on their message boards. 
+Our group created a table tennis table locating app, where users are able to search for nearby parks which have outdoor table tennis tables. While we initialised the database with some seed data, the idea is for the locations to be crowdsourced, by allowing users to create profiles, in order to create locations in the app.
 
-You can check out the website here: [Park Pong](https://parkpong.herokuapp.com//)
+Finally, there is a social aspect of the app, where logged in users can set up events at different locations (e.g. tournaments), see all the locations created by all users, and interact with other users by writing on their message boards. 
+
+Please check it out here!: [Park Pong](https://parkpong.herokuapp.com//)
 
 ### The Brief
 
